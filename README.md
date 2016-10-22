@@ -11,7 +11,7 @@ Run  ```npm i nativescript-carousel``` in the ROOT directory of your project.
 ## Usage
 *Make sure you include `xmlns:ns="nativescript-carousel"` on the Page element!*
 
-#### * Manually create each slide by using `CarouselItem`
+### Manually create each slide by using `CarouselItem`
 ```xml
 <ns:Carousel height="250" pageChanged="myChangeEvent" pageTapped="mySelectedEvent">
     <ns:CarouselItem id="slide1"  verticalAlignment="center" backgroundColor="#b3cde0" height="250">
@@ -26,7 +26,7 @@ Run  ```npm i nativescript-carousel``` in the ROOT directory of your project.
 </ns:Carousel>
 ```
 
-#### * Or use a template by wrapping a single `CarouselItem` with `Carousel.itemTemplate` and assigning the `items` property with an array of data.
+### Or use a template by wrapping a single `CarouselItem` with `Carousel.itemTemplate` and assigning the `items` property with an array of data.
 ```xml
 <ns:Carousel items="{{ myDataArray }}" height="250" pageChanged="myChangeEvent" pageTapped="mySelectedEvent">
     <ns:Carousel.itemTemplate>
