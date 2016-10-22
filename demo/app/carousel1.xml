@@ -1,0 +1,29 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" xmlns:ns="nativescript-carousel">
+<Page.actionBar>
+	<ActionBar title="Carousel - Static views"></ActionBar>
+</Page.actionBar>
+
+<StackLayout>
+    <Label text="Each slide is defined in the XML." textWrap="true" margin="30,0,0,0"/>
+    <Label text="They can be images or custom views." textWrap="true" margin="0,0,30,0"/>
+
+    <ns:Carousel height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff">
+        <ns:CarouselItem id="slide1"  verticalAlignment="center" backgroundColor="#b3cde0" height="250">
+            <Label text="Slide 1" verticalAlignment="center" horizontalAlignment="center"/>
+        </ns:CarouselItem>
+
+        <ns:CarouselItem id="slide2" verticalAlignment="center" backgroundColor="#6497b1" height="250">
+            <Label text="Slide 2" verticalAlignment="center" horizontalAlignment="center"/>
+        </ns:CarouselItem>
+
+        <ns:CarouselItem id="slide3" verticalAlignment="center" backgroundColor="#005b96" height="250">
+            <Label text="Slide 3" verticalAlignment="center" horizontalAlignment="center"/>
+        </ns:CarouselItem>
+
+        <ns:CarouselItem id="slide4" verticalAlignment="center" backgroundColor="#03396c" height="250">
+            <Label text="Slide 4" verticalAlignment="center" horizontalAlignment="center"/>
+        </ns:CarouselItem>
+    </ns:Carousel>
+    
+</StackLayout>
+</Page>

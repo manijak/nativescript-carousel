@@ -1,0 +1,30 @@
+{
+  "name": "nativescript-carousel",
+  "description": "A simple iOS carousel component for NativeScript based on DKCarouselView cocoapod",
+  "main": "index.js",
+  "version": "1.0.0",
+  "nativescript": {
+    "platforms": {
+      "ios": "2.3.0"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manijak/nativescript-carousel.git"
+  },
+  "keywords": [
+    "NativeScript",
+    "Carousel",
+    "Slider",
+    "Pager",
+    "Paged",
+    "DKCarouselView",
+    "JavaScript",
+    "iOS",
+    "manijak"
+  ],
+  "author": "Nedim Erkocevic <nedim@fkzeljo.com> (https://github.com/manijak)",
+  "bugs": "https://github.com/manijak/nativescript-carousel/issues",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/manijak/nativescript-carousel"
+}

@@ -1,0 +1,15 @@
+.DS_Store?
+ehthumbs.db
+Thumbs.db
+*.js.map
+*.log
+*.d.ts
+!index.d.ts
+demo/lib
+demo/*.d.ts
+demo/platforms
+demo/node_modules
+demo/.vscode
+node_modules
+.vscode/
+*.DS_Store

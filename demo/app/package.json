@@ -1,0 +1,28 @@
+{
+	"name": "carousel-demo",
+	"main": "app.js",
+	"version": "2.3.0",
+	"author": "Nedim Erkocevic",
+	"description": "Nativescript carousel-demo app",
+	"license": "Apache-2.0",
+	"keywords": [
+		"telerik",
+		"mobile",
+		"nativescript",
+		"{N}",
+		"tns",
+		"carousel",
+		"manijak"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/manijak/nativescript-carousel.git"
+	},
+	"bugs": {
+		"url": "https://github.com/manijak/nativescript-carousel.git/issues"
+	},
+	"homepage": "https://github.com/manijak/nativescript-carousel.git",
+	"android": {
+		"v8Flags": "--expose_gc"
+	}
+}
