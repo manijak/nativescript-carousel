@@ -11,7 +11,7 @@ Run  ```npm i nativescript-carousel``` in the ROOT directory of your project.
 ## Usage
 *Make sure you include `xmlns:ns="nativescript-carousel"` on the Page element!*
 
-### Manually create each slide by using `CarouselItem`
+#### Manually create each slide by using `CarouselItem`
 ```xml
 <ns:Carousel height="250" pageChanged="myChangeEvent" pageTapped="mySelectedEvent">
     <ns:CarouselItem id="slide1"  verticalAlignment="center" backgroundColor="#b3cde0" height="250">
@@ -26,7 +26,7 @@ Run  ```npm i nativescript-carousel``` in the ROOT directory of your project.
 </ns:Carousel>
 ```
 
-### Or use a template by wrapping a single `CarouselItem` with `Carousel.itemTemplate` and assigning the `items` property with an array of data.
+#### Or use a template by wrapping a single `CarouselItem` with `Carousel.itemTemplate` and assigning the `items` property with an array of data.
 ```xml
 <ns:Carousel items="{{ myDataArray }}" height="250" pageChanged="myChangeEvent" pageTapped="mySelectedEvent">
     <ns:Carousel.itemTemplate>
@@ -38,7 +38,7 @@ Run  ```npm i nativescript-carousel``` in the ROOT directory of your project.
 </ns:Carousel>
 ```
 
-### Events
+#### Events
 ```js
 exports.myChangeEvent = function(args){
     var changeEventText = "Page changed to index: " + args.index;
@@ -53,7 +53,7 @@ exports.mySelectedEvent = function(args){
 ## Attributes
 * **items** *optional* (must be used with `itemTemplate`)
 
-Assign a data-array to generate the slides and apply the bindingContext. If items is populated then you must use the template-option.
+Assign a data-array to generate the slides and apply the bindingContext. If `items` is populated then you must use the template-option.
 
 * **itemTemplate** *optional* (must be used with `items`)
 
@@ -65,7 +65,7 @@ Defines the interval in seconds to wait before the next slide is shown. Default 
 
 * **showIndicator** *optional*
 
-Shows or hides the page-indicator bullets
+Shows or hides the page-indicator
 
 * **indicatorColor** *optional*
 
