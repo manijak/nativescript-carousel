@@ -1,8 +1,15 @@
 # NativeScript Carousel
-A simple, iOS, carousel component for NativeScript based on the DKCarouselView pod: https://github.com/zhangao0086/DKCarouselView
+A simple carousel component for NativeScript based on the DKCarouselView pod: https://github.com/zhangao0086/DKCarouselView
 
 ## Installation
-Run  ```npm i nativescript-carousel``` in the ROOT directory of your project.
+Run  `npm i nativescript-carousel` in the ROOT directory of your project.
+
+## Upgrading
+If you are upgrading from an earlier version, you might receive some pod-errors when building. Therefore you must remove the platform/ios and re-add it. 
+```
+tns platform remove ios
+tns platform add ios
+```
 
 ## Limitations
 - Currently no Android support, only iOS. If anyone knows of a similar Android component that we can use, please let me know.
@@ -87,7 +94,6 @@ By default the indicator is centered at the bottom. You can use points (x,y) to 
 
 Returns the `DKCarouselView` object.
 
-
 ## Screenshots
 ![Demo PNG](ios_carousel.gif)
 
@@ -101,7 +107,6 @@ Returns the `DKCarouselView` object.
 
 **1.0.0**
 * Initial release
-
 
 ## Authors
 Nedim Erkocevic
