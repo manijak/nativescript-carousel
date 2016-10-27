@@ -159,6 +159,13 @@ var Carousel = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Carousel.prototype, "selectedPage", {
+        set: function (value) {
+            this._ios.selectedPage = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Carousel.prototype, "autoPagingInterval", {
         set: function (value) {
             this._ios.setAutoPagingForInterval(value);

@@ -7,11 +7,18 @@ var myDataArray = [
 	{title:"Slide 4", color: "#03396c", image:"https://raw.githubusercontent.com/manijak/nativescript-photoviewer/master/demo/res/04.jpg"}
 	/*{title:"Slide 5", color: "#011f4b", image: ""}*/
 ];
-
+var myCarousel = null;
 pageData.set("myDataArray", myDataArray);
 
 function pageLoaded(args) {
     var page = args.object;
     page.bindingContext = pageData;
+
+	myCarousel = page.getViewById("myCarousel");
 }
 exports.pageLoaded = pageLoaded;
+
+exports.selectPageEvent = function(args){
+    if(!myCarousel) return;
+    myCarousel.selectedPage = 2;
+}

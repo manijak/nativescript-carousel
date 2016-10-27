@@ -12,7 +12,8 @@
             <Label text="Some content here..." textWrap="true"/>
         </StackLayout>
         
-        <ns:Carousel height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" items="{{ myDataArray }}" indicatorColor="#fff">
+        <ns:Carousel id="myCarousel" height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" 
+            items="{{ myDataArray }}" indicatorColor="#fff">
             <ns:Carousel.itemTemplate>
                 <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}" height="250">
                     <Label text="{{ title }}"  horizontalAlignment="center"/>
@@ -20,8 +21,8 @@
                 </ns:CarouselItem>
             </ns:Carousel.itemTemplate>
         </ns:Carousel>
-        
-        <StackLayout height="400" margin="20,0,0,0">
+        <Button text="Select page 3" tap="selectPageEvent" margin="10,10,0,10"/>
+        <StackLayout height="400" margin="10,0,0,0">
             <Label text="Some content here..." textWrap="true" />
         </StackLayout>
     </StackLayout>

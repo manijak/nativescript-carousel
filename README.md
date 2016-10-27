@@ -59,6 +59,14 @@ Assign a data-array to generate the slides and apply the bindingContext. If `ite
 
 Defines the view template for each slide-view to be generated. 
 
+* **selectedPage** *optional*
+
+Sets the active page by index
+
+* **finite** *optional*
+
+If set to 'true' scrolling will bounce at the first/last page (non-infinite). Default is 'false'. 
+
 * **autoPagingInterval** *optional*
 
 Defines the interval in seconds to wait before the next slide is shown. Default is 0 (off).
@@ -79,8 +87,21 @@ By default the indicator is centered at the bottom. You can use points (x,y) to 
 
 Returns the `DKCarouselView` object.
 
+
 ## Screenshots
 ![Demo PNG](ios_carousel.gif)
+
+## Changelog
+
+**1.1.0**
+* Updated pod with version '1.4.10'
+* Fixed page-change-event when finite is set to 'true'
+* Added new property 'selectedPage' (set active page by index). 
+* Updated demo app  
+
+**1.0.0**
+* Initial release
+
 
 ## Authors
 Nedim Erkocevic

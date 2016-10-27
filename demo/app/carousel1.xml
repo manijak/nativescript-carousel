@@ -5,9 +5,10 @@
 
 <StackLayout>
     <Label text="Each slide is defined in the XML." textWrap="true" margin="30,0,0,0"/>
-    <Label text="They can be images or custom views." textWrap="true" margin="0,0,30,0"/>
-
-    <ns:Carousel height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff">
+    <Label text="They can be images or custom views." textWrap="true" margin="0,0,10,0"/>
+    <Label text="'finite' is set to True" textWrap="true" margin="0,0,30,0"/>
+    
+    <ns:Carousel height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff" finite="true">
         <ns:CarouselItem id="slide1"  verticalAlignment="center" backgroundColor="#b3cde0" height="250">
             <Label text="Slide 1" verticalAlignment="center" horizontalAlignment="center"/>
         </ns:CarouselItem>

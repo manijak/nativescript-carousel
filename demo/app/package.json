@@ -4,14 +4,16 @@
 	"version": "2.3.0",
 	"author": "Nedim Erkocevic",
 	"description": "Nativescript carousel-demo app",
-	"license": "Apache-2.0",
+	"license": "MIT",
 	"keywords": [
-		"telerik",
-		"mobile",
-		"nativescript",
-		"{N}",
-		"tns",
-		"carousel",
+		"NativeScript",
+		"Carousel",
+		"Slider",
+		"Pager",
+		"Paged",
+		"DKCarouselView",
+		"JavaScript",
+		"iOS",
 		"manijak"
 	],
 	"repository": {
