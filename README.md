@@ -107,4 +107,4 @@ Returns the `DKCarouselView` object.
 Nedim Erkocevic
 
 ## Help
-I will accept pull requests that improve this and assign credit. All code needs to be Apache-2.0 licensed.
+I will accept pull requests that improve this and assign credit.
