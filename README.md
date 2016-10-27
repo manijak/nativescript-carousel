@@ -1,3 +1,6 @@
+[![npm](https://img.shields.io/npm/v/nativescript-carousel.svg)](https://www.npmjs.com/package/nativescript-carousel)
+[![npm](https://img.shields.io/npm/dt/nativescript-carousel.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-carousel)
+
 # NativeScript Carousel
 A simple carousel component for NativeScript based on the DKCarouselView pod: https://github.com/zhangao0086/DKCarouselView
 
