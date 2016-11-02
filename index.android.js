@@ -125,7 +125,6 @@ var Carousel = (function (_super) {
         }
     };
     Carousel.prototype._onItemTemplatePropertyChanged = function (data) {
-        //console.log("_onItemTemplatePropertyChanged");
         if (!types.isNullOrUndefined(this.items) && types.isNumber(this.items.length)) {
            this._pageIndicatorView.setCount(this.items.length);
         }
@@ -286,6 +285,11 @@ var Carousel = (function (_super) {
                 this._viewPager.setCurrentItem(value);
             }
         },
+        get: function(){
+            if(this._viewPager){
+               return this._viewPager.getCurrentItem();
+            }
+        },
         enumerable: true,
         configurable: true
     });
@@ -343,7 +347,6 @@ function ensureCarouselPagerAdapterClass() {
             return view === _object;
         };
         CarouselPagerAdapterClassInner.prototype.instantiateItem = function (container, index) {
-            console.log("instantiateItem");
             var item = this.owner.getChildAt(index);
             if(!item)
                 return null;
@@ -357,7 +360,6 @@ function ensureCarouselPagerAdapterClass() {
                 item._nativeView.restoreHierarchyState(this[VIEWS_STATES]);
             }
             container.addView(item._nativeView, android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT);
-            console.log("container.addView", item._nativeView);
             return item._nativeView;
         };
         CarouselPagerAdapterClassInner.prototype.destroyItem = function (container, index, _object) {

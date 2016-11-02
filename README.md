@@ -2,24 +2,34 @@
 [![npm](https://img.shields.io/npm/dt/nativescript-carousel.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-carousel)
 
 # NativeScript Carousel
-A simple carousel component for NativeScript based on the DKCarouselView pod: https://github.com/zhangao0086/DKCarouselView
+A simple carousel component for NativeScript.
+
+|Platform|Supported|Version|NativeView|
+| ------------------- | :-----------: | :-----------: | :------------------: |
+|iOS|Yes|iOS 8.1+|[DKCarouselView](https://github.com/zhangao0086/DKCarouselView)|
+|Android|Yes|API 15+|ViewPager with [PageIndicatorView](https://github.com/romandanylyk/PageIndicatorView)|
 
 ## Installation
 Run  `npm i nativescript-carousel` in the ROOT directory of your project.
 
 ## Upgrading
-If you are upgrading from an earlier version, you might receive some pod-errors when building. Therefore you must remove the platform/ios and re-add it. 
+If you are upgrading from an earlier version, you might receive some errors when building. Therefore you must remove the platforms and re-add them. 
 ```
-tns platform remove ios
-tns platform add ios
+tns platform remove ios OR android
+tns platform add ios OR android
 ```
 
 ## Limitations
-- Currently no Android support, only iOS. If anyone knows of a similar Android component that we can use, please let me know.
-- Interactive components innside the CarouselItem are not possible (buttons, sliders, dropdown, ect) will have no effect.
+- (iOS) Interactive components innside the CarouselItem are not possible (buttons, sliders, dropdown, ect) will have no effect.
+- (iOS) PagerIndicator animations not available for iOS, only Android. 
+- (Android) In order to show the PageIndicators over the Carousel, wrap the `Carousel` inside a `<GridLayout>`.
+- (Android) Auto- and Infinite-paging not available.
 
 ## Usage
-*Make sure you include `xmlns:ns="nativescript-carousel"` on the Page element!*
+*Make sure you include the namespace on the Page element:*
+```xml
+xmlns:ns="nativescript-carousel"
+```
 
 #### Manually create each slide by using `CarouselItem`
 ```xml
@@ -60,7 +70,7 @@ exports.mySelectedEvent = function(args){
 }
 ```
 
-## Attributes
+## Attributes - Common
 * **items** *optional* (must be used with `itemTemplate`)
 
 Assign a data-array to generate the slides and apply the bindingContext. If `items` is populated then you must use the template-option.
@@ -73,14 +83,6 @@ Defines the view template for each slide-view to be generated.
 
 Sets the active page by index
 
-* **finite** *optional*
-
-If set to 'true' scrolling will bounce at the first/last page (non-infinite). Default is 'false'. 
-
-* **autoPagingInterval** *optional*
-
-Defines the interval in seconds to wait before the next slide is shown. Default is 0 (off).
-
 * **showIndicator** *optional*
 
 Shows or hides the page-indicator
@@ -88,6 +90,16 @@ Shows or hides the page-indicator
 * **indicatorColor** *optional*
 
 Sets the active indicator color. Default is semi-transparent white. Use hex or color-name. 
+
+
+## Attributes - iOS specific
+* **finite** *optional*
+
+If set to 'true' scrolling will bounce at the first/last page (non-infinite). Default is 'false'. 
+
+* **autoPagingInterval** *optional*
+
+Defines the interval in seconds to wait before the next slide is shown. Default is 0 (off).
 
 * **indicatorOffset** *optional*
 
@@ -97,10 +109,45 @@ By default the indicator is centered at the bottom. You can use points (x,y) to 
 
 Returns the `DKCarouselView` object.
 
+
+## Attributes - Android specific
+* **android**
+
+Returns the `ViewPager` object.
+
+* **indicatorColorUnselected**
+
+Sets the color of unselected indicators
+
+* **indicatorAnimation**
+
+Sets the pager-indicator animation type. Choose between: `color`, `slide`, `worm`, `fill` or `none`. Default is `none`.
+
+* **indicatorAnimationDuration**
+
+Sets the pager-indicator animation duration in milliseconds. Default is 500.
+
+* **indicatorAlignment**
+
+Sets the pager-indicator alignment. Choose between `top` or `bottom`. Default is `bottom`.
+
+* **indicatorRadius**
+
+Sets the pager-indicator dot radius.
+
+* **indicatorPadding**
+
+Sets the pager-indicator dot padding.
+
+
 ## Screenshots
 ![Demo PNG](ios_carousel.gif)
 
 ## Changelog
+
+**2.1.0**
+* Added Android support!
+* Android gets animated pager-indicators made by @romandanylyk. 
 
 **1.1.0**
 * Updated pod with version '1.4.10'
@@ -111,8 +158,11 @@ Returns the `DKCarouselView` object.
 **1.0.0**
 * Initial release
 
-## Authors
-Nedim Erkocevic
+## Author
+* [manijak](https://github.com/manijak)
+
+## Collaborators
+* [Pip3r4o](https://github.com/Pip3r4o) 
 
 ## Help
 I will accept pull requests that improve this and assign credit.
