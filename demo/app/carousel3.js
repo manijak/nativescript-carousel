@@ -36,4 +36,5 @@ exports.toggleIndicator = function(args){
 exports.toggleColor = function(args){
     if(!myCarousel) return;
     myCarousel.indicatorColor = "#FED700";
+    myCarousel.indicatorColorUnselected = "#50FED700";
 }

@@ -1,0 +1,10 @@
+android { 
+    productFlavors {
+        "nativescript-carousel" {
+            dimension "nativescript-carousel"
+        }
+    }
+}
+dependencies {
+  compile 'com.romandanylyk:pageindicatorview:0.0.6'
+}

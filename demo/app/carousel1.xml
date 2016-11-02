@@ -4,27 +4,34 @@
 </Page.actionBar>
 
 <StackLayout>
-    <Label text="Each slide is defined in the XML." textWrap="true" margin="30,0,0,0"/>
-    <Label text="They can be images or custom views." textWrap="true" margin="0,0,10,0"/>
-    <Label text="'finite' is set to True" textWrap="true" margin="0,0,30,0"/>
+    <Label text="Each slide is defined in the XML." textWrap="true" margin="30,0,10,0"/>
+    <Label text="'finite' is set to True" textWrap="true" margin="0,0,20,0" android:visibility="collapsed" />
     
-    <ns:Carousel height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff" finite="true">
-        <ns:CarouselItem id="slide1"  verticalAlignment="center" backgroundColor="#b3cde0" height="250">
-            <Label text="Slide 1" verticalAlignment="center" horizontalAlignment="center"/>
-        </ns:CarouselItem>
+    <GridLayout margin="20,0,0,0">
+        <ns:Carousel height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff"
+        finite="true" verticalAlignment="top" android:indicatorAnimation="color">
+            <ns:CarouselItem id="slide1" backgroundColor="#b3cde0" height="250">
+                <Label text="Slide 1" verticalAlignment="center" horizontalAlignment="center"/>    
+            </ns:CarouselItem>
 
-        <ns:CarouselItem id="slide2" verticalAlignment="center" backgroundColor="#6497b1" height="250">
-            <Label text="Slide 2" verticalAlignment="center" horizontalAlignment="center"/>
-        </ns:CarouselItem>
+            <ns:CarouselItem id="slide2" backgroundColor="#6497b1" height="250">
+                <Label text="Slide 2" verticalAlignment="center" horizontalAlignment="center"/>
+            </ns:CarouselItem>
 
-        <ns:CarouselItem id="slide3" verticalAlignment="center" backgroundColor="#005b96" height="250">
-            <Label text="Slide 3" verticalAlignment="center" horizontalAlignment="center"/>
-        </ns:CarouselItem>
+            <ns:CarouselItem id="slide3" backgroundColor="#005b96" height="250">
+                <Label text="Slide 3" verticalAlignment="center" horizontalAlignment="center"/>
+            </ns:CarouselItem>
 
-        <ns:CarouselItem id="slide4" verticalAlignment="center" backgroundColor="#03396c" height="250">
-            <Label text="Slide 4" verticalAlignment="center" horizontalAlignment="center"/>
-        </ns:CarouselItem>
-    </ns:Carousel>
+            <ns:CarouselItem id="slide4" backgroundColor="#03396c" height="250">
+                <Label text="Slide 4" verticalAlignment="center" horizontalAlignment="center"/>
+            </ns:CarouselItem>
+        </ns:Carousel>
+    </GridLayout>
+
+    <Label text="Indicator animation type: 'color'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"/>
     
+     <Label text="The Carousel is wrapped in a GridLayout so that the indicators overlay the content. Otherwise it's placed directly under the content." textWrap="true" 
+       ios:visibility="collapsed" margin="10,0,0,0"/>
+
 </StackLayout>
 </Page>

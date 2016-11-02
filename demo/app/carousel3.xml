@@ -4,21 +4,32 @@
 </Page.actionBar>
 <ScrollView>
     <StackLayout>
-        <Label text="Here auto-paging is enabled with an interval of 4 seconds." textWrap="true" margin="10,5,0,5"/>
-        <Label text="You can also capture the tap and change events." textWrap="true" margin="10,5,0,5"/>
-        <Label text="Page-indicator can be turned on/off and its color changed" textWrap="true" margin="10,5,20,5"/>
+        <StackLayout android:visibility="collapsed" >
+            <Label text="Here auto-paging is enabled with an interval of 4 seconds." textWrap="true" margin="10,5,0,5"/>
+            <Label text="You can also capture the tap and change events." textWrap="true" margin="10,5,0,5"/>
+            <Label text="Page-indicator can be turned on/off and its color changed" textWrap="true" margin="10,5,20,5"/>
+        </StackLayout>
+        <StackLayout ios:visibility="collapsed" >
+            <Label text="You can also capture the change events." textWrap="true" margin="10,5,0,5"/>
+            <Label text="Page-indicator can have different animations and change color" textWrap="true" margin="10,5,20,5"/>
+        </StackLayout>
 
-        <ns:Carousel id="myCarousel" height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" 
-            items="{{ myDataArray }}" indicatorColor="#fff" autoPagingInterval="4">
-            <ns:Carousel.itemTemplate>
-                <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}" height="250">
-                    <Label text="{{ title }}"  horizontalAlignment="center"/>
-                    <Image src="{{ image }}" height="100" />
-                </ns:CarouselItem>
-            </ns:Carousel.itemTemplate>
-        </ns:Carousel>
+        <GridLayout height="250">
+            <ns:Carousel id="myCarousel" height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" 
+            items="{{ myDataArray }}" indicatorColor="#fff" ios:autoPagingInterval="4" android:indicatorAnimation="fill">
+                <ns:Carousel.itemTemplate>
+                    <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}" height="250">
+                         <GridLayout rows="*" columns="*,*">
+                             <Label text="{{ title }}"  horizontalAlignment="center" verticalAlignment="center" col="0"/>
+                            <Image src="{{ image }}" height="100" col="1" />
+                        </GridLayout>
+                    </ns:CarouselItem>
+                </ns:Carousel.itemTemplate>
+            </ns:Carousel>    
+        </GridLayout>
+        <Label text="Indicator animation type: 'fill'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"/>
 
-        <Button text="Toggle indicator" tap="toggleIndicator" margin="10,10,0,10"/>
+        <Button text="Toggle indicator" tap="toggleIndicator" margin="10,10,0,10" android:visibility="collapsed"/>
         <Button text="Toggle indicator color" tap="toggleColor" margin="10,10,0,10"/>
         <Label text="{{ changeEventText }}" textWrap="true" margin="10,0,0,0"/>
         <Label text="{{ tappedViewText }}" textWrap="true" margin="0,0,0,0"/>

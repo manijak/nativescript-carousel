@@ -215,6 +215,49 @@ var Carousel = (function (_super) {
         enumerable: true,
         configurable: true
     });
+
+    Object.defineProperty(Carousel.prototype, "indicatorColorUnselected", {
+        set: function (value) {
+            console.log("'indicatorColorUnselected' property not available for Android");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Carousel.prototype, "indicatorAnimation", {
+        set: function (value) {
+            console.log("'indicatorAnimation' property not available for Android");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Carousel.prototype, "indicatorAnimationDuration", {
+        set: function (value) {
+            console.log("'indicatorAnimationDuration' property not available for Android");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Carousel.prototype, "indicatorAlignment", {
+        set: function (value) {
+            console.log("'indicatorAlignment' property not available for Android");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Carousel.prototype, "indicatorRadius", {
+        set: function (value) {
+            console.log("'indicatorRadius' property not available for Android");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Carousel.prototype, "indicatorPadding", {
+        set: function (value) {
+            console.log("'indicatorPadding' property not available for Android");
+        },
+        enumerable: true,
+        configurable: true
+    });
     Carousel.pageChangedEvent = "pageChanged";
     Carousel.pageTappedEvent = "pageTapped";
     Carousel.itemsProperty = new dObservable.Property("items", "Carousel", new proxy.PropertyMetadata(undefined, dObservable.PropertyMetadataSettings.AffectsLayout, onItemsPropertyChanged));

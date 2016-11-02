@@ -6,21 +6,28 @@
 <ScrollView>
     <StackLayout>
         <Label text="Define a template and assign the 'items' array." textWrap="true" margin="10,0,0,0"/>
-        <Label text="Also works well innside a ScrollView." textWrap="true" margin="0,0,20,0"/>
+        <Label text="Also works well innside a ScrollView." textWrap="true" margin="0,0,20,0" />
 
         <StackLayout height="100" verticalAlignment="center">
             <Label text="Some content here..." textWrap="true"/>
         </StackLayout>
         
-        <ns:Carousel id="myCarousel" height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" 
-            items="{{ myDataArray }}" indicatorColor="#fff">
-            <ns:Carousel.itemTemplate>
-                <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}" height="250">
-                    <Label text="{{ title }}"  horizontalAlignment="center"/>
-                    <Image src="{{ image }}" height="100" />
-                </ns:CarouselItem>
-            </ns:Carousel.itemTemplate>
-        </ns:Carousel>
+        <GridLayout height="250">
+            <ns:Carousel id="myCarousel" height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" android:indicatorAnimation="slide"
+                items="{{ myDataArray }}" indicatorColor="#fff">
+                <ns:Carousel.itemTemplate>
+                    <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}" height="250">
+                        <GridLayout rows="*" columns="*,*">
+                             <Label text="{{ title }}"  horizontalAlignment="center" verticalAlignment="center" col="0"/>
+                            <Image src="{{ image }}" height="100" col="1" />
+                        </GridLayout>
+                    </ns:CarouselItem>
+                </ns:Carousel.itemTemplate>
+            </ns:Carousel>
+        </GridLayout>
+
+        <Label text="Indicator animation type: 'slide'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"/>
+        
         <Button text="Select page 3" tap="selectPageEvent" margin="10,10,0,10"/>
         <StackLayout height="400" margin="10,0,0,0">
             <Label text="Some content here..." textWrap="true" />

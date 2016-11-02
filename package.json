@@ -2,10 +2,11 @@
   "name": "nativescript-carousel",
   "description": "A simple iOS carousel component for NativeScript based on DKCarouselView cocoapod",
   "main": "index.js",
-  "version": "1.1.0",
+  "version": "2.1.0",
   "nativescript": {
     "platforms": {
-      "ios": "2.3.0"
+      "ios": "2.3.0",
+      "android": "2.3.0"
     }
   },
   "repository": {
