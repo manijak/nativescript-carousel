@@ -140,7 +140,9 @@ Sets the pager-indicator dot radius.
 Sets the pager-indicator dot padding.
 
 
-## Screenshots
+## Demo
+|iOS|Android|
+| ----------- | ----------- |
 |![iOS](ios_carousel.gif)|![Android](android_carousel.gif)|
 
 ## Changelog
