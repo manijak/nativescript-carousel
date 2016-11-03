@@ -141,7 +141,7 @@ Sets the pager-indicator dot padding.
 
 
 ## Screenshots
-![Demo PNG](ios_carousel.gif)
+|![iOS](ios_carousel.gif)|![Android](android_carousel.gif)|
 
 ## Changelog
 
