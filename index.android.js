@@ -16,7 +16,7 @@ var weakEvents = require("ui/core/weak-event-listener");
 var types = require("utils/types");
 var builder = require("ui/builder");
 var proxy = require("ui/core/proxy");
-var view_1 = require("ui/core/view");
+var viewModule = require("ui/core/view");
 var knownTemplates;
 (function (knownTemplates) {
     knownTemplates.itemTemplate = "itemTemplate";
@@ -63,6 +63,13 @@ var Carousel = (function (_super) {
         this._pagerIndicatorLayoutParams = this.parent.android.getLayoutParams();
     };
     Carousel.prototype.onLoaded = function () {
+        ensureCarouselPagerAdapterClass();
+        this._viewPager.setAdapter(new CarouselPagerAdapterClass(this));
+        
+        ensureCarouselPageChangedListenerClass();
+        this._viewPager.setOnPageChangeListener(new CarouselPageChangedListenerClass(this));
+        this._viewPager.setCurrentItem(this.selectedPage, false);
+
         this._pagerIndicatorLayoutParams.height = android.support.v4.view.ViewPager.LayoutParams.WRAP_CONTENT;
         this._pagerIndicatorLayoutParams.width = android.support.v4.view.ViewPager.LayoutParams.MATCH_PARENT;
         
@@ -74,13 +81,6 @@ var Carousel = (function (_super) {
             this._pagerIndicatorLayoutParams.gravity = android.view.Gravity.BOTTOM;
         }
         
-        ensureCarouselPagerAdapterClass();
-        this._viewPager.setAdapter(new CarouselPagerAdapterClass(this));
-        
-        ensureCarouselPageChangedListenerClass();
-        this._viewPager.setOnPageChangeListener(new CarouselPageChangedListenerClass(this));
-        this._viewPager.setCurrentItem(this.selectedPage, false);
-       
         if(this._enableIndicator !== false){
             if(this.parent instanceof grid_layout.GridLayout){
                 this.parent.android.addView(this._pageIndicatorView, this._pagerIndicatorLayoutParams);
@@ -90,7 +90,8 @@ var Carousel = (function (_super) {
 
             this._pageIndicatorView.setViewPager(this._viewPager);
             this._pageIndicatorView.setCount(this._childrenCount);
-            
+            this._pageIndicatorView.setSelection(this.selectedPage);
+
             this.indicatorAnimationDuration = this._indicatorAnimationDuration ? this._indicatorAnimationDuration : 500;
             this.indicatorAnimation = this._indicatorAnimation;
             this.indicatorRadius = this._indicatorRadius;
@@ -98,8 +99,26 @@ var Carousel = (function (_super) {
             this.indicatorColor = this._indicatorColor;
             this.indicatorColorUnselected = this._indicatorColorUnselected;
         }
+        _super.prototype.onLoaded.call(this);
     };
-    Carousel.prototype.constructView = function () {};
+    Carousel.prototype.constructView = function () { };
+    Carousel.prototype.refresh = function () {
+        if (types.isNullOrUndefined(this.items) || !types.isNumber(this.items.length))
+            return;
+        this.removeChildren();
+     
+        var length = this.items.length;
+        for (var i = 0; i < length; i++) {
+            var viewToAdd = !types.isNullOrUndefined(this.itemTemplate) ? builder.parse(this.itemTemplate, this) : this._getDefaultItemContent(i);
+            var dataItem = this._getDataItem(i);
+            viewToAdd.bindingContext = dataItem;
+            this.addChild(viewToAdd);
+        }
+        var adapter = this._viewPager.getAdapter();
+        adapter.notifyDataSetChanged();
+        this._pageIndicatorView.setCount(this.items.length);
+        this._pageIndicatorView.setSelection(0);
+    };
     Carousel.prototype._getDataItem = function (index) {
         return this.items.getItem ? this.items.getItem(index) : this.items[index];
     };
@@ -110,26 +129,26 @@ var Carousel = (function (_super) {
         if (data.newValue instanceof observableArray.ObservableArray) {
             weakEvents.addWeakEventListener(data.newValue, observableArray.ObservableArray.changeEvent, this._onItemsChanged, this);
         }
-        if (!types.isNullOrUndefined(this.items) && types.isNumber(this.items.length)) {
-            var length = this.items.length;
-            for (var i = 0; i < length; i++) {
-                var viewToAdd = !types.isNullOrUndefined(this.itemTemplate) ? builder.parse(this.itemTemplate, this) : null;
-                if(!viewToAdd) continue;
-                var dataItem = this._getDataItem(i);
-                viewToAdd.bindingContext = dataItem;
-                this.addChild(viewToAdd);
-            }
-            var adapter = this._viewPager.getAdapter();
-            adapter.notifyDataSetChanged();
-            this._pageIndicatorView.setCount(this.items.length);
-        }
+        this._requestRefresh();
     };
     Carousel.prototype._onItemTemplatePropertyChanged = function (data) {
-        if (!types.isNullOrUndefined(this.items) && types.isNumber(this.items.length)) {
-           this._pageIndicatorView.setCount(this.items.length);
+        this._requestRefresh();
+    };
+    Carousel.prototype._onItemsChanged = function (data) {
+        var adapter = this._viewPager.getAdapter();
+        adapter.notifyDataSetChanged();
+        this._pageIndicatorView.setCount(this.items.length);
+        console.log("ItemsChanged");
+    };
+    Carousel.prototype.onLayout = function (left, top, right, bottom) {
+        viewModule.View.layoutChild(this, this, 0, 0, right - left, bottom - top);
+    };
+    Carousel.prototype._requestRefresh = function () {
+        if (this.isLoaded) {
+            this.refresh();
         }
     };
-
+    
     Object.defineProperty(Carousel.prototype, "items", {
         get: function () {
             return this._getValue(Carousel.itemsProperty);
@@ -171,7 +190,6 @@ var Carousel = (function (_super) {
         enumerable: true,
         configurable: true
     });
-
     Object.defineProperty(Carousel.prototype, "showIndicator", {
         set: function (value) {
             this._enableIndicator = value;
