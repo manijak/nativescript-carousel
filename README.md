@@ -20,9 +20,9 @@ tns platform add ios OR android
 ```
 
 ## Limitations
-- (iOS) Interactive components innside the CarouselItem are not possible (buttons, sliders, dropdown, ect) will have no effect.
+- (iOS) Interactive components innside the CarouselItem are not possible for now, (tapping on buttons, sliders, dropdown, ect) will have no effect.
 - (iOS) PagerIndicator animations not available for iOS, only Android. 
-- (Android) In order to show the PageIndicators over the Carousel, wrap the `Carousel` inside a `<GridLayout>`.
+- (Android) In order to show the PageIndicators on top of the Carousel, wrap the `<Carousel>` inside a `<GridLayout>`.
 - (Android) Auto- and Infinite-paging not available.
 
 ## Usage
@@ -59,6 +59,8 @@ xmlns:ns="nativescript-carousel"
 ```
 
 #### Events
+For `Android`, you can create tap events on the `CarouselItem` or elements innside it, then check against `selectedPage` to get the index.
+
 ```js
 exports.myChangeEvent = function(args){
     var changeEventText = "Page changed to index: " + args.index;

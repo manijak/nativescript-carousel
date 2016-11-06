@@ -1,6 +1,6 @@
 {
   "name": "nativescript-carousel",
-  "description": "A simple iOS carousel component for NativeScript based on DKCarouselView cocoapod",
+  "description": "A simple iOS carousel component for NativeScript.",
   "main": "index.js",
   "version": "2.1.0",
   "nativescript": {
@@ -22,6 +22,7 @@
     "DKCarouselView",
     "JavaScript",
     "iOS",
+    "Android",
     "manijak"
   ],
   "author": "Nedim Erkocevic <nedim@fkzeljo.com> (https://github.com/manijak)",
