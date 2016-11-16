@@ -59,6 +59,7 @@ var Carousel = (function (_super) {
                 view: view,
                 index: index
             };
+             _this._selectedPage = index;
             _this.notify(args2);
         });
         
@@ -161,7 +162,11 @@ var Carousel = (function (_super) {
     });
     Object.defineProperty(Carousel.prototype, "selectedPage", {
         set: function (value) {
+            this._selectedPage = value;
             this._ios.selectedPage = value;
+        },
+        get: function () {
+            return this._selectedPage ? this._selectedPage : 0;
         },
         enumerable: true,
         configurable: true
