@@ -1,0 +1,15 @@
+{
+  "nativescript": {
+    "id": "org.carousel.demo",
+    "tns-ios": {
+      "version": "2.4.0"
+    },
+    "tns-android": {
+      "version": "2.4.0"
+    }
+  },
+  "dependencies": {
+    "nativescript-carousel": "file:..",
+    "tns-core-modules": "^2.4.0"
+  }
+}
