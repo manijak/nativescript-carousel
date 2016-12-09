@@ -20,7 +20,6 @@ tns platform add ios OR android
 ```
 
 ## Limitations
-- (iOS) Interactive components innside the CarouselItem are not possible for now, (tapping on buttons, sliders, dropdown, ect) will have no effect.
 - (iOS) PagerIndicator animations not available for iOS, only Android. 
 - (Android) In order to show the PageIndicators on top of the Carousel, wrap the `<Carousel>` inside a `<GridLayout>`.
 - (Android) Auto- and Infinite-paging not available.
@@ -48,9 +47,9 @@ xmlns:ns="nativescript-carousel"
 
 #### Or use a template by wrapping a single `CarouselItem` with `Carousel.itemTemplate` and assigning the `items` property with an array of data.
 ```xml
-<ns:Carousel items="{{ myDataArray }}" height="250" pageChanged="myChangeEvent" pageTapped="mySelectedEvent">
+<ns:Carousel items="{{ myDataArray }}" height="250" pageChanged="myChangeEvent">
     <ns:Carousel.itemTemplate>
-        <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}" height="250">
+        <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}" height="250" tap="myTapEvent">
             <Label text="{{ title }}"  horizontalAlignment="center"/>
             <Image src="{{ image }}" height="100" />
         </ns:CarouselItem>
@@ -59,16 +58,12 @@ xmlns:ns="nativescript-carousel"
 ```
 
 #### Events
-For `Android`, you can create tap events on the `CarouselItem` or elements innside it, then check against `selectedPage` to get the index.
+For both platforms, you can create tap-events on the `CarouselItem` or elements innside it, then check against `selectedPage` to get the index.
 
 ```js
 exports.myChangeEvent = function(args){
     var changeEventText = "Page changed to index: " + args.index;
     console.log(changeEventText);
-}
-exports.mySelectedEvent = function(args){
-    var tappedViewText = "Tapped index: " + args.index;
-     console.log(tappedViewText);
 }
 ```
 
@@ -148,6 +143,9 @@ Sets the pager-indicator dot padding.
 |![iOS](ios_carousel.gif)|![Android](android_carousel.gif)|
 
 ## Changelog
+
+**2.1.1**
+* Corrected README, iOS does indeed allow for tap-events innside the CarouselItems, thanks @terreb! 
 
 **2.1.0**
 * Added Android support!
