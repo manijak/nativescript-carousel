@@ -32,7 +32,7 @@ xmlns:ns="nativescript-carousel"
 
 #### Manually create each slide by using `CarouselItem`
 ```xml
-<ns:Carousel height="250" pageChanged="myChangeEvent" pageTapped="mySelectedEvent">
+<ns:Carousel height="250" pageChanged="myChangeEvent">
     <ns:CarouselItem id="slide1"  verticalAlignment="center" backgroundColor="#b3cde0" height="250">
         <Label text="Slide 1" verticalAlignment="center" horizontalAlignment="center"/>
     </ns:CarouselItem>
@@ -78,7 +78,7 @@ Defines the view template for each slide-view to be generated.
 
 * **selectedPage** *optional*
 
-Sets the active page by index
+Sets/Gets the active page by index
 
 * **showIndicator** *optional*
 
@@ -145,7 +145,9 @@ Sets the pager-indicator dot padding.
 ## Changelog
 
 **2.1.1**
-* Corrected README, iOS does indeed allow for tap-events innside the CarouselItems, thanks @terreb! 
+* Corrected README, iOS does indeed allow for tap-events innside the CarouselItems, thanks @terreb!
+* Fixed the selectedPage property on iOS, now also returns selected index. 
+* Updated iOS Podfile to 1.4.12
 
 **2.1.0**
 * Added Android support!
