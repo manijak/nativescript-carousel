@@ -85,6 +85,10 @@ var Carousel = (function (_super) {
             if(this.parent instanceof grid_layout.GridLayout){
                 this.parent.android.addView(this._pageIndicatorView, this._pagerIndicatorLayoutParams);
             }else{
+                // will crash the app after fi. a barcodescanner was closed
+                if (this._pageIndicatorView.parent !== null) {
+                  this.parent.android.removeView(this._pageIndicatorView);
+                }
                 this.parent.android.addView(this._pageIndicatorView);
             }
 
