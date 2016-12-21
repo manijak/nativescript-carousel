@@ -23,7 +23,8 @@ tns platform add ios OR android
 - (iOS) PagerIndicator animations not available for iOS, only Android. 
 - (Android) In order to show the PageIndicators on top of the Carousel, wrap the `<Carousel>` inside a `<GridLayout>`.
 - (Android) Auto- and Infinite-paging not available.
-
+- (Angular) Only static slides work, the dynamic ones with binding do not (for now).
+ 
 ## Usage
 *Make sure you include the namespace on the Page element:*
 ```xml
@@ -144,8 +145,11 @@ Sets the pager-indicator dot padding.
 
 ## Changelog
 
+**2.1.2**
+* Fixes a critical bug that would cause the app to crash when resuming the activity (Android). Thanks @EddyVerbruggen!
+
 **2.1.1**
-* Corrected README, iOS does indeed allow for tap-events innside the CarouselItems, thanks @terreb!
+* Corrected README, iOS does indeed allow for tap-events innside the CarouselItems. Thanks @terreb!
 * Fixed the selectedPage property on iOS, now also returns selected index. 
 * Updated iOS Podfile to 1.4.12
 
