@@ -70,18 +70,18 @@ var Carousel = (function (_super) {
         this._viewPager.setOnPageChangeListener(new CarouselPageChangedListenerClass(this));
         this._viewPager.setCurrentItem(this.selectedPage, false);
 
-        this._pagerIndicatorLayoutParams.height = android.support.v4.view.ViewPager.LayoutParams.WRAP_CONTENT;
-        this._pagerIndicatorLayoutParams.width = android.support.v4.view.ViewPager.LayoutParams.MATCH_PARENT;
-        
-        if(this._indicatorAlignment === "TOP"){
-            this._pagerIndicatorLayoutParams.setMargins(0, 20, 0, 0);
-            this._pagerIndicatorLayoutParams.gravity = android.view.Gravity.TOP;    
-        }else{
-            this._pagerIndicatorLayoutParams.setMargins(0, 0, 0, 20);
-            this._pagerIndicatorLayoutParams.gravity = android.view.Gravity.BOTTOM;
-        }
-        
         if(this._enableIndicator !== false){
+            this._pagerIndicatorLayoutParams.height = android.support.v4.view.ViewPager.LayoutParams.WRAP_CONTENT;
+            this._pagerIndicatorLayoutParams.width = android.support.v4.view.ViewPager.LayoutParams.MATCH_PARENT;
+        
+            if(this._indicatorAlignment === "TOP"){
+                this._pagerIndicatorLayoutParams.setMargins(0, 20, 0, 0);
+                this._pagerIndicatorLayoutParams.gravity = android.view.Gravity.TOP;    
+            }else{
+                this._pagerIndicatorLayoutParams.setMargins(0, 0, 0, 20);
+                this._pagerIndicatorLayoutParams.gravity = android.view.Gravity.BOTTOM;
+            }
+        
             if(this.parent instanceof grid_layout.GridLayout){
                 this.parent.android.addView(this._pageIndicatorView, this._pagerIndicatorLayoutParams);
             }else{
