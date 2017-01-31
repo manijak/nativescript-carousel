@@ -60,14 +60,15 @@ var Carousel = (function (_super) {
         
         this._pageIndicatorView = new com.rd.PageIndicatorView(this._context);
         this._pageIndicatorView.setId(this._indicatorViewId);
-        this._pagerIndicatorLayoutParams = this.parent.android.getLayoutParams();
-    };
-    Carousel.prototype.onLoaded = function () {
+        this._pagerIndicatorLayoutParams = new org.nativescript.widgets.CommonLayoutParams();
+
         ensureCarouselPagerAdapterClass();
         this._viewPager.setAdapter(new CarouselPagerAdapterClass(this));
         
         ensureCarouselPageChangedListenerClass();
         this._viewPager.setOnPageChangeListener(new CarouselPageChangedListenerClass(this));
+    };
+    Carousel.prototype.onLoaded = function () {
         this._viewPager.setCurrentItem(this.selectedPage, false);
 
         if(this._enableIndicator !== false){
@@ -76,19 +77,19 @@ var Carousel = (function (_super) {
         
             if(this._indicatorAlignment === "TOP"){
                 this._pagerIndicatorLayoutParams.setMargins(0, 20, 0, 0);
-                this._pagerIndicatorLayoutParams.gravity = android.view.Gravity.TOP;    
+                this._pagerIndicatorLayoutParams.gravity = android.view.Gravity.TOP | android.view.Gravity.CENTER;    
             }else{
                 this._pagerIndicatorLayoutParams.setMargins(0, 0, 0, 20);
-                this._pagerIndicatorLayoutParams.gravity = android.view.Gravity.BOTTOM;
+                this._pagerIndicatorLayoutParams.gravity = android.view.Gravity.BOTTOM | android.view.Gravity.CENTER;
             }
         
+            if (this._pageIndicatorView.getParent()) {
+                this.parent.android.removeView(this._pageIndicatorView);
+            }
+
             if(this.parent instanceof grid_layout.GridLayout){
                 this.parent.android.addView(this._pageIndicatorView, this._pagerIndicatorLayoutParams);
             }else{
-                // will crash the app after fi. a barcodescanner was closed
-                if (this._pageIndicatorView.parent !== null) {
-                  this.parent.android.removeView(this._pageIndicatorView);
-                }
                 this.parent.android.addView(this._pageIndicatorView);
             }
 
@@ -250,6 +251,12 @@ var Carousel = (function (_super) {
                     break;
                 case "FILL":
                     animationType = com.rd.animation.AnimationType.FILL;
+                    break;
+                case "THIN_WORM":
+                    animationType = com.rd.animation.AnimationType.THIN_WORM;
+                    break;
+                case "DROP":
+                    animationType = com.rd.animation.AnimationType.DROP;
                     break;
                 default:
                     animationType = com.rd.animation.AnimationType.NONE;
