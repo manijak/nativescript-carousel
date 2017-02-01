@@ -119,7 +119,7 @@ Sets the color of unselected indicators
 
 * **indicatorAnimation**
 
-Sets the pager-indicator animation type. Choose between: `color`, `slide`, `worm`, `fill` or `none`. Default is `none`.
+Sets the pager-indicator animation type. Choose between: `color`, `slide`, `scale`, `worm`, `thin_worm`, `fill`, `drop` or `none`. Default is `none`.
 
 * **indicatorAnimationDuration**
 
@@ -141,12 +141,24 @@ Sets the pager-indicator dot padding.
 ## Demo
 |iOS|Android|
 | ----------- | ----------- |
-|![iOS](ios_carousel.gif)|![Android](android_carousel.gif)|
+|![iOS](https://github.com/manijak/nativescript-carousel/raw/master/ios_carousel.gif)|![Android](https://github.com/manijak/nativescript-carousel/raw/master/android_carousel.gif)|
+
+#### Indicator animations (Android only!)
+NONE| COLOR| SCALE| SLIDE| WORM| THIN_WORM| FILL| DROP
+-------- | --- | --- | --- | --- | --- | --- | ---
+![anim_prev_none](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_none.gif) |![anim_prev_color](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_color.gif) |![anim_prev_scale](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_scale.gif) |![anim_prev_slide](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_slide.gif) |![anim_prev_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_worm.gif) |![anim_prev_thin_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_thin_worm.gif) |![anim_prev_fill](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_fill.gif) |![anim_prev_drop](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_drop.gif)
+
 
 ## Changelog
 
+**2.2.0**
+* Fixed issue with the `refresh` function that could cause a crash or removal of slides (Android).
+* Updated Android-indicators gradle library to v0.1.0. More stable and more animations! New animations are: `drop`, `scale` and `thin_worm`.
+* Fixed issue with a small white bar being shown if the indicators are disabled (Android). Thanks to @EddyVerbruggen.
+* Fixed, another, potential bug that would cause app to crash when resuming he activity (Android). 
+
 **2.1.2**
-* Fixes a critical bug that would cause the app to crash when resuming the activity (Android). Thanks @EddyVerbruggen!
+* Fixed a critical bug that would cause the app to crash when resuming the activity (Android). Thanks to @EddyVerbruggen.
 
 **2.1.1**
 * Corrected README, iOS does indeed allow for tap-events innside the CarouselItems. Thanks @terreb!
