@@ -372,7 +372,10 @@ function ensureCarouselPagerAdapterClass() {
             else
                 return this.owner ? this.owner.items.length : 0;
         };
-         CarouselPagerAdapterClassInner.prototype.isViewFromObject = function (view, _object) {
+        CarouselPagerAdapterClassInner.prototype.getItemPosition = function (item) {
+           return android.support.v4.view.PagerAdapter.POSITION_NONE;
+        };
+        CarouselPagerAdapterClassInner.prototype.isViewFromObject = function (view, _object) {
             return view === _object;
         };
         CarouselPagerAdapterClassInner.prototype.instantiateItem = function (container, index) {
@@ -397,9 +400,6 @@ function ensureCarouselPagerAdapterClass() {
                 return null;
 
             var nativeView = item._nativeView;
-            if (nativeView.toString() !== _object.toString()) {
-                throw new Error("Expected " + nativeView.toString() + " to equal " + _object.toString());
-            }
             container.removeView(nativeView);
         };
         CarouselPagerAdapterClassInner.prototype.saveState = function () {
