@@ -144,10 +144,12 @@ Sets the pager-indicator dot padding.
 |![iOS](https://github.com/manijak/nativescript-carousel/raw/master/ios_carousel.gif)|![Android](https://github.com/manijak/nativescript-carousel/raw/master/android_carousel.gif)|
 
 #### Indicator animations (Android only!)
-NONE| COLOR| SCALE| SLIDE| WORM| THIN_WORM| FILL| DROP
--------- | --- | --- | --- | --- | --- | --- | ---
-![anim_prev_none](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_none.gif) |![anim_prev_color](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_color.gif) |![anim_prev_scale](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_scale.gif) |![anim_prev_slide](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_slide.gif) |![anim_prev_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_worm.gif) |![anim_prev_thin_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_thin_worm.gif) |![anim_prev_fill](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_fill.gif) |![anim_prev_drop](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_drop.gif)
-
+NONE| COLOR| SCALE| SLIDE
+--- | --- | --- | --- 
+![anim_prev_none](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_none.gif) |![anim_prev_color](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_color.gif) |![anim_prev_scale](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_scale.gif) |![anim_prev_slide](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_slide.gif)
+WORM| THIN_WORM| FILL| DROP 
+--- | --- | --- | ---
+![anim_prev_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_worm.gif) |![anim_prev_thin_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_thin_worm.gif) |![anim_prev_fill](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_fill.gif) |![anim_prev_drop](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_drop.gif)
 
 ## Changelog
 
