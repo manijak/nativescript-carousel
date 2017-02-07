@@ -223,7 +223,7 @@ var Carousel = (function (_super) {
 
     Object.defineProperty(Carousel.prototype, "indicatorColorUnselected", {
         set: function (value) {
-            console.log("'indicatorColorUnselected' property not available for Android");
+            this._ios.indicatorTintColorUnselected = new colorModule.Color(value).ios;
         },
         enumerable: true,
         configurable: true

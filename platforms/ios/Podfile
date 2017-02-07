@@ -1,1 +1,1 @@
-pod 'DKCarouselView', '1.4.12'
+pod 'DKCarouselView', :git => 'https://github.com/manijak/DKCarouselView'
