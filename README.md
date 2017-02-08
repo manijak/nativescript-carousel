@@ -89,6 +89,9 @@ Shows or hides the page-indicator
 
 Sets the active indicator color. Default is semi-transparent white. Use hex or color-name. 
 
+* **indicatorColorUnselected**
+
+Sets the color of unselected indicators
 
 ## Attributes - iOS specific
 * **finite** *optional*
@@ -112,10 +115,6 @@ Returns the `DKCarouselView` object.
 * **android**
 
 Returns the `ViewPager` object.
-
-* **indicatorColorUnselected**
-
-Sets the color of unselected indicators
 
 * **indicatorAnimation**
 
@@ -153,6 +152,10 @@ WORM| THIN_WORM| FILL| DROP
 ![anim_prev_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_worm.gif) |![anim_prev_thin_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_thin_worm.gif) |![anim_prev_fill](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_fill.gif) |![anim_prev_drop](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_prev_drop.gif)
 
 ## Changelog
+
+**2.3.0**
+* Changed the iOS Pod to point to our own repo! We have the control ;)
+* New property available for iOS: `indicatorColorUnselected`. Allows you to set color to the unselected dots.
 
 **2.2.0**
 * Fixed issue with the `refresh` function that could cause a crash or removal of slides (Android).
