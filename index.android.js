@@ -253,6 +253,9 @@ var Carousel = (function (_super) {
                 case "DROP":
                     animationType = com.rd.animation.AnimationType.DROP;
                     break;
+                case "SWAP":
+                    animationType = com.rd.animation.AnimationType.SWAP;
+                    break;
                 default:
                     animationType = com.rd.animation.AnimationType.NONE;
                     break;
