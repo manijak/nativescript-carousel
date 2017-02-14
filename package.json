@@ -1,7 +1,7 @@
 {
   "name": "nativescript-carousel",
   "description": "Carousel component for NativeScript (iOS & Android).",
-  "main": "index.js",
+  "main": "index",
   "version": "2.3.0",
   "nativescript": {
     "platforms": {

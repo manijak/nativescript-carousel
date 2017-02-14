@@ -153,6 +153,9 @@ WORM| THIN_WORM| FILL| DROP
 
 ## Changelog
 
+**2.3.1**
+* Potential fix for ng2 & webpack users (`Trying to link invalid 'this' to a Java object`). Thanks @peterstaev.
+
 **2.3.0**
 * Changed the iOS Pod to point to our own repo! We have the control ;)
 * New property available for iOS: `indicatorColorUnselected`. Allows you to set color to the unselected dots.
