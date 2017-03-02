@@ -1,0 +1,37 @@
+{
+  "description": "NativeScript Carousel Demo Application",
+  "license": "SEE LICENSE IN <your-license-filename>",
+  "readme": "NativeScript Carousel Demo Application",
+  "repository": "<fill-your-repository-here>",
+  "nativescript": {
+    "id": "org.nativescript.demo",
+    "tns-android": {
+      "version": "2.5.0"
+    }
+  },
+  "dependencies": {
+    "@angular/common": "2.4.5",
+    "@angular/compiler": "2.4.5",
+    "@angular/core": "2.4.5",
+    "@angular/forms": "2.4.5",
+    "@angular/http": "2.4.5",
+    "@angular/platform-browser": "2.4.5",
+    "@angular/platform-browser-dynamic": "2.4.5",
+    "@angular/router": "3.4.5",
+    "nativescript-angular": "1.4.0",
+    "nativescript-carousel": "^2.3.1",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "~5.0.1",
+    "tns-core-modules": "^2.5.0"
+  },
+  "devDependencies": {
+    "@angular/compiler-cli": "2.4.5",
+    "babel-traverse": "6.8.0",
+    "babel-types": "6.8.1",
+    "babylon": "6.8.0",
+    "lazy": "1.0.11",
+    "nativescript-dev-typescript": "^0.3.2",
+    "typescript": "^2.1.0",
+    "zone.js": "~0.7.2"
+  }
+}
