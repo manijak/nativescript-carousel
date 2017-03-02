@@ -10,7 +10,7 @@ A simple carousel component for NativeScript.
 |Android|Yes|API 15+|ViewPager with [PageIndicatorView](https://github.com/romandanylyk/PageIndicatorView)|
 
 ## Installation
-Run  `npm i nativescript-carousel` in the ROOT directory of your project.
+Run  `tns plugin install nativescript-carousel` in the ROOT directory of your project.
 
 ## Upgrading
 If you are upgrading from an earlier version, you might receive some errors when building. Therefore you must remove the platforms and re-add them. 
