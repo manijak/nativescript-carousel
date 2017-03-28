@@ -344,6 +344,8 @@ var Carousel = (function (_super) {
     });
     Carousel.pageChangedEvent = "pageChanged";
     Carousel.pageTappedEvent = "pageTapped";
+    Carousel.pageScrollingEvent = "pageScrolling";
+    Carousel.pageScrollStateChangedEvent = "pageScrolled";
     Carousel.itemsProperty = new dObservable.Property("items", "Carousel", new proxy.PropertyMetadata(undefined, dObservable.PropertyMetadataSettings.AffectsLayout, onItemsPropertyChanged));
     Carousel.itemTemplateProperty = new dObservable.Property("itemTemplate", "Carousel", new proxy.PropertyMetadata(undefined, dObservable.PropertyMetadataSettings.AffectsLayout, onItemTemplatePropertyChanged));
     return Carousel;
@@ -447,8 +449,28 @@ function ensureCarouselPageChangedListenerClass() {
             };
             this.owner.notify(args2);
         };
-        CarouselPageChangedListener.prototype.onPageScrollStateChanged = function (state) { };
-        CarouselPageChangedListener.prototype.onPageScrolled = function (position, positionOffset, positionOffsetPixels) { };
+        CarouselPageChangedListener.prototype.onPageScrollStateChanged = function (state) {
+            var args2 = { 
+                eventName: Carousel.pageScrollStateChangedEvent, 
+                object: this.owner,
+                state: state
+            };
+            this.owner.notify(args2);
+        };
+        CarouselPageChangedListener.prototype.onPageScrolled = function (position, positionOffset, positionOffsetPixels) {
+            var args2 = { 
+                eventName: Carousel.pageScrollingEvent, 
+                object: this.owner,
+                state: {
+                    android:{
+                        position: position,
+                        positionOffset: positionOffset, 
+                        positionOffsetPixels: positionOffsetPixels
+                    }
+                }
+            };
+            this.owner.notify(args2);
+        };
         return CarouselPageChangedListener;
     }(android.support.v4.view.ViewPager.SimpleOnPageChangeListener));
     CarouselPageChangedListenerClass = CarouselPageChangedListener;
