@@ -462,6 +462,7 @@ function ensureCarouselPageChangedListenerClass() {
                 eventName: Carousel.pageScrollingEvent, 
                 object: this.owner,
                 state: {
+                    offset: positionOffset,
                     android:{
                         position: position,
                         positionOffset: positionOffset, 
