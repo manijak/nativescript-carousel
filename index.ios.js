@@ -57,6 +57,17 @@ var Carousel = (function (_super) {
              _this._selectedPage = index;
             _this.notify(args2);
         });
+        this._ios.setDidScrollBlock(function(view, offset){
+            var args2 = { 
+                eventName: Carousel.pageScrollingEvent, 
+                object: _this, 
+                view: view,
+                state: {
+                    offset: offset
+                }
+            };
+            _this.notify(args2);
+        });
         
         this.constructView();
     }
@@ -260,6 +271,7 @@ var Carousel = (function (_super) {
     });
     Carousel.pageChangedEvent = "pageChanged";
     Carousel.pageTappedEvent = "pageTapped";
+    Carousel.pageScrollingEvent = "pageScrolling";
     Carousel.itemsProperty = new dObservable.Property("items", "Carousel", new proxy.PropertyMetadata(undefined, dObservable.PropertyMetadataSettings.AffectsLayout, onItemsPropertyChanged));
     Carousel.itemTemplateProperty = new dObservable.Property("itemTemplate", "Carousel", new proxy.PropertyMetadata(undefined, dObservable.PropertyMetadataSettings.AffectsLayout, onItemTemplatePropertyChanged));
     return Carousel;
