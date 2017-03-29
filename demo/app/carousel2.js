@@ -22,3 +22,7 @@ exports.selectPageEvent = function(args){
     if(!myCarousel) return;
     myCarousel.selectedPage = 2;
 }
+
+exports.myScrollingEvent = function(args){
+	console.log("Scrolling: " + args.state.offset);
+}
