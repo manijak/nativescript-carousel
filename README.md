@@ -48,7 +48,7 @@ xmlns:ns="nativescript-carousel"
 
 #### Or use a template by wrapping a single `CarouselItem` with `Carousel.itemTemplate` and assigning the `items` property with an array of data.
 ```xml
-<ns:Carousel items="{{ myDataArray }}" height="250" pageChanged="myChangeEvent">
+<ns:Carousel items="{{ myDataArray }}" height="250" pageChanged="myChangeEvent" pageScrolling="myScrollingEvent">
     <ns:Carousel.itemTemplate>
         <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}" height="250" tap="myTapEvent">
             <Label text="{{ title }}"  horizontalAlignment="center"/>
@@ -65,6 +65,10 @@ For both platforms, you can create tap-events on the `CarouselItem` or elements 
 exports.myChangeEvent = function(args){
     var changeEventText = "Page changed to index: " + args.index;
     console.log(changeEventText);
+}
+
+exports.myScrollingEvent = function(args){
+	console.log("Scrolling: " + args.state.offset);
 }
 ```
 
@@ -152,6 +156,12 @@ WORM| THIN_WORM| FILL| DROP| SWAP
 ![anim_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_worm.gif) |![anim_thin_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_thin_worm.gif) |![anim_fill](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_fill.gif) |![anim_drop](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_drop.gif) |![anim_swap](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_swap.gif)
 
 ## Changelog
+
+**2.4.0**
+* Added new event, 'pageScrolling'. Thanks @sitefinitysteve!
+* Updated gradle for 'PageIndicatorView' to version 0.1.2
+* Updated package.json with 'plugin' metadata to comply with the upcomming 3.0 plugin standard
+* Potential fix for `ViewPager.populate` exception on Android.
 
 **2.3.1**
 * Potential fix for ng2 & webpack users (`Trying to link invalid 'this' to a Java object`). Thanks @peterstaev.

@@ -64,8 +64,6 @@ var Carousel = (function (_super) {
         this._viewPager.setOnPageChangeListener(new CarouselPageChangedListenerClass(this));
     };
     Carousel.prototype.onLoaded = function () {
-        this._viewPager.setCurrentItem(this.selectedPage, false);
-
         if(this._enableIndicator !== false){
             this._pagerIndicatorLayoutParams.height = android.support.v4.view.ViewPager.LayoutParams.WRAP_CONTENT;
             this._pagerIndicatorLayoutParams.width = android.support.v4.view.ViewPager.LayoutParams.MATCH_PARENT;
@@ -99,6 +97,7 @@ var Carousel = (function (_super) {
             this.indicatorColor = this._indicatorColor;
             this.indicatorColorUnselected = this._indicatorColorUnselected;
         }
+        this._viewPager.setCurrentItem(this.selectedPage, false);
         _super.prototype.onLoaded.call(this);
     };
     Carousel.prototype.constructView = function () { };
