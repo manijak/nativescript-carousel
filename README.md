@@ -202,6 +202,8 @@ WORM| THIN_WORM| FILL| DROP| SWAP
 * [manijak](https://github.com/manijak)
 
 ## Collaborators
+* [sitefinitysteve](https://github.com/sitefinitysteve)
+* [EddyVerbruggen](https://github.com/EddyVerbruggen)
 * [Pip3r4o](https://github.com/Pip3r4o) 
 
 ## Help
