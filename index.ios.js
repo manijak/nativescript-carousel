@@ -73,6 +73,7 @@ var Carousel = (function (_super) {
     }
 
     Carousel.prototype.constructView = function () {
+        this._ios.setItems(new NSMutableArray());
         var that = this;
         if (types.isNullOrUndefined(this.items) || !types.isNumber(this.items.length)) {
             this.on(absolute_layout.AbsoluteLayout.loadedEvent, function (data) {
@@ -114,13 +115,18 @@ var Carousel = (function (_super) {
         return this.items.getItem ? this.items.getItem(index) : this.items[index];
     };
     Carousel.prototype._onItemsPropertyChanged = function (data) {
-        /*if (data.oldValue instanceof observableArray.ObservableArray) {
+        if (data.oldValue instanceof observableArray.ObservableArray) {
             weakEvents.removeWeakEventListener(data.oldValue, observableArray.ObservableArray.changeEvent, this._onItemsChanged, this);
         }
         if (data.newValue instanceof observableArray.ObservableArray) {
             weakEvents.addWeakEventListener(data.newValue, observableArray.ObservableArray.changeEvent, this._onItemsChanged, this);
-        }*/
+        }
         //console.log("_onItemsPropertyChanged");
+        if (!types.isNullOrUndefined(this.items) && types.isNumber(this.items.length)) {
+            this.constructView();
+        }
+    };
+    Carousel.prototype._onItemsChanged = function (data) {
         if (!types.isNullOrUndefined(this.items) && types.isNumber(this.items.length)) {
             this.constructView();
         }

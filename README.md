@@ -157,6 +157,9 @@ WORM| THIN_WORM| FILL| DROP| SWAP
 
 ## Changelog
 
+**2.4.1**
+* Fixed an issue on iOS when updating `Items` binding, would not refresh Carousel-view.
+
 **2.4.0**
 * Added new event, 'pageScrolling'. Thanks @sitefinitysteve!
 * Updated gradle for 'PageIndicatorView' to version 0.1.2
