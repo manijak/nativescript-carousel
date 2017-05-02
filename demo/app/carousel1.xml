@@ -9,7 +9,7 @@
     
     <GridLayout margin="20,0,0,0">
         <ns:Carousel height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff"
-        finite="true" verticalAlignment="top" android:indicatorAnimation="color">
+        finite="true" bounce="false" verticalAlignment="top" android:indicatorAnimation="color">
             <ns:CarouselItem id="slide1" backgroundColor="#b3cde0" height="250">
                 <Label text="Slide 1" verticalAlignment="center" horizontalAlignment="center"/>    
             </ns:CarouselItem>

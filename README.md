@@ -100,6 +100,10 @@ Sets the color of unselected indicators
 ## Attributes - iOS specific
 * **finite** *optional*
 
+If true last slide will wrap back to first and visa versa
+
+* **bounce** *optional*
+
 If set to 'true' scrolling will bounce at the first/last page (non-infinite). Default is 'false'. 
 
 * **autoPagingInterval** *optional*
