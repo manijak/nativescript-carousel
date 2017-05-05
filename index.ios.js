@@ -1,5 +1,5 @@
 "use strict";
-var dObservable = require("ui/core/dependency-observable");
+//var dObservable = require("ui/core/dependency-observable");
 var observableArray = require("data/observable-array");
 var Platform = require('platform');
 var absolute_layout = require('ui/layouts/absolute-layout');
@@ -9,7 +9,7 @@ var repeaterModule = require("ui/repeater");
 var weakEvents = require("ui/core/weak-event-listener");
 var types = require("utils/types");
 var builder = require("ui/builder");
-var proxy = require("ui/core/proxy");
+//var proxy = require("ui/core/proxy");
 var knownTemplates;
 (function (knownTemplates) {
     knownTemplates.itemTemplate = "itemTemplate";
@@ -285,8 +285,35 @@ var Carousel = (function (_super) {
     Carousel.pageChangedEvent = "pageChanged";
     Carousel.pageTappedEvent = "pageTapped";
     Carousel.pageScrollingEvent = "pageScrolling";
-    Carousel.itemsProperty = new dObservable.Property("items", "Carousel", new proxy.PropertyMetadata(undefined, dObservable.PropertyMetadataSettings.AffectsLayout, onItemsPropertyChanged));
-    Carousel.itemTemplateProperty = new dObservable.Property("itemTemplate", "Carousel", new proxy.PropertyMetadata(undefined, dObservable.PropertyMetadataSettings.AffectsLayout, onItemTemplatePropertyChanged));
+    //Carousel.itemsProperty = new dObservable.Property("items", "Carousel", new proxy.PropertyMetadata(undefined, dObservable.PropertyMetadataSettings.AffectsLayout, onItemsPropertyChanged));
+    //Carousel.itemTemplateProperty = new dObservable.Property("itemTemplate", "Carousel", new proxy.PropertyMetadata(undefined, dObservable.PropertyMetadataSettings.AffectsLayout, onItemTemplatePropertyChanged));
     return Carousel;
 }(absolute_layout.AbsoluteLayout));
+
+Carousel.itemsProperty = new viewModule.Property({
+    name: "items",
+    defaultValue: undefined,
+    valueChanged: function (target, oldValue, newValue) {
+        Carousel.prototype._onItemsPropertyChanged({
+            object: target,
+            oldValue: oldValue,
+            newValue: newValue
+        });
+    }
+});
+Carousel.itemTemplateProperty = new viewModule.Property({
+    name: "itemTemplate",
+    defaultValue: undefined,
+    valueChanged: function (target, oldValue, newValue) {
+        Carousel.prototype._onItemTemplatePropertyChanged({
+            object: target,
+            oldValue: oldValue,
+            newValue: newValue
+        });
+    }
+});
+
 exports.Carousel = Carousel;
+
+Carousel.itemsProperty.register(Carousel);
+Carousel.itemTemplateProperty.register(Carousel);

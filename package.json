@@ -5,8 +5,8 @@
   "version": "2.4.2",
   "nativescript": {
     "platforms": {
-      "ios": "2.3.0",
-      "android": "2.3.0"
+      "ios": "3.0.0",
+      "android": "3.0.0"
     },
     "plugin": {
        "nan": "true",

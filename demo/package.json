@@ -1,15 +1,18 @@
 {
   "nativescript": {
     "id": "org.carousel.demo",
-    "tns-ios": {
-      "version": "2.5.0"
-    },
     "tns-android": {
-      "version": "2.5.0"
+      "version": "3.0.0"
     }
   },
   "dependencies": {
     "nativescript-carousel": "file:..",
-    "tns-core-modules": "^2.5.2"
+    "tns-core-modules": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-traverse": "6.24.1",
+    "babel-types": "6.24.1",
+    "babylon": "6.17.0",
+    "lazy": "1.0.11"
   }
 }
