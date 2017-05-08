@@ -142,7 +142,7 @@ var Carousel = (function (_super) {
         }
     }
     Carousel.prototype._onItemsChanged = function (data) {
-        this._pageIndicatorView.setCount(this.items.length);
+        this.refresh();
     };
     Carousel.prototype.onLayout = function (left, top, right, bottom) {
         viewModule.View.layoutChild(this, this, 0, 0, right - left, bottom - top);
