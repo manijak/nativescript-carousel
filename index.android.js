@@ -1,18 +1,14 @@
 "use strict";
-//var dObservable = require("ui/core/dependency-observable");
 var observableArray = require("data/observable-array");
 var Platform = require('platform');
 var absolute_layout = require('ui/layouts/absolute-layout');
 var grid_layout = require('ui/layouts/grid-layout');
 var stack_layout = require('ui/layouts/stack-layout');
 var colorModule = require('color');
-var repeaterModule = require("ui/repeater");
 var weakEvents = require("ui/core/weak-event-listener");
 var types = require("utils/types");
 var builder = require("ui/builder");
-//var proxy = require("ui/core/proxy");
 var viewModule = require("tns-core-modules/ui/core/view");
-//var viewModule = require("ui/core/view");
 var knownTemplates;
 (function (knownTemplates) {
     knownTemplates.itemTemplate = "itemTemplate";
@@ -130,6 +126,21 @@ var Carousel = (function (_super) {
     Carousel.prototype._onItemTemplatePropertyChanged = function (data) {
         this._requestRefresh();
     };
+    Carousel.prototype._onIndicatorColorChaged = function(data) {
+        if(!this._pageIndicatorView) return;
+        
+        if(data.indicatorColor){
+            this._indicatorColor = data.indicatorColor;
+            var droidColor = new colorModule.Color(data.indicatorColor).android;
+            this._pageIndicatorView.setSelectedColor(droidColor);
+        }
+
+        if(data.indicatorColorUnselected){
+            this._indicatorColorUnselected = data.indicatorColorUnselected;
+            var droidColor = new colorModule.Color(data.indicatorColorUnselected).android;
+            this._pageIndicatorView.setUnselectedColor(droidColor);
+        }
+    }
     Carousel.prototype._onItemsChanged = function (data) {
         this._pageIndicatorView.setCount(this.items.length);
     };
@@ -156,24 +167,21 @@ var Carousel = (function (_super) {
         configurable: true
     });
     Object.defineProperty(Carousel.prototype, "indicatorColor", {
+        get: function () {
+            return this._getValue(Carousel.indicatorColorProperty);
+        },
         set: function (value) {
-            if(!value) return;
-            this._indicatorColor = value;
-            var droidColor = new colorModule.Color(value).android;
-            if(this._pageIndicatorView){
-                this._pageIndicatorView.setSelectedColor(droidColor);
-            }
+            this._setValue(Carousel.indicatorColorProperty, value);
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Carousel.prototype, "indicatorColorUnselected", {
+        get: function () {
+            return this._getValue(Carousel.indicatorColorUnselectedProperty);
+        },
         set: function (value) {
-            if(!value) return;
-            this._indicatorColorUnselected = value;
-            var droidColor = new colorModule.Color(value).android;
-            if(this._pageIndicatorView)
-                this._pageIndicatorView.setUnselectedColor(droidColor);
+            this._setValue(Carousel.indicatorColorUnselectedProperty, value);
         },
         enumerable: true,
         configurable: true
@@ -345,7 +353,6 @@ var Carousel = (function (_super) {
         enumerable: true,
         configurable: true
     });
-
     return Carousel;
 }(absolute_layout.AbsoluteLayout));
 
@@ -388,6 +395,27 @@ Carousel.finiteProperty = new viewModule.Property({
     name: "finite",
     defaultValue: false
 });
+Carousel.indicatorColorProperty = new viewModule.Property({
+    name: "indicatorColor",
+    defaultValue: undefined,
+    valueChanged: function (target, oldValue, newValue) {
+        target._onIndicatorColorChaged({
+            object: target,
+            indicatorColor: newValue
+        });
+    }
+});
+Carousel.indicatorColorUnselectedProperty = new viewModule.Property({
+    name: "indicatorColorUnselected",
+    defaultValue: undefined,
+    valueChanged: function (target, oldValue, newValue) {
+        target._onIndicatorColorChaged({
+            object: target,
+            indicatorColorUnselected: newValue
+        });
+    }
+});
+
 exports.Carousel = Carousel;
 
 Carousel.pageWidthProperty.register(Carousel);
@@ -395,6 +423,8 @@ Carousel.showIndicatorProperty.register(Carousel);
 Carousel.itemsProperty.register(Carousel);
 Carousel.itemTemplateProperty.register(Carousel);
 Carousel.finiteProperty.register(Carousel);
+Carousel.indicatorColorProperty.register(Carousel);
+Carousel.indicatorColorUnselectedProperty.register(Carousel);
 
 var VIEWS_STATES = "_viewStates";
 var CarouselPagerAdapterClass;

@@ -1,15 +1,13 @@
 "use strict";
-//var dObservable = require("ui/core/dependency-observable");
 var observableArray = require("data/observable-array");
 var Platform = require('platform');
 var absolute_layout = require('ui/layouts/absolute-layout');
 var stack_layout = require('ui/layouts/stack-layout');
 var colorModule = require('color');
-var repeaterModule = require("ui/repeater");
 var weakEvents = require("ui/core/weak-event-listener");
 var types = require("utils/types");
 var builder = require("ui/builder");
-//var proxy = require("ui/core/proxy");
+var viewModule = require("tns-core-modules/ui/core/view");
 var knownTemplates;
 (function (knownTemplates) {
     knownTemplates.itemTemplate = "itemTemplate";
@@ -26,17 +24,17 @@ function onItemTemplatePropertyChanged(data) {
 var CarouselItem = (function (_super) {
     __extends(CarouselItem, _super);
     function CarouselItem() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     return CarouselItem;
 }(stack_layout.StackLayout));
 exports.CarouselItem = CarouselItem;
-
 var Carousel = (function (_super) {
     __extends(Carousel, _super);
     function Carousel() {
         _super.call(this);
         var _this = this;
+
         this._ios = new DKCarouselView(CGRectMake(0, 0, this.pageWidth, 0));
         this._ios.setDidSelectBlock(function(item, index){
             var args1 = { 
@@ -68,17 +66,15 @@ var Carousel = (function (_super) {
             };
             _this.notify(args2);
         });
-        
-        this.constructView();
+        //this.constructView();
     }
-
     Carousel.prototype.constructView = function () {
         this._ios.setItems(new NSMutableArray());
         var that = this;
         if (types.isNullOrUndefined(this.items) || !types.isNumber(this.items.length)) {
             this.on(absolute_layout.AbsoluteLayout.loadedEvent, function (data) {
                 var nsArray = new NSMutableArray();
-                that.eachLayoutChild(function (view1) {
+                that.eachChildView(function (view1) {
                     if (view1 instanceof CarouselItem) {
                         view1.width = that.pageWidth;
                         var dkCarouselViewItem1 = new DKCarouselViewItem();
@@ -100,7 +96,7 @@ var Carousel = (function (_super) {
                 viewToAdd.bindingContext = dataItem;
                 this.addChild(viewToAdd);
             }
-            this.eachLayoutChild(function (view) {
+            this.eachChildView(function (view) {
                 if (view instanceof CarouselItem) {
                     view.width = that.pageWidth;
                     var dkCarouselViewItem = new DKCarouselViewItem();
@@ -111,6 +107,11 @@ var Carousel = (function (_super) {
             this._ios.setItems(nsArray);
         }
     };
+    Carousel.prototype.createNativeView = function () {
+        this.constructView();
+        return this._ios;
+    };
+    Carousel.prototype.initNativeView = function () { };
     Carousel.prototype._getDataItem = function (index) {
         return this.items.getItem ? this.items.getItem(index) : this.items[index];
     };
@@ -121,7 +122,6 @@ var Carousel = (function (_super) {
         if (data.newValue instanceof observableArray.ObservableArray) {
             weakEvents.addWeakEventListener(data.newValue, observableArray.ObservableArray.changeEvent, this._onItemsChanged, this);
         }
-        //console.log("_onItemsPropertyChanged");
         if (!types.isNullOrUndefined(this.items) && types.isNumber(this.items.length)) {
             this.constructView();
         }
@@ -132,7 +132,6 @@ var Carousel = (function (_super) {
         }
     };
     Carousel.prototype._onItemTemplatePropertyChanged = function (data) {
-        //console.log("_onItemTemplatePropertyChanged");
         if (!types.isNullOrUndefined(this.items) && types.isNumber(this.items.length)) {
             this.constructView();
         }
@@ -192,7 +191,20 @@ var Carousel = (function (_super) {
     });
     Object.defineProperty(Carousel.prototype, "pageWidth", {
         get: function () {
-            return Platform.screen.mainScreen.widthDIPs;
+            return this._getValue(Carousel.pageWidthProperty);
+        },
+        set: function (value) {
+            this._setValue(Carousel.pageWidthProperty, value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Carousel.prototype, "showIndicator", {
+        get: function () {
+            return this._getValue(Carousel.showIndicatorProperty);
+        },
+        set: function (value) {
+            this._setValue(Carousel.showIndicatorProperty, value);
         },
         enumerable: true,
         configurable: true
@@ -207,16 +219,6 @@ var Carousel = (function (_super) {
     Object.defineProperty(Carousel.prototype, "bounce", {
         set: function (value) {
             this._ios.bounce = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "showIndicator", {
-        set: function (value) {
-            this._ios.indicatorIsVisible = value;
-        },
-        get: function () {
-            return this._ios.indicatorIsVisible;
         },
         enumerable: true,
         configurable: true
@@ -282,19 +284,25 @@ var Carousel = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Carousel.pageChangedEvent = "pageChanged";
-    Carousel.pageTappedEvent = "pageTapped";
-    Carousel.pageScrollingEvent = "pageScrolling";
-    //Carousel.itemsProperty = new dObservable.Property("items", "Carousel", new proxy.PropertyMetadata(undefined, dObservable.PropertyMetadataSettings.AffectsLayout, onItemsPropertyChanged));
-    //Carousel.itemTemplateProperty = new dObservable.Property("itemTemplate", "Carousel", new proxy.PropertyMetadata(undefined, dObservable.PropertyMetadataSettings.AffectsLayout, onItemTemplatePropertyChanged));
     return Carousel;
 }(absolute_layout.AbsoluteLayout));
 
+Carousel.pageChangedEvent = "pageChanged";
+Carousel.pageTappedEvent = "pageTapped";
+Carousel.pageScrollingEvent = "pageScrolling";
+Carousel.pageWidthProperty = new viewModule.Property({
+    name: "pageWidth",
+    defaultValue: Platform.screen.mainScreen.widthDIPs
+});
+Carousel.showIndicatorProperty = new viewModule.Property({
+    name: "showIndicator",
+    defaultValue: true
+});
 Carousel.itemsProperty = new viewModule.Property({
     name: "items",
     defaultValue: undefined,
     valueChanged: function (target, oldValue, newValue) {
-        Carousel.prototype._onItemsPropertyChanged({
+        target._onItemsPropertyChanged({
             object: target,
             oldValue: oldValue,
             newValue: newValue
@@ -305,7 +313,7 @@ Carousel.itemTemplateProperty = new viewModule.Property({
     name: "itemTemplate",
     defaultValue: undefined,
     valueChanged: function (target, oldValue, newValue) {
-        Carousel.prototype._onItemTemplatePropertyChanged({
+        target._onItemTemplatePropertyChanged({
             object: target,
             oldValue: oldValue,
             newValue: newValue
@@ -315,5 +323,7 @@ Carousel.itemTemplateProperty = new viewModule.Property({
 
 exports.Carousel = Carousel;
 
+Carousel.pageWidthProperty.register(Carousel);
+Carousel.showIndicatorProperty.register(Carousel);
 Carousel.itemsProperty.register(Carousel);
 Carousel.itemTemplateProperty.register(Carousel);
