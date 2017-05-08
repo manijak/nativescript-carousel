@@ -166,6 +166,13 @@ var Carousel = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Carousel.prototype, "nativeView", {
+        get: function () {
+            return this._viewPager;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Carousel.prototype, "indicatorColor", {
         get: function () {
             return this._getValue(Carousel.indicatorColorProperty);
@@ -323,10 +330,7 @@ var Carousel = (function (_super) {
 
     Object.defineProperty(Carousel.prototype, "pageWidth", {
         get: function () {
-            return this._getValue(Carousel.pageWidthProperty);
-        },
-        set: function (value) {
-            this._setValue(Carousel.pageWidthProperty, value);
+            return Platform.screen.mainScreen.widthDIPs;
         },
         enumerable: true,
         configurable: true
@@ -361,13 +365,12 @@ Carousel.pageTappedEvent = "pageTapped";
 Carousel.pageScrollingEvent = "pageScrolling";
 Carousel.pageScrollStateChangedEvent = "pageScrolled";
 
-Carousel.pageWidthProperty = new viewModule.Property({
-    name: "pageWidth",
-    defaultValue: Platform.screen.mainScreen.widthDIPs
-});
 Carousel.showIndicatorProperty = new viewModule.Property({
     name: "showIndicator",
-    defaultValue: true
+    defaultValue: true,
+    valueChanged: function (target, oldValue, newValue) {
+        target._enableIndicator = newValue;
+    }
 });
 Carousel.itemsProperty = new viewModule.Property({
     name: "items",
@@ -417,8 +420,6 @@ Carousel.indicatorColorUnselectedProperty = new viewModule.Property({
 });
 
 exports.Carousel = Carousel;
-
-Carousel.pageWidthProperty.register(Carousel);
 Carousel.showIndicatorProperty.register(Carousel);
 Carousel.itemsProperty.register(Carousel);
 Carousel.itemTemplateProperty.register(Carousel);

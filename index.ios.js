@@ -164,7 +164,14 @@ var Carousel = (function (_super) {
         enumerable: true,
         configurable: true
     });
-     Object.defineProperty(Carousel.prototype, "_nativeView", {
+    Object.defineProperty(Carousel.prototype, "_nativeView", {
+        get: function () {
+            return this._ios;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Carousel.prototype, "nativeView", {
         get: function () {
             return this._ios;
         },
@@ -191,20 +198,17 @@ var Carousel = (function (_super) {
     });
     Object.defineProperty(Carousel.prototype, "pageWidth", {
         get: function () {
-            return this._getValue(Carousel.pageWidthProperty);
-        },
-        set: function (value) {
-            this._setValue(Carousel.pageWidthProperty, value);
+            return Platform.screen.mainScreen.widthDIPs;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Carousel.prototype, "showIndicator", {
-        get: function () {
-            return this._getValue(Carousel.showIndicatorProperty);
-        },
         set: function (value) {
-            this._setValue(Carousel.showIndicatorProperty, value);
+            this._ios.indicatorIsVisible = value;
+        },
+        get: function () {
+            return this._ios.indicatorIsVisible;
         },
         enumerable: true,
         configurable: true
@@ -290,14 +294,6 @@ var Carousel = (function (_super) {
 Carousel.pageChangedEvent = "pageChanged";
 Carousel.pageTappedEvent = "pageTapped";
 Carousel.pageScrollingEvent = "pageScrolling";
-Carousel.pageWidthProperty = new viewModule.Property({
-    name: "pageWidth",
-    defaultValue: Platform.screen.mainScreen.widthDIPs
-});
-Carousel.showIndicatorProperty = new viewModule.Property({
-    name: "showIndicator",
-    defaultValue: true
-});
 Carousel.itemsProperty = new viewModule.Property({
     name: "items",
     defaultValue: undefined,
@@ -322,8 +318,5 @@ Carousel.itemTemplateProperty = new viewModule.Property({
 });
 
 exports.Carousel = Carousel;
-
-Carousel.pageWidthProperty.register(Carousel);
-Carousel.showIndicatorProperty.register(Carousel);
 Carousel.itemsProperty.register(Carousel);
 Carousel.itemTemplateProperty.register(Carousel);
