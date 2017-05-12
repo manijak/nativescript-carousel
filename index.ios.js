@@ -211,6 +211,13 @@ var Carousel = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Carousel.prototype, "scrollEnabled", {
+        set: function (value) {
+            this._ios.scrollEnabled = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Carousel.prototype, "showIndicator", {
         set: function (value) {
             this._ios.indicatorIsVisible = value;
