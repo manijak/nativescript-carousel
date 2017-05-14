@@ -221,8 +221,15 @@ var Carousel = (function (_super) {
         configurable: true
     });
     Object.defineProperty(Carousel.prototype, "bounce", {
-        set: function (value) {
+      set: function (value) {
             this._ios.bounce = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Carousel.prototype, "scrollEnabled", {
+        set: function (value) {
+            this._ios.scrollEnabled = value;
         },
         enumerable: true,
         configurable: true
