@@ -29,14 +29,13 @@ var CarouselItem = (function (_super) {
     return CarouselItem;
 }(stack_layout.StackLayout));
 exports.CarouselItem = CarouselItem;
+
 var Carousel = (function (_super) {
     __extends(Carousel, _super);
     function Carousel() {
-        _super.call(this);
-        var _this = this;
-
-        this._ios = new DKCarouselView(CGRectMake(0, 0, this.pageWidth, 0));
-        this._ios.setDidSelectBlock(function(item, index){
+        var _this = _super.call(this) || this;
+        _this.nativeView = new DKCarouselView(CGRectMake(0, 0, Platform.screen.mainScreen.widthDIPs, 0));
+        _this.nativeView.setDidSelectBlock(function(item, index){
             var args1 = { 
                 eventName: Carousel.pageTappedEvent, 
                 object: _this,
@@ -45,7 +44,7 @@ var Carousel = (function (_super) {
             };
             _this.notify(args1);
         });
-        this._ios.setDidChangeBlock(function(view, index){
+        _this.nativeView.setDidChangeBlock(function(view, index){
             var args2 = { 
                 eventName: Carousel.pageChangedEvent, 
                 object: _this, 
@@ -55,7 +54,7 @@ var Carousel = (function (_super) {
              _this._selectedPage = index;
             _this.notify(args2);
         });
-        this._ios.setDidScrollBlock(function(view, offset){
+        _this.nativeView.setDidScrollBlock(function(view, offset){
             var args2 = { 
                 eventName: Carousel.pageScrollingEvent, 
                 object: _this, 
@@ -66,26 +65,32 @@ var Carousel = (function (_super) {
             };
             _this.notify(args2);
         });
-        //this.constructView();
+        return _this;
     }
-    Carousel.prototype.constructView = function () {
-        this._ios.setItems(new NSMutableArray());
+    Carousel.prototype.createNativeView = function () {
+        this.refresh();
+        return this.nativeView;
+    };
+    Carousel.prototype.refresh = function () {
+        this.nativeView.setItems(new NSMutableArray());
         var that = this;
         if (types.isNullOrUndefined(this.items) || !types.isNumber(this.items.length)) {
             this.on(absolute_layout.AbsoluteLayout.loadedEvent, function (data) {
                 var nsArray = new NSMutableArray();
                 that.eachChildView(function (view1) {
                     if (view1 instanceof CarouselItem) {
-                        view1.width = that.pageWidth;
+                        view1.width = "100%";
+                        view1.height = "100%";
                         var dkCarouselViewItem1 = new DKCarouselViewItem();
                         dkCarouselViewItem1.view = view1.ios;
                         nsArray.addObject(dkCarouselViewItem1);
                     }
                 });
-                that._ios.setItems(nsArray);
+                that.nativeView.setItems(nsArray);
             });
         }
         else{
+            console.log("refresh()");
             this.removeChildren();
             var nsArray = new NSMutableArray();
             var length = this.items.length;
@@ -98,20 +103,16 @@ var Carousel = (function (_super) {
             }
             this.eachChildView(function (view) {
                 if (view instanceof CarouselItem) {
-                    view.width = that.pageWidth;
+                    view.width = "100%";
+                    view.height = "100%";
                     var dkCarouselViewItem = new DKCarouselViewItem();
                     dkCarouselViewItem.view = view.ios;
                     nsArray.addObject(dkCarouselViewItem);
                 }
             });
-            this._ios.setItems(nsArray);
+            this.nativeView.setItems(nsArray);
         }
     };
-    Carousel.prototype.createNativeView = function () {
-        this.constructView();
-        return this._ios;
-    };
-    Carousel.prototype.initNativeView = function () { };
     Carousel.prototype._getDataItem = function (index) {
         return this.items.getItem ? this.items.getItem(index) : this.items[index];
     };
@@ -123,17 +124,17 @@ var Carousel = (function (_super) {
             weakEvents.addWeakEventListener(data.newValue, observableArray.ObservableArray.changeEvent, this._onItemsChanged, this);
         }
         if (!types.isNullOrUndefined(this.items) && types.isNumber(this.items.length)) {
-            this.constructView();
+            this.refresh();
         }
     };
     Carousel.prototype._onItemsChanged = function (data) {
         if (!types.isNullOrUndefined(this.items) && types.isNumber(this.items.length)) {
-            this.constructView();
+            this.refresh();
         }
     };
     Carousel.prototype._onItemTemplatePropertyChanged = function (data) {
         if (!types.isNullOrUndefined(this.items) && types.isNumber(this.items.length)) {
-            this.constructView();
+            this.refresh();
         }
     };
 
@@ -159,29 +160,16 @@ var Carousel = (function (_super) {
     });
     Object.defineProperty(Carousel.prototype, "ios", {
         get: function () {
-            return this._ios;
+            return this.nativeView;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Carousel.prototype, "_nativeView", {
-        get: function () {
-            return this._ios;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "nativeView", {
-        get: function () {
-            return this._ios;
-        },
-        enumerable: true,
-        configurable: true
-    });
+
     Object.defineProperty(Carousel.prototype, "selectedPage", {
         set: function (value) {
             this._selectedPage = value;
-            this._ios.selectedPage = value;
+            this.nativeView.selectedPage = value;
         },
         get: function () {
             return this._selectedPage ? this._selectedPage : 0;
@@ -191,52 +179,62 @@ var Carousel = (function (_super) {
     });
     Object.defineProperty(Carousel.prototype, "autoPagingInterval", {
         set: function (value) {
-            this._ios.setAutoPagingForInterval(value);
+            this.nativeView.setAutoPagingForInterval(value);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Carousel.prototype, "pageWidth", {
-        get: function () {
-            return Platform.screen.mainScreen.widthDIPs;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    
     Object.defineProperty(Carousel.prototype, "showIndicator", {
-        set: function (value) {
-            this._ios.indicatorIsVisible = value;
-        },
         get: function () {
-            return this._ios.indicatorIsVisible;
+            return this.nativeView.indicatorIsVisible;
+        },
+        set: function (value) {
+            this.nativeView.indicatorIsVisible = value;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Carousel.prototype, "finite", {
+        get: function () {
+            return this.nativeView.finite;
+        },
         set: function (value) {
-            this._ios.finite = value;
+            this.nativeView.finite = value;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Carousel.prototype, "bounce", {
-      set: function (value) {
-            this._ios.bounce = value;
+        get: function () {
+            return this.nativeView.bounce;
+        },
+        set: function (value) {
+            this.nativeView.bounce = value;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Carousel.prototype, "scrollEnabled", {
+        get: function () {
+            return this.nativeView.scrollEnabled;
+        },
         set: function (value) {
-            this._ios.scrollEnabled = value;
+            this.nativeView.scrollEnabled = value;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Carousel.prototype, "indicatorColor", {
         set: function (value) {
-            this._ios.indicatorTintColor = new colorModule.Color(value).ios;
+            this.nativeView.indicatorTintColor = new colorModule.Color(value).ios;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Carousel.prototype, "indicatorColorUnselected", {
+        set: function (value) {
+            this.nativeView.indicatorTintColorUnselected = new colorModule.Color(value).ios;
         },
         enumerable: true,
         configurable: true
@@ -246,51 +244,43 @@ var Carousel = (function (_super) {
             var ar = value.split(',');
             var x = ar[0] ? ar[0] : 0;
             var y = ar[1] ? ar[1] : 0;
-            this._ios.indicatorOffset = CGPointMake(x,y);
-            //console.log("indicatorOffset", this._ios.indicatorOffset.x + " - " + this._ios.indicatorOffset.y);
-        },
-        enumerable: true,
-        configurable: true
-    });
-
-    Object.defineProperty(Carousel.prototype, "indicatorColorUnselected", {
-        set: function (value) {
-            this._ios.indicatorTintColorUnselected = new colorModule.Color(value).ios;
+            this.nativeView.indicatorOffset = CGPointMake(x,y);
+            //console.log("indicatorOffset", this.nativeView.indicatorOffset.x + " - " + this.nativeView.indicatorOffset.y);
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Carousel.prototype, "indicatorAnimation", {
         set: function (value) {
-            console.log("'indicatorAnimation' property not available for Android");
+            console.log("'indicatorAnimation' property not available for iOS");
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Carousel.prototype, "indicatorAnimationDuration", {
         set: function (value) {
-            console.log("'indicatorAnimationDuration' property not available for Android");
+            console.log("'indicatorAnimationDuration' property not available for iOS");
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Carousel.prototype, "indicatorAlignment", {
         set: function (value) {
-            console.log("'indicatorAlignment' property not available for Android");
+            console.log("'indicatorAlignment' property not available for iOS");
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Carousel.prototype, "indicatorRadius", {
         set: function (value) {
-            console.log("'indicatorRadius' property not available for Android");
+            console.log("'indicatorRadius' property not available for iOS");
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Carousel.prototype, "indicatorPadding", {
         set: function (value) {
-            console.log("'indicatorPadding' property not available for Android");
+            console.log("'indicatorPadding' property not available for iOS");
         },
         enumerable: true,
         configurable: true
@@ -301,6 +291,8 @@ var Carousel = (function (_super) {
 Carousel.pageChangedEvent = "pageChanged";
 Carousel.pageTappedEvent = "pageTapped";
 Carousel.pageScrollingEvent = "pageScrolling";
+
+
 Carousel.itemsProperty = new viewModule.Property({
     name: "items",
     defaultValue: undefined,

@@ -22,10 +22,10 @@ var CarouselItem = (function (_super) {
     return CarouselItem;
 }(stack_layout.StackLayout));
 exports.CarouselItem = CarouselItem;
+
 var Carousel = (function (_super) {
     __extends(Carousel, _super);
     function Carousel() {
-        //_super.call(this);
         this._androidViewId = -1;
         this._indicatorViewId = -1;
         return _super !== null && _super.apply(this, arguments) || this;
@@ -93,7 +93,6 @@ var Carousel = (function (_super) {
     Carousel.prototype.initNativeView = function () {
         this.refresh();
     };
-    Carousel.prototype.constructView = function () { };
     Carousel.prototype.refresh = function () {
         if (types.isNullOrUndefined(this.items) || !types.isNumber(this.items.length))
             return;
