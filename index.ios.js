@@ -34,6 +34,12 @@ var Carousel = (function (_super) {
     __extends(Carousel, _super);
     function Carousel() {
         var _this = _super.call(this) || this;
+        return _this;
+    }
+
+    Carousel.prototype.createNativeView = function () {
+        console.log("createNativeView");
+        var _this = this;
         _this.nativeView = new DKCarouselView(CGRectMake(0, 0, Platform.screen.mainScreen.widthDIPs, 0));
         _this.nativeView.setDidSelectBlock(function(item, index){
             var args1 = { 
@@ -65,11 +71,16 @@ var Carousel = (function (_super) {
             };
             _this.notify(args2);
         });
-        return _this;
-    }
-    Carousel.prototype.createNativeView = function () {
+        return _this.nativeView;
+    };
+    Carousel.prototype.initNativeView = function () {
+        console.log("initNativeView");
         this.refresh();
-        return this.nativeView;
+    };
+    Carousel.prototype.disposeNativeView = function () {
+        console.log("disposeNativeView");
+        this.nativeView.setItems(new NSMutableArray());
+        this.removeChildren();
     };
     Carousel.prototype.refresh = function () {
         this.nativeView.setItems(new NSMutableArray());
@@ -112,6 +123,7 @@ var Carousel = (function (_super) {
             });
             this.nativeView.setItems(nsArray);
         }
+        //this.nativeView.indicatorIsVisible = this._showIndicator;
     };
     Carousel.prototype._getDataItem = function (index) {
         return this.items.getItem ? this.items.getItem(index) : this.items[index];
@@ -179,6 +191,7 @@ var Carousel = (function (_super) {
     });
     Object.defineProperty(Carousel.prototype, "autoPagingInterval", {
         set: function (value) {
+            console.log("nativeView", this.nativeView)
             this.nativeView.setAutoPagingForInterval(value);
         },
         enumerable: true,
@@ -191,6 +204,7 @@ var Carousel = (function (_super) {
         },
         set: function (value) {
             this.nativeView.indicatorIsVisible = value;
+            console.log("showIndicator native:", this.nativeView.indicatorIsVisible);
         },
         enumerable: true,
         configurable: true
