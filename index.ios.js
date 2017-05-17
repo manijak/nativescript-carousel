@@ -12,14 +12,49 @@ var knownTemplates;
 (function (knownTemplates) {
     knownTemplates.itemTemplate = "itemTemplate";
 })(knownTemplates = exports.knownTemplates || (exports.knownTemplates = {}));
-function onItemsPropertyChanged(data) {
-    var carousel = data.object;
-    carousel._onItemsPropertyChanged(data);
-}
-function onItemTemplatePropertyChanged(data) {
-    var carousel = data.object;
-    carousel._onItemTemplatePropertyChanged(data);
-}
+
+const selectedPageProperty = new viewModule.Property({
+    name: "selectedPage",
+    defaultValue: 0,
+    valueConverter: function (value) { return +value; }
+});
+const autoPagingIntervalProperty = new viewModule.Property({
+    name: "autoPagingInterval",
+    defaultValue: 0,
+    valueConverter: function (value) { return +value; }
+});
+const showIndicatorProperty = new viewModule.Property({
+    name: "showIndicator",
+    defaultValue: true,
+    valueConverter: viewModule.booleanConverter
+});
+const finiteProperty = new viewModule.Property({
+    name: "finite",
+    defaultValue: undefined,
+    valueConverter: viewModule.booleanConverter
+});
+const bounceProperty = new viewModule.Property({
+    name: "bounce",
+    defaultValue: undefined,
+    valueConverter: viewModule.booleanConverter
+});
+const scrollEnabledProperty = new viewModule.Property({
+    name: "scrollEnabled",
+    defaultValue: undefined,
+    valueConverter: viewModule.booleanConverter
+});
+const indicatorColorProperty = new viewModule.Property({
+    name: "indicatorColor",
+    defaultValue: undefined
+});
+const indicatorColorUnselectedProperty = new viewModule.Property({
+    name: "indicatorColorUnselected",
+    defaultValue: undefined
+});
+const indicatorOffsetProperty = new viewModule.Property({
+    name: "indicatorOffset",
+    defaultValue: undefined
+});
 
 var CarouselItem = (function (_super) {
     __extends(CarouselItem, _super);
@@ -36,9 +71,7 @@ var Carousel = (function (_super) {
         var _this = _super.call(this) || this;
         return _this;
     }
-
     Carousel.prototype.createNativeView = function () {
-        console.log("createNativeView");
         var _this = this;
         _this.nativeView = new DKCarouselView(CGRectMake(0, 0, Platform.screen.mainScreen.widthDIPs, 0));
         _this.nativeView.setDidSelectBlock(function(item, index){
@@ -74,15 +107,15 @@ var Carousel = (function (_super) {
         return _this.nativeView;
     };
     Carousel.prototype.initNativeView = function () {
-        console.log("initNativeView");
         this.refresh();
     };
     Carousel.prototype.disposeNativeView = function () {
-        console.log("disposeNativeView");
         this.nativeView.setItems(new NSMutableArray());
         this.removeChildren();
     };
     Carousel.prototype.refresh = function () {
+        if(!(this.nativeView instanceof DKCarouselView)) return; 
+        
         this.nativeView.setItems(new NSMutableArray());
         var that = this;
         if (types.isNullOrUndefined(this.items) || !types.isNumber(this.items.length)) {
@@ -101,7 +134,6 @@ var Carousel = (function (_super) {
             });
         }
         else{
-            console.log("refresh()");
             this.removeChildren();
             var nsArray = new NSMutableArray();
             var length = this.items.length;
@@ -123,178 +155,98 @@ var Carousel = (function (_super) {
             });
             this.nativeView.setItems(nsArray);
         }
-        //this.nativeView.indicatorIsVisible = this._showIndicator;
     };
     Carousel.prototype._getDataItem = function (index) {
         return this.items.getItem ? this.items.getItem(index) : this.items[index];
-    };
-    Carousel.prototype._onItemsPropertyChanged = function (data) {
-        if (data.oldValue instanceof observableArray.ObservableArray) {
-            weakEvents.removeWeakEventListener(data.oldValue, observableArray.ObservableArray.changeEvent, this._onItemsChanged, this);
-        }
-        if (data.newValue instanceof observableArray.ObservableArray) {
-            weakEvents.addWeakEventListener(data.newValue, observableArray.ObservableArray.changeEvent, this._onItemsChanged, this);
-        }
-        if (!types.isNullOrUndefined(this.items) && types.isNumber(this.items.length)) {
-            this.refresh();
-        }
     };
     Carousel.prototype._onItemsChanged = function (data) {
         if (!types.isNullOrUndefined(this.items) && types.isNumber(this.items.length)) {
             this.refresh();
         }
     };
-    Carousel.prototype._onItemTemplatePropertyChanged = function (data) {
-        if (!types.isNullOrUndefined(this.items) && types.isNumber(this.items.length)) {
-            this.refresh();
+
+    Carousel.prototype[autoPagingIntervalProperty.setNative] = function (value) {
+        if (this.nativeView instanceof DKCarouselView){
+            this.nativeView.setAutoPagingForInterval(value);
         }
     };
 
-    Object.defineProperty(Carousel.prototype, "items", {
-        get: function () {
-            return this._getValue(Carousel.itemsProperty);
-        },
-        set: function (value) {
-            this._setValue(Carousel.itemsProperty, value);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "itemTemplate", {
-        get: function () {
-            return this._getValue(Carousel.itemTemplateProperty);
-        },
-        set: function (value) {
-            this._setValue(Carousel.itemTemplateProperty, value);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "ios", {
-        get: function () {
-            return this.nativeView;
-        },
-        enumerable: true,
-        configurable: true
-    });
-
-    Object.defineProperty(Carousel.prototype, "selectedPage", {
-        set: function (value) {
+    Carousel.prototype[selectedPageProperty.getNative] = function (value) {
+        if (this.nativeView instanceof DKCarouselView){
+            return this._selectedPage ? this._selectedPage : 0;
+        }
+    };
+    Carousel.prototype[selectedPageProperty.setNative] = function (value) {
+        if (this.nativeView instanceof DKCarouselView){
             this._selectedPage = value;
             this.nativeView.selectedPage = value;
-        },
-        get: function () {
-            return this._selectedPage ? this._selectedPage : 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "autoPagingInterval", {
-        set: function (value) {
-            console.log("nativeView", this.nativeView)
-            this.nativeView.setAutoPagingForInterval(value);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    
-    Object.defineProperty(Carousel.prototype, "showIndicator", {
-        get: function () {
+        }
+    };
+
+    Carousel.prototype[showIndicatorProperty.getNative] = function (value) {
+        if (this.nativeView instanceof DKCarouselView){
             return this.nativeView.indicatorIsVisible;
-        },
-        set: function (value) {
+        }
+    };
+    Carousel.prototype[showIndicatorProperty.setNative] = function (value) {
+        if (this.nativeView instanceof DKCarouselView){
             this.nativeView.indicatorIsVisible = value;
-            console.log("showIndicator native:", this.nativeView.indicatorIsVisible);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "finite", {
-        get: function () {
+        }
+    };
+
+    Carousel.prototype[finiteProperty.getNative] = function (value) {
+        if (this.nativeView instanceof DKCarouselView){
             return this.nativeView.finite;
-        },
-        set: function (value) {
+        }
+    };
+    Carousel.prototype[finiteProperty.setNative] = function (value) {
+        if (this.nativeView instanceof DKCarouselView){
             this.nativeView.finite = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "bounce", {
-        get: function () {
+        }
+    };
+    Carousel.prototype[bounceProperty.getNative] = function (value) {
+        if (this.nativeView instanceof DKCarouselView){
             return this.nativeView.bounce;
-        },
-        set: function (value) {
+        }
+    };
+    Carousel.prototype[bounceProperty.setNative] = function (value) {
+        if (this.nativeView instanceof DKCarouselView){
             this.nativeView.bounce = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "scrollEnabled", {
-        get: function () {
+        }
+    };
+    
+    Carousel.prototype[scrollEnabledProperty.getNative] = function (value) {
+        if (this.nativeView instanceof DKCarouselView){
             return this.nativeView.scrollEnabled;
-        },
-        set: function (value) {
+        }
+    };
+    Carousel.prototype[scrollEnabledProperty.setNative] = function (value) {
+        if (this.nativeView instanceof DKCarouselView){
             this.nativeView.scrollEnabled = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "indicatorColor", {
-        set: function (value) {
+        }
+    };
+
+    Carousel.prototype[indicatorColorProperty.setNative] = function (value) {
+        if (this.nativeView instanceof DKCarouselView){
             this.nativeView.indicatorTintColor = new colorModule.Color(value).ios;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "indicatorColorUnselected", {
-        set: function (value) {
+        }
+    };
+    Carousel.prototype[indicatorColorUnselectedProperty.setNative] = function (value) {
+        if (this.nativeView instanceof DKCarouselView){
             this.nativeView.indicatorTintColorUnselected = new colorModule.Color(value).ios;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "indicatorOffset", {
-        set: function (value) {
+        }
+    };
+    Carousel.prototype[indicatorOffsetProperty.setNative] = function (value) {
+        if (this.nativeView instanceof DKCarouselView){
             var ar = value.split(',');
             var x = ar[0] ? ar[0] : 0;
             var y = ar[1] ? ar[1] : 0;
             this.nativeView.indicatorOffset = CGPointMake(x,y);
-            //console.log("indicatorOffset", this.nativeView.indicatorOffset.x + " - " + this.nativeView.indicatorOffset.y);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "indicatorAnimation", {
-        set: function (value) {
-            console.log("'indicatorAnimation' property not available for iOS");
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "indicatorAnimationDuration", {
-        set: function (value) {
-            console.log("'indicatorAnimationDuration' property not available for iOS");
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "indicatorAlignment", {
-        set: function (value) {
-            console.log("'indicatorAlignment' property not available for iOS");
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "indicatorRadius", {
-        set: function (value) {
-            console.log("'indicatorRadius' property not available for iOS");
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Carousel.prototype, "indicatorPadding", {
-        set: function (value) {
-            console.log("'indicatorPadding' property not available for iOS");
+        }
+    };
+    Object.defineProperty(Carousel.prototype, "ios", {
+        get: function () {
+            return this.nativeView;
         },
         enumerable: true,
         configurable: true
@@ -306,30 +258,38 @@ Carousel.pageChangedEvent = "pageChanged";
 Carousel.pageTappedEvent = "pageTapped";
 Carousel.pageScrollingEvent = "pageScrolling";
 
-
-Carousel.itemsProperty = new viewModule.Property({
-    name: "items",
-    defaultValue: undefined,
-    valueChanged: function (target, oldValue, newValue) {
-        target._onItemsPropertyChanged({
-            object: target,
-            oldValue: oldValue,
-            newValue: newValue
-        });
-    }
-});
-Carousel.itemTemplateProperty = new viewModule.Property({
-    name: "itemTemplate",
-    defaultValue: undefined,
-    valueChanged: function (target, oldValue, newValue) {
-        target._onItemTemplatePropertyChanged({
-            object: target,
-            oldValue: oldValue,
-            newValue: newValue
-        });
-    }
-});
-
 exports.Carousel = Carousel;
-Carousel.itemsProperty.register(Carousel);
-Carousel.itemTemplateProperty.register(Carousel);
+exports.itemTemplateProperty = new viewModule.Property({
+    name: "itemTemplate", 
+    affectsLayout: true, 
+    valueChanged: function (target) {
+        target.refresh();
+    }
+});
+exports.itemTemplateProperty.register(Carousel);
+exports.itemsProperty = new viewModule.Property({
+    name: "items", 
+    affectsLayout: true, 
+    valueChanged: function (target, oldValue, newValue) {
+        if (oldValue instanceof observableArray.ObservableArray) {
+            weakEvents.removeWeakEventListener(oldValue, observableArray.ObservableArray.changeEvent, target._onItemsChanged, target);
+        }
+        if (newValue instanceof observableArray.ObservableArray) {
+            weakEvents.addWeakEventListener(newValue, observableArray.ObservableArray.changeEvent, target._onItemsChanged, target);
+        }
+        if (!types.isNullOrUndefined(target.items) && types.isNumber(target.items.length)) {
+            target.refresh();
+        }
+    }
+});
+exports.itemsProperty.register(Carousel);
+
+selectedPageProperty.register(Carousel);
+autoPagingIntervalProperty.register(Carousel);
+showIndicatorProperty.register(Carousel);
+finiteProperty.register(Carousel);
+bounceProperty.register(Carousel);
+scrollEnabledProperty.register(Carousel);
+indicatorColorProperty.register(Carousel);
+indicatorColorUnselectedProperty.register(Carousel);
+indicatorOffsetProperty.register(Carousel);
