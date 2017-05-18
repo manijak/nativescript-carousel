@@ -1,28 +1,17 @@
 "use strict";
-var observableArray = require("data/observable-array");
+Object.defineProperty(exports, "__esModule", { value: true });
 var Platform = require('platform');
 var absolute_layout = require('ui/layouts/absolute-layout');
 var stack_layout = require('ui/layouts/stack-layout');
-var colorModule = require('color');
-var weakEvents = require("ui/core/weak-event-listener");
 var types = require("utils/types");
 var builder = require("ui/builder");
-var viewModule = require("tns-core-modules/ui/core/view");
 var carouselCommon = require("./index-common");
 var knownTemplates;
 (function (knownTemplates) {
     knownTemplates.itemTemplate = "itemTemplate";
 })(knownTemplates = exports.knownTemplates || (exports.knownTemplates = {}));
 
-var CarouselItem = (function (_super) {
-    __extends(CarouselItem, _super);
-    function CarouselItem() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return CarouselItem;
-}(stack_layout.StackLayout));
-exports.CarouselItem = CarouselItem;
-
+exports.CarouselItem = carouselCommon.CarouselItem;
 var Carousel = (function (_super) {
     __extends(Carousel, _super);
     function Carousel() {
@@ -30,9 +19,14 @@ var Carousel = (function (_super) {
         return _this;
     }
     Carousel.prototype.createNativeView = function () {
+        this.nativeView = new DKCarouselView(CGRectMake(0, 0, Platform.screen.mainScreen.widthDIPs, 0));
+        return this.nativeView;
+    };
+    Carousel.prototype.initNativeView = function () {
         var _this = this;
-        _this.nativeView = new DKCarouselView(CGRectMake(0, 0, Platform.screen.mainScreen.widthDIPs, 0));
-        _this.nativeView.setDidSelectBlock(function(item, index){
+        var nativeView = this.nativeView;
+        _this._isDirty = true;
+        nativeView.setDidSelectBlock(function(item, index){
             var args1 = { 
                 eventName: Carousel.pageTappedEvent, 
                 object: _this,
@@ -41,7 +35,7 @@ var Carousel = (function (_super) {
             };
             _this.notify(args1);
         });
-        _this.nativeView.setDidChangeBlock(function(view, index){
+        nativeView.setDidChangeBlock(function(view, index){
             var args2 = { 
                 eventName: Carousel.pageChangedEvent, 
                 object: _this, 
@@ -51,7 +45,7 @@ var Carousel = (function (_super) {
              _this._selectedPage = index;
             _this.notify(args2);
         });
-        _this.nativeView.setDidScrollBlock(function(view, offset){
+        nativeView.setDidScrollBlock(function(view, offset){
             var args2 = { 
                 eventName: Carousel.pageScrollingEvent, 
                 object: _this, 
@@ -62,34 +56,44 @@ var Carousel = (function (_super) {
             };
             _this.notify(args2);
         });
-        return _this.nativeView;
-    };
-    Carousel.prototype.initNativeView = function () {
-        this.refresh();
     };
     Carousel.prototype.disposeNativeView = function () {
-        this.nativeView.setItems(new NSMutableArray());
+        var nativeView = this.nativeView;
+        nativeView.setDidChangeBlock(null);
+        nativeView.setDidScrollBlock(null);
+        nativeView.setDidSelectBlock(null);
+        nativeView.setItems(new NSMutableArray());
         this.removeChildren();
+    };
+    Carousel.prototype.onLoaded = function () {
+        _super.prototype.onLoaded.call(this); 
+        if (this._isDirty) {
+            this.refresh();
+        }
     };
     Carousel.prototype.refresh = function () {
         if(!(this.nativeView instanceof DKCarouselView)) return; 
         
+        if (!this.isLoaded || !this.nativeView) {
+            this._isDirty = true;
+            return;
+        }
+        this._isDirty = false;
+
         this.nativeView.setItems(new NSMutableArray());
-        var that = this;
         if (types.isNullOrUndefined(this.items) || !types.isNumber(this.items.length)) {
-            this.on(absolute_layout.AbsoluteLayout.loadedEvent, function (data) {
-                var nsArray = new NSMutableArray();
-                that.eachChildView(function (view1) {
-                    if (view1 instanceof CarouselItem) {
-                        view1.width = "100%";
-                        view1.height = "100%";
-                        var dkCarouselViewItem1 = new DKCarouselViewItem();
-                        dkCarouselViewItem1.view = view1.ios;
-                        nsArray.addObject(dkCarouselViewItem1);
-                    }
-                });
-                that.nativeView.setItems(nsArray);
+            var nsArray = new NSMutableArray();
+            this.eachChildView(function (view1) {
+                if (view1 instanceof carouselCommon.CarouselItem) {
+                    view1.width = "100%";
+                    view1.height = "100%";
+                    var dkCarouselViewItem1 = new DKCarouselViewItem();
+                    dkCarouselViewItem1.view = view1.ios;
+                    nsArray.addObject(dkCarouselViewItem1);
+                }
             });
+            console.log("setItems", this.nativeView);
+            this.nativeView.setItems(nsArray);
         }
         else{
             this.removeChildren();
@@ -103,7 +107,7 @@ var Carousel = (function (_super) {
                 this.addChild(viewToAdd);
             }
             this.eachChildView(function (view) {
-                if (view instanceof CarouselItem) {
+                if (view instanceof carouselCommon.CarouselItem) {
                     view.width = "100%";
                     view.height = "100%";
                     var dkCarouselViewItem = new DKCarouselViewItem();
@@ -211,9 +215,5 @@ var Carousel = (function (_super) {
     });
     return Carousel;
 }(carouselCommon.CarouselCommon));
-
-Carousel.pageChangedEvent = "pageChanged";
-Carousel.pageTappedEvent = "pageTapped";
-Carousel.pageScrollingEvent = "pageScrolling";
 
 exports.Carousel = Carousel;

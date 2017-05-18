@@ -1,11 +1,7 @@
 "use strict";
-var observableArray = require("data/observable-array");
-var Platform = require('platform');
-var absolute_layout = require('ui/layouts/absolute-layout');
+Object.defineProperty(exports, "__esModule", { value: true });
 var grid_layout = require('ui/layouts/grid-layout');
 var stack_layout = require('ui/layouts/stack-layout');
-var colorModule = require('color');
-var weakEvents = require("ui/core/weak-event-listener");
 var types = require("utils/types");
 var builder = require("ui/builder");
 var viewModule = require("tns-core-modules/ui/core/view");
@@ -15,15 +11,7 @@ var knownTemplates;
     knownTemplates.itemTemplate = "itemTemplate";
 })(knownTemplates = exports.knownTemplates || (exports.knownTemplates = {}));
 
-var CarouselItem = (function (_super) {
-    __extends(CarouselItem, _super);
-    function CarouselItem() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return CarouselItem;
-}(stack_layout.StackLayout));
-exports.CarouselItem = CarouselItem;
-
+exports.CarouselItem = carouselCommon.CarouselItem;
 var Carousel = (function (_super) {
     __extends(Carousel, _super);
     function Carousel() {
@@ -220,12 +208,6 @@ var Carousel = (function (_super) {
     };
     return Carousel;
 }(carouselCommon.CarouselCommon));
-
-Carousel.pageChangedEvent = "pageChanged";
-Carousel.pageTappedEvent = "pageTapped";
-Carousel.pageScrollingEvent = "pageScrolling";
-Carousel.pageScrollStateChangedEvent = "pageScrolled";
-
 exports.Carousel = Carousel;
 
 var VIEWS_STATES = "_viewStates";
@@ -319,7 +301,7 @@ function ensureCarouselPageChangedListenerClass() {
         }
         CarouselPageChangedListener.prototype.onPageSelected = function (position) {
             var args2 = { 
-                eventName: Carousel.pageChangedEvent, 
+                eventName: carouselCommon.pageChangedEvent, 
                 object: this.owner,
                 index: position
             };
@@ -327,7 +309,7 @@ function ensureCarouselPageChangedListenerClass() {
         };
         CarouselPageChangedListener.prototype.onPageScrollStateChanged = function (state) {
             var args2 = { 
-                eventName: Carousel.pageScrollStateChangedEvent, 
+                eventName: carouselCommon.pageScrollStateChangedEvent, 
                 object: this.owner,
                 state: state
             };
@@ -335,7 +317,7 @@ function ensureCarouselPageChangedListenerClass() {
         };
         CarouselPageChangedListener.prototype.onPageScrolled = function (position, positionOffset, positionOffsetPixels) {
             var args2 = { 
-                eventName: Carousel.pageScrollingEvent, 
+                eventName: carouselCommon.pageScrollingEvent, 
                 object: this.owner,
                 state: {
                     offset: positionOffset,

@@ -1,10 +1,21 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var absolute_layout = require('ui/layouts/absolute-layout');
+var stack_layout = require('ui/layouts/stack-layout');
 var viewModule = require("tns-core-modules/ui/core/view");
 var weakEvents = require("ui/core/weak-event-listener");
 var observableArray = require("data/observable-array");
 var types = require("utils/types");
 var colorModule = require('color');
+
+var CarouselItem = (function (_super) {
+    __extends(CarouselItem, _super);
+    function CarouselItem() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return CarouselItem;
+}(stack_layout.StackLayout));
+exports.CarouselItem = CarouselItem;
 
 var CarouselCommon = (function (_super) {
     __extends(CarouselCommon, _super);
@@ -13,6 +24,10 @@ var CarouselCommon = (function (_super) {
     }
     return CarouselCommon;
 }(absolute_layout.AbsoluteLayout));
+CarouselCommon.pageChangedEvent = "pageChanged";
+CarouselCommon.pageTappedEvent = "pageTapped";
+CarouselCommon.pageScrollingEvent = "pageScrolling";
+CarouselCommon.pageScrollStateChangedEvent = "pageScrolled";
 exports.CarouselCommon = CarouselCommon;
 
 // Common
@@ -111,7 +126,6 @@ exports.indicatorPaddingProperty = new viewModule.Property({
     defaultValue: undefined,
     valueConverter: function (value) { return +value; }
 });
-
 
 exports.itemsProperty.register(CarouselCommon);
 exports.itemTemplateProperty.register(CarouselCommon);
