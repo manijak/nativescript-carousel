@@ -14,7 +14,6 @@ var myCarousel = null;
 exports.pageLoaded = function(args) {
     var page = args.object;
     page.bindingContext = pageData;
-
     myCarousel = page.getViewById("myCarousel");
 }
 

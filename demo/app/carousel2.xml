@@ -13,13 +13,13 @@
         </StackLayout>
         
         <GridLayout height="250">
-            <ns:Carousel id="myCarousel" height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" pageScrolling="myScrollingEvent" android:indicatorAnimation="slide"
-                items="{{ myDataArray }}" indicatorColor="#fff">
+           <ns:Carousel id="myCarousel" height="100%" width="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent"
+                android:indicatorAnimation="slide" items="{{ myDataArray }}" indicatorColor="#fff" showIndicator="true">
                 <ns:Carousel.itemTemplate>
-                    <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}" height="250">
-                        <GridLayout rows="*" columns="*,*">
-                             <Label text="{{ title }}"  horizontalAlignment="center" verticalAlignment="center" col="0"/>
-                            <Image src="{{ image }}" height="100" col="1" />
+                    <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}">
+                        <GridLayout rows="*" columns="*">
+                            <Image src="{{ image }}" stretch="aspectFill" />
+                            <Label text="{{ title }}"  horizontalAlignment="center" verticalAlignment="center"/>
                         </GridLayout>
                     </ns:CarouselItem>
                 </ns:Carousel.itemTemplate>

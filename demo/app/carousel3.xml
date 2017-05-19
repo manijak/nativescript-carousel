@@ -15,19 +15,20 @@
         </StackLayout>
 
         <GridLayout height="250">
-            <ns:Carousel id="myCarousel" height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" 
-            items="{{ myDataArray }}" indicatorColor="#fff" ios:autoPagingInterval="4" android:indicatorAnimation="fill">
+            <ns:Carousel id="myCarousel" height="100%" width="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" 
+            items="{{ myDataArray }}" indicatorColor="#fff" indicatorColorUnselected="#50ffffff"
+            ios:autoPagingInterval="3" android:indicatorAnimation="worm">
                 <ns:Carousel.itemTemplate>
-                    <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}" height="250">
-                         <GridLayout rows="*" columns="*,*">
-                             <Label text="{{ title }}"  horizontalAlignment="center" verticalAlignment="center" col="0"/>
-                            <Image src="{{ image }}" height="100" col="1" />
+                    <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}">
+                         <GridLayout rows="*" columns="*">
+                            <Image src="{{ image }}" stretch="aspectFill" />
+                            <Label text="{{ title }}" horizontalAlignment="center" verticalAlignment="center" backgroundColor="#90000000" />
                         </GridLayout>
                     </ns:CarouselItem>
                 </ns:Carousel.itemTemplate>
-            </ns:Carousel>    
+            </ns:Carousel>
         </GridLayout>
-        <Label text="Indicator animation type: 'fill'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"/>
+        <Label text="Indicator animation type: 'worm'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"/>
 
         <Button text="Toggle indicator" tap="toggleIndicator" margin="10,10,0,10" android:visibility="collapsed"/>
         <Button text="Toggle indicator color" tap="toggleColor" margin="10,10,0,10"/>

@@ -13,7 +13,6 @@ pageData.set("myDataArray", myDataArray);
 function pageLoaded(args) {
     var page = args.object;
     page.bindingContext = pageData;
-
 	myCarousel = page.getViewById("myCarousel");
 }
 exports.pageLoaded = pageLoaded;
