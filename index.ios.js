@@ -72,14 +72,11 @@ var Carousel = (function (_super) {
         }
     };
     Carousel.prototype.refresh = function () {
-        if(!(this.nativeView instanceof DKCarouselView)) return; 
-        
         if (!this.isLoaded || !this.nativeView) {
             this._isDirty = true;
             return;
         }
         this._isDirty = false;
-
         this.nativeView.setItems(new NSMutableArray());
         if (types.isNullOrUndefined(this.items) || !types.isNumber(this.items.length)) {
             var nsArray = new NSMutableArray();
@@ -92,7 +89,6 @@ var Carousel = (function (_super) {
                     nsArray.addObject(dkCarouselViewItem1);
                 }
             });
-            console.log("setItems", this.nativeView);
             this.nativeView.setItems(nsArray);
         }
         else{
@@ -128,83 +124,57 @@ var Carousel = (function (_super) {
     };
 
     Carousel.prototype[carouselCommon.autoPagingIntervalProperty.setNative] = function (value) {
-        if (this.nativeView instanceof DKCarouselView){
+        if(this.nativeView instanceof DKCarouselView){
             this.nativeView.setAutoPagingForInterval(value);
         }
     };
 
     Carousel.prototype[carouselCommon.selectedPageProperty.getNative] = function (value) {
-        if (this.nativeView instanceof DKCarouselView){
-            return this._selectedPage ? this._selectedPage : 0;
-        }
+        return this._selectedPage ? this._selectedPage : 0;
     };
     Carousel.prototype[carouselCommon.selectedPageProperty.setNative] = function (value) {
-        if (this.nativeView instanceof DKCarouselView){
-            this._selectedPage = value;
-            this.nativeView.selectedPage = value;
-        }
+        this._selectedPage = value;
+        this.nativeView.selectedPage = value;
     };
 
     Carousel.prototype[carouselCommon.showIndicatorProperty.getNative] = function (value) {
-        if (this.nativeView instanceof DKCarouselView){
-            return this.nativeView.indicatorIsVisible;
-        }
+        return this.nativeView.indicatorIsVisible;
     };
     Carousel.prototype[carouselCommon.showIndicatorProperty.setNative] = function (value) {
-        if (this.nativeView instanceof DKCarouselView){
-            this.nativeView.indicatorIsVisible = value;
-        }
+        this.nativeView.indicatorIsVisible = value;
     };
 
     Carousel.prototype[carouselCommon.finiteProperty.getNative] = function (value) {
-        if (this.nativeView instanceof DKCarouselView){
-            return this.nativeView.finite;
-        }
+        return this.nativeView.finite;
     };
     Carousel.prototype[carouselCommon.finiteProperty.setNative] = function (value) {
-        if (this.nativeView instanceof DKCarouselView){
-            this.nativeView.finite = value;
-        }
+        this.nativeView.finite = value;
     };
     Carousel.prototype[carouselCommon.bounceProperty.getNative] = function (value) {
-        if (this.nativeView instanceof DKCarouselView){
-            return this.nativeView.bounce;
-        }
+        return this.nativeView.bounce;
     };
     Carousel.prototype[carouselCommon.bounceProperty.setNative] = function (value) {
-        if (this.nativeView instanceof DKCarouselView){
-            this.nativeView.bounce = value;
-        }
+        this.nativeView.bounce = value;
     };
     
     Carousel.prototype[carouselCommon.scrollEnabledProperty.getNative] = function (value) {
-        if (this.nativeView instanceof DKCarouselView){
-            return this.nativeView.scrollEnabled;
-        }
+        return this.nativeView.scrollEnabled;
     };
     Carousel.prototype[carouselCommon.scrollEnabledProperty.setNative] = function (value) {
-        if (this.nativeView instanceof DKCarouselView){
-            this.nativeView.scrollEnabled = value;
-        }
+        this.nativeView.scrollEnabled = value;
     };
 
     Carousel.prototype[carouselCommon.indicatorColorProperty.setNative] = function (value) {
-        if (this.nativeView instanceof DKCarouselView){
-            this.nativeView.indicatorTintColor = value.ios;
-        }
+        this.nativeView.indicatorTintColor = value.ios;
     };
     Carousel.prototype[carouselCommon.indicatorColorUnselectedProperty.setNative] = function (value) {
-        if (this.nativeView instanceof DKCarouselView){
-            this.nativeView.indicatorTintColorUnselected = value.ios;
-        }
+        this.nativeView.indicatorTintColorUnselected = value.ios;
     };
     Carousel.prototype[carouselCommon.indicatorOffsetProperty.setNative] = function (value) {
-        if (this.nativeView instanceof DKCarouselView){
-            var ar = value.split(',');
-            var x = ar[0] ? ar[0] : 0;
-            var y = ar[1] ? ar[1] : 0;
-            this.nativeView.indicatorOffset = CGPointMake(x,y);
-        }
+        var ar = value.split(',');
+        var x = ar[0] ? ar[0] : 0;
+        var y = ar[1] ? ar[1] : 0;
+        this.nativeView.indicatorOffset = CGPointMake(x,y);
     };
     Object.defineProperty(Carousel.prototype, "ios", {
         get: function () {
