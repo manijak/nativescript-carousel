@@ -46,11 +46,21 @@ var Carousel = (function (_super) {
             this._pagerIndicatorLayoutParams.height = android.support.v4.view.ViewPager.LayoutParams.WRAP_CONTENT;
             this._pagerIndicatorLayoutParams.width = android.support.v4.view.ViewPager.LayoutParams.MATCH_PARENT;
         
+            var ar = this.indicatorOffset.split(',');
+            var x = ar[0] ? Number(ar[0]) : 0;
+            var y = ar[1] ? Number(ar[1]) : 0;
+
+            var defaultVerticalMargin = 50;
+            var verticalOffset = defaultVerticalMargin + ((y < 0) ? Math.abs(y) : -Math.abs(y)); //Reverse +- to be the same as ios
+            var horizontalOffset = x;
+
+            console.log("Vertical offset:" + verticalOffset);
+
             if(this._indicatorAlignment === "TOP"){
-                this._pagerIndicatorLayoutParams.setMargins(0, 20, 0, 0);
+                this._pagerIndicatorLayoutParams.setMargins(horizontalOffset, verticalOffset, 0, 0);
                 this._pagerIndicatorLayoutParams.gravity = android.view.Gravity.TOP | android.view.Gravity.CENTER;    
             }else{
-                this._pagerIndicatorLayoutParams.setMargins(0, 0, 0, 20);
+                this._pagerIndicatorLayoutParams.setMargins(horizontalOffset, 0, 0, verticalOffset);
                 this._pagerIndicatorLayoutParams.gravity = android.view.Gravity.BOTTOM | android.view.Gravity.CENTER;
             }
         
