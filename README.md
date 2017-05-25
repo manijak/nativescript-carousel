@@ -97,6 +97,11 @@ Sets the active indicator color. Default is semi-transparent white. Use hex or c
 
 Sets the color of unselected indicators
 
+* **indicatorOffset** *optional*
+
+By default the indicator is centered at the bottom. You can use points (x,y) to move the indicator. E.g. `indicatorOffset="100,100"`
+
+
 ## Attributes - iOS specific
 * **finite** *optional*
 
@@ -109,10 +114,6 @@ If set to 'true' scrolling will bounce at the first/last page (non-infinite). De
 * **autoPagingInterval** *optional*
 
 Defines the interval in seconds to wait before the next slide is shown. Default is 0 (off).
-
-* **indicatorOffset** *optional*
-
-By default the indicator is centered at the bottom. You can use points (x,y) to move the indicator. E.g. `indicatorOffset="100,100"`
 
 * **ios**
 
