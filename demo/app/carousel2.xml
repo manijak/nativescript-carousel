@@ -14,7 +14,7 @@
         
         <GridLayout height="250">
            <ns:Carousel id="myCarousel" height="100%" width="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent"
-                android:indicatorAnimation="slide" items="{{ myDataArray }}" indicatorColor="#fff" ios:indicatorOffset="0, -0" android:indicatorOffset="0, -80" showIndicator="true">
+                android:indicatorAnimation="slide" items="{{ myDataArray }}" indicatorColor="#fff" indicatorOffset="0, 0" showIndicator="true">
                 <ns:Carousel.itemTemplate>
                     <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}">
                         <GridLayout rows="*" columns="*">
