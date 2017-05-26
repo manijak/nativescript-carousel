@@ -34,13 +34,13 @@ xmlns:ns="nativescript-carousel"
 #### Manually create each slide by using `CarouselItem`
 ```xml
 <ns:Carousel height="250" pageChanged="myChangeEvent">
-    <ns:CarouselItem id="slide1"  verticalAlignment="center" backgroundColor="#b3cde0" height="250">
+    <ns:CarouselItem id="slide1"  verticalAlignment="center" backgroundColor="#b3cde0">
         <Label text="Slide 1" verticalAlignment="center" horizontalAlignment="center"/>
     </ns:CarouselItem>
-    <ns:CarouselItem id="slide2" verticalAlignment="center" backgroundColor="#6497b1" height="250">
+    <ns:CarouselItem id="slide2" verticalAlignment="center" backgroundColor="#6497b1">
         <Label text="Slide 2" verticalAlignment="center" horizontalAlignment="center"/>
     </ns:CarouselItem>
-    <ns:CarouselItem id="slide3" verticalAlignment="center" backgroundColor="#005b96" height="250">
+    <ns:CarouselItem id="slide3" verticalAlignment="center" backgroundColor="#005b96">
         <Label text="Slide 3" verticalAlignment="center" horizontalAlignment="center"/>
     </ns:CarouselItem>
 </ns:Carousel>
@@ -50,7 +50,7 @@ xmlns:ns="nativescript-carousel"
 ```xml
 <ns:Carousel items="{{ myDataArray }}" height="250" pageChanged="myChangeEvent" pageScrolling="myScrollingEvent">
     <ns:Carousel.itemTemplate>
-        <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}" height="250" tap="myTapEvent">
+        <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}" tap="myTapEvent">
             <Label text="{{ title }}"  horizontalAlignment="center"/>
             <Image src="{{ image }}" height="100" />
         </ns:CarouselItem>
@@ -115,6 +115,10 @@ If set to 'true' scrolling will bounce at the first/last page (non-infinite). De
 
 Defines the interval in seconds to wait before the next slide is shown. Default is 0 (off).
 
+* **scrollEnabled** *optional*
+
+Enables/Disables user scroll on the Carousel.
+
 * **ios**
 
 Returns the `DKCarouselView` object.
@@ -161,6 +165,15 @@ WORM| THIN_WORM| FILL| DROP| SWAP
 ![anim_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_worm.gif) |![anim_thin_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_thin_worm.gif) |![anim_fill](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_fill.gif) |![anim_drop](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_drop.gif) |![anim_swap](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_swap.gif)
 
 ## Changelog
+
+**3.0.0**
+* Finally! Support for TNS 3.x. Big thanks to @MattNer0, @sitefinitysteve, @hristo, @NickIliev
+* Fixed the "refresh observable" issue on Android, thanks @MattNer0.
+* New property to enable/disable scroll, thanks @sitefinitysteve.
+* New property for Android: `indicatorOffset`, thanks @sitefinitysteve.
+* Fixed issue with orientation change on iOS. Please use `nativescript-orientation` plugin in order to trigger UI-refresh.
+* Code refactor & cleanup, introduced common.js
+* Updated Pod & Android-IndicatorView to latest version. 
 
 **2.4.2**
 * Added `bounce` property to the plugin and the Pod. Thanks to @sitefinitysteve.
@@ -215,7 +228,8 @@ WORM| THIN_WORM| FILL| DROP| SWAP
 ## Collaborators
 * [sitefinitysteve](https://github.com/sitefinitysteve)
 * [EddyVerbruggen](https://github.com/EddyVerbruggen)
-* [Pip3r4o](https://github.com/Pip3r4o) 
+* [Pip3r4o](https://github.com/Pip3r4o)
+* [MattNer0](https://github.com/MattNer0)
 
 ## Help
 I will accept pull requests that improve this and assign credit.
