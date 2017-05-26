@@ -73,6 +73,10 @@ exports.indicatorColorUnselectedProperty = new viewModule.Property({
     defaultValue: undefined,
     valueConverter: function (value) { return new colorModule.Color(value); }
 });
+exports.indicatorOffsetProperty = new viewModule.Property({
+    name: "indicatorOffset",
+    defaultValue: "0,0"
+});
 
 // iOS only
 exports.autoPagingIntervalProperty = new viewModule.Property({
@@ -94,11 +98,6 @@ exports.scrollEnabledProperty = new viewModule.Property({
     name: "scrollEnabled",
     defaultValue: undefined,
     valueConverter: viewModule.booleanConverter
-});
-
-exports.indicatorOffsetProperty = new viewModule.Property({
-    name: "indicatorOffset",
-    defaultValue: undefined
 });
 
 

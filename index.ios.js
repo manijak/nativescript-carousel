@@ -42,7 +42,7 @@ var Carousel = (function (_super) {
                 view: view,
                 index: index
             };
-             _this._selectedPage = index;
+             _this.selectedPage = index;
             _this.notify(args2);
         });
         nativeView.setDidScrollBlock(function(view, offset){
@@ -128,42 +128,22 @@ var Carousel = (function (_super) {
             this.nativeView.setAutoPagingForInterval(value);
         }
     };
-
-    Carousel.prototype[carouselCommon.selectedPageProperty.getNative] = function (value) {
-        return this._selectedPage ? this._selectedPage : 0;
-    };
     Carousel.prototype[carouselCommon.selectedPageProperty.setNative] = function (value) {
-        this._selectedPage = value;
+        this.selectedPage = value;
         this.nativeView.selectedPage = value;
-    };
-
-    Carousel.prototype[carouselCommon.showIndicatorProperty.getNative] = function (value) {
-        return this.nativeView.indicatorIsVisible;
     };
     Carousel.prototype[carouselCommon.showIndicatorProperty.setNative] = function (value) {
         this.nativeView.indicatorIsVisible = value;
     };
-
-    Carousel.prototype[carouselCommon.finiteProperty.getNative] = function (value) {
-        return this.nativeView.finite;
-    };
     Carousel.prototype[carouselCommon.finiteProperty.setNative] = function (value) {
         this.nativeView.finite = value;
-    };
-    Carousel.prototype[carouselCommon.bounceProperty.getNative] = function (value) {
-        return this.nativeView.bounce;
     };
     Carousel.prototype[carouselCommon.bounceProperty.setNative] = function (value) {
         this.nativeView.bounce = value;
     };
-    
-    Carousel.prototype[carouselCommon.scrollEnabledProperty.getNative] = function (value) {
-        return this.nativeView.scrollEnabled;
-    };
     Carousel.prototype[carouselCommon.scrollEnabledProperty.setNative] = function (value) {
         this.nativeView.scrollEnabled = value;
     };
-
     Carousel.prototype[carouselCommon.indicatorColorProperty.setNative] = function (value) {
         this.nativeView.indicatorTintColor = value.ios;
     };
