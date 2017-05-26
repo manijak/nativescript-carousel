@@ -54,8 +54,6 @@ var Carousel = (function (_super) {
             var verticalOffset = defaultVerticalMargin + ((y < 0) ? Math.abs(y) : -Math.abs(y)); //Reverse +- to be the same as ios
             var horizontalOffset = x;
 
-            console.log("Vertical offset:" + verticalOffset);
-
             if(this._indicatorAlignment === "TOP"){
                 this._pagerIndicatorLayoutParams.setMargins(horizontalOffset, verticalOffset, 0, 0);
                 this._pagerIndicatorLayoutParams.gravity = android.view.Gravity.TOP | android.view.Gravity.CENTER;    
@@ -85,10 +83,6 @@ var Carousel = (function (_super) {
             this.indicatorColor = this._indicatorColor;
             this.indicatorColorUnselected = this._indicatorColorUnselected;
         }
-        //this.nativeView.setCurrentItem(this.selectedPage, false);
-        this.selectedPage = this._selectedPage;
-        //console.log("this.selectedPage", this._selectedPage);
-        //console.log("this.selectedPage.native", this.selectedPage);
         _super.prototype.onLoaded.call(this);
     };
     Carousel.prototype.initNativeView = function () {
@@ -109,7 +103,10 @@ var Carousel = (function (_super) {
         var adapter = this.nativeView.getAdapter();
         adapter.notifyDataSetChanged();
         this._pageIndicatorView.setCount(this.items.length);
-        this._pageIndicatorView.setSelection(0);
+        //this.selectedPage = this._selectedPage;
+        this.nativeView.setCurrentItem(this._selectedPage);
+        this._pageIndicatorView.setSelection(this._selectedPage);
+        console.log("refresh - set selectedPage", this._selectedPage);
     };
     Carousel.prototype._getDataItem = function (index) {
         return this.items.getItem ? this.items.getItem(index) : this.items[index];
@@ -127,7 +124,23 @@ var Carousel = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    
+    /*Object.defineProperty(Carousel.prototype, "selectedPage", {
+        get: function () {
+            console.log("get.selectedPageProperty: ", this.nativeView.getCurrentItem());
+            return this.nativeView.getCurrentItem();
+        },
+        set: function (value) {
+            if(!this.nativeView) return;
+            this._selectedPage = value;
+            this.nativeView.setCurrentItem(value);
+            this._pageIndicatorView.setSelection(value);
+            console.log("set.selectedPageProperty.value: ", value);
+            console.log("set.selectedPageProperty.native: ", this.nativeView.getCurrentItem());
+        },
+        enumerable: true,
+        configurable: true
+    });*/
+
     Carousel.prototype[carouselCommon.indicatorColorProperty.setNative] = function (value) {
         this._indicatorColor = value;
         this._pageIndicatorView.setSelectedColor(value.android);
@@ -136,17 +149,19 @@ var Carousel = (function (_super) {
         this._indicatorColorUnselected = value;
         this._pageIndicatorView.setUnselectedColor(value.android);
     };
-    Carousel.prototype[carouselCommon.selectedPageProperty.getNative] = function (value) {
-        return this.nativeView.getCurrentItem();
+    Carousel.prototype[carouselCommon.selectedPageProperty.getDefault] = function () {
+        this._selectedPage = 0;
+        return this.selectedPage;
     };
     Carousel.prototype[carouselCommon.selectedPageProperty.setNative] = function (value) {
         this._selectedPage = value;
         this.nativeView.setCurrentItem(value);
-        //console.log("selectedPageProperty.value: ", value);
-        //console.log("selectedPageProperty.get: ", this.nativeView.getCurrentItem());
+        this._pageIndicatorView.setSelection(value);
+        console.log("set.selectedPageProperty.value: ", value);
+        console.log("set.selectedPageProperty.native: ", this.nativeView.getCurrentItem());
     };
 
-    Carousel.prototype[carouselCommon.showIndicatorProperty.getNative] = function (value) {
+    Carousel.prototype[carouselCommon.showIndicatorProperty.getDefault] = function () {
         return this._enableIndicator;
     };
     Carousel.prototype[carouselCommon.showIndicatorProperty.setNative] = function (value) {
@@ -316,6 +331,9 @@ function ensureCarouselPageChangedListenerClass() {
                 index: position
             };
             this.owner.notify(args2);
+            this.owner._selectedPage = position;
+            console.log("CarouselPageChangedListener._selectedPage ", this.owner.nativeView.getCurrentItem());
+            console.log("CarouselPageChangedListener.getCurrentItem ", this.owner.nativeView.getCurrentItem());
         };
         CarouselPageChangedListener.prototype.onPageScrollStateChanged = function (state) {
             var args2 = { 
