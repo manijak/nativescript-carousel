@@ -89,8 +89,8 @@ var Carousel = (function (_super) {
         this.refresh();
     };
     Carousel.prototype.refresh = function () {
-        if (types.isNullOrUndefined(this.items) || !types.isNumber(this.items.length))
-            return;
+        if (types.isNullOrUndefined(this.items) || !types.isNumber(this.items.length)) return;
+        if (!this.nativeView) return;
         this.removeChildren();
      
         var length = this.items.length;

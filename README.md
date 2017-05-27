@@ -6,7 +6,7 @@ A simple carousel component for NativeScript.
 
 |Platform|Supported|Version|NativeView|
 | ------------------- | :-----------: | :-----------: | :------------------: |
-|iOS|Yes|iOS 8.1+|[DKCarouselView](https://github.com/zhangao0086/DKCarouselView)|
+|iOS|Yes|iOS 8.1+|[DKCarouselView](https://github.com/manijak/DKCarouselView)|
 |Android|Yes|API 15+|ViewPager with [PageIndicatorView](https://github.com/romandanylyk/PageIndicatorView)|
 
 ## Installation
@@ -165,6 +165,9 @@ WORM| THIN_WORM| FILL| DROP| SWAP
 ![anim_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_worm.gif) |![anim_thin_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_thin_worm.gif) |![anim_fill](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_fill.gif) |![anim_drop](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_drop.gif) |![anim_swap](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_swap.gif)
 
 ## Changelog
+
+**3.0.1**
+* Fixed a critical bug on Android during `refresh` when navigating back to a view with a Carousel.
 
 **3.0.0**
 * Finally! Support for TNS 3.x. Big thanks to @MattNer0, @sitefinitysteve, @hristo, @NickIliev
