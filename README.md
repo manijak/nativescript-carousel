@@ -166,6 +166,9 @@ WORM| THIN_WORM| FILL| DROP| SWAP
 
 ## Changelog
 
+**3.0.2**
+* Fixed an issue with events not working on Android (affected all events).
+
 **3.0.1**
 * Fixed a critical bug on Android during `refresh` when navigating back to a view with a Carousel.
 
