@@ -7,7 +7,7 @@
     <Label text="Each slide is defined in the XML." textWrap="true" margin="30,0,10,0"/>
     <Label text="'finite' is set to True" textWrap="true" margin="0,0,20,0" android:visibility="collapsed" />
     
-    <GridLayout margin="20,0,0,0">
+    <GridLayout margin="20,0,0,0" height="250">
         <ns:Carousel height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff" 
         finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap">
             <ns:CarouselItem id="slide1" backgroundColor="#b3cde0">

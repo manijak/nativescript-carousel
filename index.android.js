@@ -300,25 +300,23 @@ function ensureCarouselPageChangedListenerClass() {
             return global.__native(this);
         }
         CarouselPageChangedListener.prototype.onPageSelected = function (position) {
-            var args2 = { 
-                eventName: carouselCommon.pageChangedEvent, 
+            this.owner.notify({ 
+                eventName: carouselCommon.CarouselCommon.pageChangedEvent, 
                 object: this.owner,
                 index: position
-            };
-            this.owner.notify(args2);
+            });
             this.owner.selectedPage = position;
         };
         CarouselPageChangedListener.prototype.onPageScrollStateChanged = function (state) {
-            var args2 = { 
-                eventName: carouselCommon.pageScrollStateChangedEvent, 
+            this.owner.notify({ 
+                eventName: carouselCommon.CarouselCommon.pageScrollStateChangedEvent, 
                 object: this.owner,
                 state: state
-            };
-            this.owner.notify(args2);
+            });
         };
         CarouselPageChangedListener.prototype.onPageScrolled = function (position, positionOffset, positionOffsetPixels) {
             var args2 = { 
-                eventName: carouselCommon.pageScrollingEvent, 
+                eventName: carouselCommon.CarouselCommon.pageScrollingEvent, 
                 object: this.owner,
                 state: {
                     offset: positionOffset,
