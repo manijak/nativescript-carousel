@@ -145,7 +145,7 @@ var Carousel = (function (_super) {
         this.nativeView.scrollEnabled = value;
     };
     Carousel.prototype[carouselCommon.indicatorColorProperty.setNative] = function (value) {
-        this.nativeView.indicatorTintColor = value.ios;
+        this.nativeView.indicatorTintColor = value ? value.ios : "#fff";
     };
     Carousel.prototype[carouselCommon.indicatorColorUnselectedProperty.setNative] = function (value) {
         this.nativeView.indicatorTintColorUnselected = value.ios;

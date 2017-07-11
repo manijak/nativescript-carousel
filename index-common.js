@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var absolute_layout = require('ui/layouts/absolute-layout');
 var stack_layout = require('ui/layouts/stack-layout');
-var viewModule = require("tns-core-modules/ui/core/view");
+var viewModule = require("ui/core/view");
 var weakEvents = require("ui/core/weak-event-listener");
 var observableArray = require("data/observable-array");
 var types = require("utils/types");
@@ -11,7 +11,8 @@ var colorModule = require('color');
 var CarouselItem = (function (_super) {
     __extends(CarouselItem, _super);
     function CarouselItem() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        return _this;
     }
     return CarouselItem;
 }(stack_layout.StackLayout));
@@ -20,8 +21,12 @@ exports.CarouselItem = CarouselItem;
 var CarouselCommon = (function (_super) {
     __extends(CarouselCommon, _super);
     function CarouselCommon() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        return _this;
     }
+    CarouselCommon.prototype.onLoaded = function () {
+        _super.prototype.onLoaded.call(this);
+    };
     return CarouselCommon;
 }(absolute_layout.AbsoluteLayout));
 CarouselCommon.pageChangedEvent = "pageChanged";
@@ -34,8 +39,8 @@ exports.CarouselCommon = CarouselCommon;
 exports.itemTemplateProperty = new viewModule.Property({
     name: "itemTemplate", 
     affectsLayout: true, 
-    valueChanged: function (target) {
-        target.refresh();
+    valueChanged: function (view, oldValue, newValue) {
+        view.refresh();
     }
 });
 exports.itemsProperty = new viewModule.Property({
@@ -56,74 +61,113 @@ exports.itemsProperty = new viewModule.Property({
 exports.selectedPageProperty = new viewModule.Property({
     name: "selectedPage",
     defaultValue: 0,
-    valueConverter: function (value) { return +value; }
+    valueConverter: function (value) { return +value; },
+    valueChanged: function (view, oldValue, newValue) {
+        view.selectedPage = newValue;
+    }
 });
 exports.showIndicatorProperty = new viewModule.Property({
     name: "showIndicator",
     defaultValue: true,
-    valueConverter: viewModule.booleanConverter
+    valueConverter: viewModule.booleanConverter,
+    valueChanged: function (view, oldValue, newValue) {
+        view.showIndicator = newValue;
+    }
 });
 exports.indicatorColorProperty = new viewModule.Property({
     name: "indicatorColor",
-    defaultValue: undefined,
-    valueConverter: function (value) { return new colorModule.Color(value); }
+    equalityComparer: colorModule.Color.equals,
+    valueConverter: function (value) { return new colorModule.Color(value); },
+    valueChanged: function (view, oldValue, newValue) {
+        view.indicatorColor = newValue;
+    }
 });
 exports.indicatorColorUnselectedProperty = new viewModule.Property({
     name: "indicatorColorUnselected",
-    defaultValue: undefined,
-    valueConverter: function (value) { return new colorModule.Color(value); }
+    equalityComparer: colorModule.Color.equals,
+    valueConverter: function (value) { return new colorModule.Color(value); },
+    valueChanged: function (view, oldValue, newValue) {
+        view.indicatorColorUnselected = newValue;
+    }
 });
 exports.indicatorOffsetProperty = new viewModule.Property({
     name: "indicatorOffset",
-    defaultValue: "0,0"
+    defaultValue: "0,0",
+    valueChanged: function (view, oldValue, newValue) {
+        view.indicatorOffset = newValue;
+    }
 });
 
 // iOS only
 exports.autoPagingIntervalProperty = new viewModule.Property({
     name: "autoPagingInterval",
     defaultValue: 0,
-    valueConverter: function (value) { return +value; }
+    valueConverter: function (value) { return +value; },
+    valueChanged: function (view, oldValue, newValue) {
+        view.autoPagingInterval = newValue;
+    }
 });
 exports.finiteProperty = new viewModule.Property({
     name: "finite",
-    defaultValue: undefined,
-    valueConverter: viewModule.booleanConverter
+    valueConverter: viewModule.booleanConverter,
+    valueChanged: function (view, oldValue, newValue) {
+        view.finite = newValue;
+    }
 });
 exports.bounceProperty = new viewModule.Property({
     name: "bounce",
-    defaultValue: undefined,
-    valueConverter: viewModule.booleanConverter
+    valueConverter: viewModule.booleanConverter,
+    valueChanged: function (view, oldValue, newValue) {
+        view.bounce = newValue;
+    }
 });
 exports.scrollEnabledProperty = new viewModule.Property({
     name: "scrollEnabled",
-    defaultValue: undefined,
-    valueConverter: viewModule.booleanConverter
+    valueConverter: viewModule.booleanConverter,
+    valueChanged: function (view, oldValue, newValue) {
+        view.scrollEnabled = newValue;
+    }
 });
 
 
 // Android only
 exports.indicatorAnimationProperty = new viewModule.Property({
     name: "indicatorAnimation",
-    defaultValue: undefined
+    affectsLayout: true,
+    valueChanged: function (view, oldValue, newValue) {
+        view.indicatorAnimation = newValue;
+    }
 });
 exports.indicatorAnimationDurationProperty = new viewModule.Property({
     name: "indicatorAnimationDuration",
-    defaultValue: undefined,
-    valueConverter: function (value) { return +value; }
+    affectsLayout: true,
+    valueConverter: function (value) { return +value; },
+    valueChanged: function (view, oldValue, newValue) {
+        view.indicatorAnimationDuration = newValue;
+    }
 });
 exports.indicatorAlignmentProperty = new viewModule.Property({
     name: "indicatorAlignment",
-    defaultValue: "BOTTOM"
+    defaultValue: "BOTTOM",
+    valueChanged: function (view, oldValue, newValue) {
+        view.indicatorAlignment = newValue.toUpperCase();
+    }
 });
 exports.indicatorRadiusProperty = new viewModule.Property({
     name: "indicatorRadius",
-    defaultValue: undefined,
-    valueConverter: function (value) { return +value; }
+    affectsLayout: true,
+    valueConverter: function (value) { return +value; },
+    valueChanged: function (view, oldValue, newValue) {
+        view.indicatorRadius = newValue;
+    }
 });
 exports.indicatorPaddingProperty = new viewModule.Property({
     name: "indicatorPadding",
-    defaultValue: undefined,
-    valueConverter: function (value) { return +value; }
+    affectsLayout: true,
+    valueConverter: function (value) { return +value; },
+    valueChanged: function (view, oldValue, newValue) {
+        view.indicatorPadding = newValue;
+    }
 });
 
 exports.itemsProperty.register(CarouselCommon);

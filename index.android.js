@@ -4,7 +4,7 @@ var grid_layout = require('ui/layouts/grid-layout');
 var stack_layout = require('ui/layouts/stack-layout');
 var types = require("utils/types");
 var builder = require("ui/builder");
-var viewModule = require("tns-core-modules/ui/core/view");
+var viewModule = require("ui/core/view");
 var carouselCommon = require("./index-common");
 var knownTemplates;
 (function (knownTemplates) {
@@ -42,7 +42,7 @@ var Carousel = (function (_super) {
         return this.nativeView;
     };
     Carousel.prototype.onLoaded = function () {
-        if(this._enableIndicator !== false){
+        if(this.showIndicator !== false){
             this._pagerIndicatorLayoutParams.height = android.support.v4.view.ViewPager.LayoutParams.WRAP_CONTENT;
             this._pagerIndicatorLayoutParams.width = android.support.v4.view.ViewPager.LayoutParams.MATCH_PARENT;
         
@@ -54,7 +54,7 @@ var Carousel = (function (_super) {
             var verticalOffset = defaultVerticalMargin + ((y < 0) ? Math.abs(y) : -Math.abs(y)); //Reverse +- to be the same as ios
             var horizontalOffset = x;
 
-            if(this._indicatorAlignment === "TOP"){
+            if(this.indicatorAlignment === "TOP"){
                 this._pagerIndicatorLayoutParams.setMargins(horizontalOffset, verticalOffset, 0, 0);
                 this._pagerIndicatorLayoutParams.gravity = android.view.Gravity.TOP | android.view.Gravity.CENTER;    
             }else{
@@ -75,13 +75,6 @@ var Carousel = (function (_super) {
             this._pageIndicatorView.setViewPager(this.nativeView);
             this._pageIndicatorView.setCount(this._childrenCount);
             this._pageIndicatorView.setSelection(this.selectedPage);
-
-            this.indicatorAnimationDuration = this._indicatorAnimationDuration ? this._indicatorAnimationDuration : 500;
-            this.indicatorAnimation = this._indicatorAnimation;
-            this.indicatorRadius = this._indicatorRadius;
-            this.indicatorPadding = this._indicatorPadding;
-            this.indicatorColor = this._indicatorColor;
-            this.indicatorColorUnselected = this._indicatorColorUnselected;
         }
         _super.prototype.onLoaded.call(this);
     };
@@ -124,11 +117,11 @@ var Carousel = (function (_super) {
     });
 
     Carousel.prototype[carouselCommon.indicatorColorProperty.setNative] = function (value) {
-        this._indicatorColor = value;
+        if(!value) return;
         this._pageIndicatorView.setSelectedColor(value.android);
     };
     Carousel.prototype[carouselCommon.indicatorColorUnselectedProperty.setNative] = function (value) {
-        this._indicatorColorUnselected = value;
+        if(!value) return;
         this._pageIndicatorView.setUnselectedColor(value.android);
     };
     Carousel.prototype[carouselCommon.selectedPageProperty.setNative] = function (value) {
@@ -136,47 +129,39 @@ var Carousel = (function (_super) {
         this.nativeView.setCurrentItem(value);
     };
 
-    Carousel.prototype[carouselCommon.showIndicatorProperty.getDefault] = function () {
-        return this._enableIndicator;
-    };
-    Carousel.prototype[carouselCommon.showIndicatorProperty.setNative] = function (value) {
-        this._enableIndicator = value;
-    };
-
     Carousel.prototype[carouselCommon.indicatorAnimationProperty.setNative] = function (value) {
         if(!value) return;
-        this._indicatorAnimation = value.toUpperCase();
-        var animationType = com.rd.animation.AnimationType.NONE;
+        var animationType = com.rd.animation.type.AnimationType.NONE;
         switch(value.toUpperCase()){
             case "NONE":
-                animationType = com.rd.animation.AnimationType.NONE;
+                animationType = com.rd.animation.type.AnimationType.NONE;
                 break;
             case "COLOR":
-                animationType = com.rd.animation.AnimationType.COLOR;
+                animationType = com.rd.animation.type.AnimationType.COLOR;
                 break;
             case "SLIDE":
-                animationType = com.rd.animation.AnimationType.SLIDE;
+                animationType = com.rd.animation.type.AnimationType.SLIDE;
                 break;
             case "WORM":
-                animationType = com.rd.animation.AnimationType.WORM;
+                animationType = com.rd.animation.type.AnimationType.WORM;
                 break;
             case "SCALE":
-                animationType = com.rd.animation.AnimationType.SCALE;
+                animationType = com.rd.animation.type.AnimationType.SCALE;
                 break;
             case "FILL":
-                animationType = com.rd.animation.AnimationType.FILL;
+                animationType = com.rd.animation.type.AnimationType.FILL;
                 break;
             case "THIN_WORM":
-                animationType = com.rd.animation.AnimationType.THIN_WORM;
+                animationType = com.rd.animation.type.AnimationType.THIN_WORM;
                 break;
             case "DROP":
-                animationType = com.rd.animation.AnimationType.DROP;
+                animationType = com.rd.animation.type.AnimationType.DROP;
                 break;
             case "SWAP":
-                animationType = com.rd.animation.AnimationType.SWAP;
+                animationType = com.rd.animation.type.AnimationType.SWAP;
                 break;
             default:
-                animationType = com.rd.animation.AnimationType.NONE;
+                animationType = com.rd.animation.type.AnimationType.NONE;
                 break;
         }
         if(this._pageIndicatorView)
@@ -184,24 +169,18 @@ var Carousel = (function (_super) {
     };
     Carousel.prototype[carouselCommon.indicatorAnimationDurationProperty.setNative] = function (value) {
         if(!value) return;
-        this._indicatorAnimationDuration = value;
         if(this._pageIndicatorView)
             this._pageIndicatorView.setAnimationDuration(value);
     };
-    Carousel.prototype[carouselCommon.indicatorAlignmentProperty.setNative] = function (value) {
-        if(!value) return;
-        this._indicatorAlignment = value.toUpperCase();
-    };
+  
     Carousel.prototype[carouselCommon.indicatorRadiusProperty.setNative] = function (value) {
         if(!value) return;
-        this._indicatorRadius = value;
         if(this._pageIndicatorView){
             this._pageIndicatorView.setRadius(value);
         }
     };
     Carousel.prototype[carouselCommon.indicatorPaddingProperty.setNative] = function (value) {
         if(!value) return;
-        this._indicatorPadding = value;
         if(this._pageIndicatorView){
             this._pageIndicatorView.setPadding(value);
         }

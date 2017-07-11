@@ -165,6 +165,9 @@ WORM| THIN_WORM| FILL| DROP| SWAP
 ![anim_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_worm.gif) |![anim_thin_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_thin_worm.gif) |![anim_fill](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_fill.gif) |![anim_drop](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_drop.gif) |![anim_swap](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_swap.gif)
 
 ## Changelog
+**3.1.0**
+* Made comaptible for recent TNS 3.1.x releases.
+* Updated Android indicator library to latest version.
 
 **3.0.2**
 * Fixed an issue with events not working on Android (affected all events).
