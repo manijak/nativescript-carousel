@@ -94,10 +94,12 @@ var Carousel = (function (_super) {
             this.addChild(viewToAdd);
         }
         var adapter = this.nativeView.getAdapter();
-        adapter.notifyDataSetChanged();
-        this._pageIndicatorView.setCount(this.items.length);
-        this.nativeView.setCurrentItem(this.selectedPage);
-        this._pageIndicatorView.setSelection(this.selectedPage);
+        if(adapter){
+            adapter.notifyDataSetChanged();
+            this._pageIndicatorView.setCount(this.items.length);
+            this.nativeView.setCurrentItem(this.selectedPage);
+            this._pageIndicatorView.setSelection(this.selectedPage);
+        }
     };
     Carousel.prototype._getDataItem = function (index) {
         return this.items.getItem ? this.items.getItem(index) : this.items[index];
