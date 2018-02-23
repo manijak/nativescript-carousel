@@ -5,6 +5,7 @@
 .vscode
 .vscode/
 demo/
+demo
 screenshots/
 .sln
 *.sln
