@@ -1,0 +1,6 @@
+android { 
+    
+}
+dependencies {
+  compile 'com.romandanylyk:pageindicatorview:0.2.0'
+}

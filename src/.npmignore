@@ -1,0 +1,19 @@
+# generated files
+*.webinfo
+.vs
+.vs/
+.vscode
+.vscode/
+demo/
+screenshots/
+.sln
+*.sln
+*.png
+CONTRIBUTING.md
+*.ts
+!index.d.ts
+*.map
+tsconfig.json
+*.log
+*.gif
+tslint.json

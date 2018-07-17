@@ -1,0 +1,89 @@
+{
+  "name": "nativescript-carousel",
+  "description": "Carousel component for NativeScript (iOS & Android).",
+  "main": "index",
+  "version": "4.0.0",
+  "typings": "index.d.ts",
+  "nativescript": {
+    "platforms": {
+      "ios": "3.0.0",
+      "android": "3.0.0"
+    },
+    "plugin": {
+      "nan": "true",
+      "core3": "false",
+      "pan": "true",
+      "wrapper": "false",
+      "category": "Interface"
+    }
+  },
+  "scripts": {
+    "tsc": "tsc -skipLibCheck",
+    "build": "npm i && npm run tsc",
+    "link": "npm i && cd ../demo && npm i && cd ../src && npm run plugin.link",
+    "demo.reset": "cd ../demo && rimraf platforms",
+    "demo.ios": "npm run preparedemo && cd ../demo && tns run ios --syncAllFiles",
+    "demo.ios.device": "npm run preparedemo && cd ../demo && tns platform remove ios && tns run ios",
+    "demo.android": "npm i && npm run tsc && cd ../demo && tns run android --syncAllFiles",
+    "test": "npm run tslint && npm run tslint.demo && cd ../demo && tns build ios && tns build android",
+    "test.ios": "cd ../demo && tns platform remove ios && tns test ios --emulator",
+    "test.ios.device": "cd ../demo && tns platform remove ios && tns test ios",
+    "test.android": "cd ../demo && tns platform remove android && tns test android --justlaunch",
+    "preparedemo": "npm run build && cd ../demo && tns plugin remove nativescript-carousel && tns plugin add ../src && tns install",
+    "setup": "npm run build && cd ../demo && npm i",
+    "plugin.link": "npm link && cd ../demo && npm link nativescript-carousel && cd ../src",
+    "plugin.tscwatch": "npm run tsc -- -w",
+    "setupandinstall": "npm i && cd ../demo && npm i && cd ../src && npm run build && cd ../demo && tns plugin add ../src && cd ../src",
+    "tslint": "tslint --config '../tslint.json' '*.ts' --exclude '**/node_modules/**'",
+    "tslint.demo": "tslint --config '../tslint.json' '../demo/app/*.ts' --exclude '**/node_modules/**'",
+    "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**'",
+    "prepublishOnly": "npm run build",
+    "precommit": "lint-staged",
+    "development.setup": "npm run setup && npm link && cd ../demo && npm link nativescript-carousel && cd ../src",
+    "generate.typings.ios": "cd ../demo && TNS_DEBUG_METADATA_PATH=\"$(pwd)/metadata\" tns build ios && TNS_TYPESCRIPT_DECLARATIONS_PATH=\"$(pwd)/typings\" tns build ios && echo 'Now look for your library typings in demo/typings!'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manijak/nativescript-carousel.git"
+  },
+  "keywords": [
+    "NativeScript",
+    "Carousel",
+    "Slider",
+    "Pager",
+    "ViewPager",
+    "DKCarouselView",
+    "iOS",
+    "Android",
+    "manijak"
+  ],
+  "author": "Nedim Erkocevic <nedim@fkzeljo.com> (https://github.com/manijak)",
+  "contributors": [
+    {
+      "name": "Brad Martin",
+      "email": "bradwaynemartin@gmail.com",
+      "url": "https://github.com/bradmartin"
+    }
+  ],
+  "bugs": "https://github.com/manijak/nativescript-carousel/issues",
+  "license": "MIT",
+  "homepage": "https://github.com/manijak/nativescript-carousel",
+  "devDependencies": {
+    "typescript": "~2.8.2",
+    "prettier": "^1.13.7",
+    "tns-core-modules": "~4.1.0",
+    "tns-platform-declarations": "~4.1.0",
+    "tslint": "^5.11.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.0",
+    "prompt": "^1.0.0",
+    "rimraf": "^2.5.0",
+    "semver": "^5.5.0"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
