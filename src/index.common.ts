@@ -34,9 +34,24 @@ export const CLog = (type: CLogTypes = 0, ...args) => {
 };
 
 export class CarouselCommon extends AbsoluteLayout {
+  /**
+   * String value when hooking into the pageChanged event.
+   */
   public static pageChangedEvent = 'pageChanged';
+
+  /**
+   * String value when hooking into the pageTapped event.
+   */
   public static pageTappedEvent = 'pageTapped';
+
+  /**
+   * String value when hooking into the pageScrolling event.
+   */
   public static pageScrollingEvent = 'pageScrolling';
+
+  /**
+   * String value when hooking into the pageScrolled event.
+   */
   public static pageScrollStateChangedEvent = 'pageScrolled';
 
   /**

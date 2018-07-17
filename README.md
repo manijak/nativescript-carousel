@@ -12,16 +12,7 @@ A simple carousel component for NativeScript.
 
 ## Installation
 
-Run `npm i nativescript-carousel` in the ROOT directory of your project.
-
-## Upgrading
-
-If you are upgrading from an earlier version, you might receive some errors when building. Therefore you must remove the platforms and re-add them.
-
-```
-tns platform remove ios OR android
-tns platform add ios OR android
-```
+Run `tns plugin add nativescript-carousel` in the ROOT directory of your project. You must clean your project after adding a plugin with native dependencies. This can be done by executing `tns platform remove android` (or ios) and then `tns platform add android` (or ios). The newer versions of the NS CLI, provide a `clean` command that does this in one script if you like that option as well.
 
 ## Limitations
 
