@@ -5,10 +5,9 @@ import { View } from 'tns-core-modules/ui/core/view';
 import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
 import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
 import {
+  CarouselCommon,
   CLog,
   CLogTypes,
-  CarouselCommon,
-  CarouselItem,
   indicatorAnimationDurationProperty,
   indicatorAnimationProperty,
   indicatorColorProperty,
@@ -266,7 +265,7 @@ export class Carousel extends CarouselCommon {
     return this.items.getItem ? this.items.getItem(index) : this.items[index];
   }
 
-  private _onItemsChanged(data) {
+  public onItemsChanged(data) {
     CLog(CLogTypes.info, `_onItemsChanged...`);
     this.refresh();
   }
@@ -315,7 +314,7 @@ class CarouselPagerAdapterClassInner extends android.support.v4.view.PagerAdapte
       return null;
     }
 
-    if (item.parent !== this.owner) {
+    if (item.parent !== this.owner.get()) {
       this.owner.get().addChild(item);
     } else {
       item.parent.android.removeView(item.android);
@@ -388,7 +387,7 @@ class CarouselPageChangedListener extends android.support.v4.view.ViewPager.Simp
   onPageSelected(position) {
     CLog(CLogTypes.info, `CarouselPageChangedListener onPageSelected...`);
     this.owner.get().notify({
-      eventName: CarouselItem.pageChangedEvent,
+      eventName: CarouselCommon.pageChangedEvent,
       object: this.owner.get(),
       index: position
     });
@@ -398,7 +397,7 @@ class CarouselPageChangedListener extends android.support.v4.view.ViewPager.Simp
   onPageScrollStateChanged(state) {
     CLog(CLogTypes.info, `CarouselPageChangedListener onPageScrollStateChanged...`);
     this.owner.get().notify({
-      eventName: CarouselItem.pageScrollStateChangedEvent,
+      eventName: CarouselCommon.pageScrollStateChangedEvent,
       object: this.owner.get(),
       state: state
     });
@@ -407,7 +406,7 @@ class CarouselPageChangedListener extends android.support.v4.view.ViewPager.Simp
   onPageScrolled(position, positionOffset, positionOffsetPixels) {
     CLog(CLogTypes.info, `CarouselPageChangedListener onPageScrolled...`);
     const data = {
-      eventName: CarouselItem.pageScrollingEvent,
+      eventName: CarouselCommon.pageScrollingEvent,
       object: this.owner.get(),
       state: {
         offset: positionOffset,

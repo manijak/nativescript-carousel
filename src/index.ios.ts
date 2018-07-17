@@ -23,6 +23,7 @@ export class Carousel extends CarouselCommon {
   public itemTemplate;
   public selectedPage;
   private _isDirty: boolean;
+
   constructor() {
     super();
   }
@@ -36,28 +37,36 @@ export class Carousel extends CarouselCommon {
       this.nativeView.setAutoPagingForInterval(value);
     }
   }
+
   [selectedPageProperty.setNative](value) {
     this.selectedPage = value;
     this.nativeView.selectedPage = value;
   }
+
   [showIndicatorProperty.setNative](value) {
     this.nativeView.indicatorIsVisible = value;
   }
+
   [finiteProperty.setNative](value) {
     this.nativeView.finite = value;
   }
+
   [bounceProperty.setNative](value) {
     this.nativeView.bounce = value;
   }
+
   [scrollEnabledProperty.setNative](value) {
     this.nativeView.scrollEnabled = value;
   }
+
   [indicatorColorProperty.setNative](value) {
     this.nativeView.indicatorTintColor = value ? value.ios : '#fff';
   }
+
   [indicatorColorUnselectedProperty.setNative](value) {
     this.nativeView.indicatorTintColorUnselected = value.ios;
   }
+
   [indicatorOffsetProperty.setNative](value) {
     const ar = value.split(',');
     const x = ar[0] ? ar[0] : 0;
@@ -76,7 +85,7 @@ export class Carousel extends CarouselCommon {
 
     nativeView.setDidSelectBlock((item, index) => {
       const data = {
-        eventName: CarouselItem.pageTappedEvent,
+        eventName: CarouselCommon.pageTappedEvent,
         object: this,
         view: item,
         index: index
@@ -86,7 +95,7 @@ export class Carousel extends CarouselCommon {
 
     nativeView.setDidChangeBlock((view, index) => {
       const data = {
-        eventName: CarouselItem.pageChangedEvent,
+        eventName: CarouselCommon.pageChangedEvent,
         object: this,
         view: view,
         index: index
@@ -97,7 +106,7 @@ export class Carousel extends CarouselCommon {
 
     nativeView.setDidScrollBlock((view, offset) => {
       const data = {
-        eventName: CarouselItem.pageScrollingEvent,
+        eventName: CarouselCommon.pageScrollingEvent,
         object: this,
         view: view,
         state: {
@@ -169,13 +178,14 @@ export class Carousel extends CarouselCommon {
     }
   }
 
-  private _getDataItem(index) {
-    return this.items.getItem ? this.items.getItem(index) : this.items[index];
-  }
-  private _onItemsChanged(data) {
+  public onItemsChanged(data) {
     if (!isNullOrUndefined(this.items) && isNumber(this.items.length)) {
       this.refresh();
     }
+  }
+
+  private _getDataItem(index) {
+    return this.items.getItem ? this.items.getItem(index) : this.items[index];
   }
 }
 

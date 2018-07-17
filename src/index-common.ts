@@ -1,8 +1,9 @@
 import { Color } from 'tns-core-modules/color';
 import { ObservableArray } from 'tns-core-modules/data/observable-array';
 import { ContentView } from 'tns-core-modules/ui/content-view';
-import { booleanConverter, Property, View } from 'tns-core-modules/ui/core/view';
+import { booleanConverter, Property } from 'tns-core-modules/ui/core/view';
 import { addWeakEventListener, removeWeakEventListener } from 'tns-core-modules/ui/core/weak-event-listener';
+import { AbsoluteLayout } from 'tns-core-modules/ui/layouts/absolute-layout';
 import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
 
 export class CarouselUtil {
@@ -29,7 +30,28 @@ export const CLog = (type: CLogTypes = 0, ...args) => {
   }
 };
 
-export class CarouselCommon extends ContentView {
+export class CarouselCommon extends AbsoluteLayout {
+  public static pageChangedEvent = 'pageChanged';
+  public static pageTappedEvent = 'pageTapped';
+  public static pageScrollingEvent = 'pageScrolling';
+  public static pageScrollStateChangedEvent = 'pageScrolled';
+
+  public selectedPage;
+  public items;
+  public showIndicator;
+  public indicatorColor;
+  public indicatorOffset;
+  public indicatorColorUnselected;
+  public autoPagingInterval;
+  public bounce;
+  public finite;
+  public scrollEnabled;
+  public indicatorAnimationDuration;
+  public indicatorAnimation;
+  public indicatorAlignment;
+  public indicatorRadius;
+  public indicatorPadding;
+
   /**
    * If true console logs will be output to help debug the Video events.
    */
@@ -42,12 +64,7 @@ export class CarouselCommon extends ContentView {
   }
 }
 
-export class CarouselItem extends View {
-  public static pageChangedEvent = 'pageChanged';
-  public static pageTappedEvent = 'pageTapped';
-  public static pageScrollingEvent = 'pageScrolling';
-  public static pageScrollStateChangedEvent = 'pageScrolled';
-
+export class CarouselItem extends ContentView {
   constructor() {
     super();
   }
@@ -58,7 +75,7 @@ export class CarouselItem extends View {
 }
 
 // Common
-export const itemTemplateProperty = new Property({
+export const itemTemplateProperty = new Property<CarouselCommon, any>({
   name: 'itemTemplate',
   affectsLayout: true,
   valueChanged: (view, oldValue, newValue) => {
@@ -67,15 +84,15 @@ export const itemTemplateProperty = new Property({
 });
 itemTemplateProperty.register(CarouselCommon);
 
-export const itemsProperty = new Property({
+export const itemsProperty = new Property<CarouselCommon, any>({
   name: 'items',
   affectsLayout: true,
   valueChanged: (target, oldValue, newValue) => {
     if (oldValue instanceof ObservableArray) {
-      removeWeakEventListener(oldValue, ObservableArray.changeEvent, target._onItemsChanged, target);
+      removeWeakEventListener(oldValue, ObservableArray.changeEvent, target.onItemsChanged, target);
     }
     if (newValue instanceof ObservableArray) {
-      addWeakEventListener(newValue, ObservableArray.changeEvent, target._onItemsChanged, target);
+      addWeakEventListener(newValue, ObservableArray.changeEvent, target.onItemsChanged, target);
     }
     if (!isNullOrUndefined(target.items) && isNumber(target.items.length)) {
       target.refresh();
@@ -84,7 +101,7 @@ export const itemsProperty = new Property({
 });
 itemsProperty.register(CarouselCommon);
 
-export const selectedPageProperty = new Property({
+export const selectedPageProperty = new Property<CarouselCommon, any>({
   name: 'selectedPage',
   defaultValue: 0,
   valueConverter: value => {
@@ -96,7 +113,7 @@ export const selectedPageProperty = new Property({
 });
 selectedPageProperty.register(CarouselCommon);
 
-export const showIndicatorProperty = new Property({
+export const showIndicatorProperty = new Property<CarouselCommon, any>({
   name: 'showIndicator',
   defaultValue: true,
   valueConverter: booleanConverter,
@@ -106,7 +123,7 @@ export const showIndicatorProperty = new Property({
 });
 showIndicatorProperty.register(CarouselCommon);
 
-export const indicatorColorProperty = new Property({
+export const indicatorColorProperty = new Property<CarouselCommon, any>({
   name: 'indicatorColor',
   equalityComparer: Color.equals,
   valueConverter: value => {
@@ -118,7 +135,7 @@ export const indicatorColorProperty = new Property({
 });
 indicatorColorProperty.register(CarouselCommon);
 
-export const indicatorColorUnselectedProperty = new Property({
+export const indicatorColorUnselectedProperty = new Property<CarouselCommon, any>({
   name: 'indicatorColorUnselected',
   equalityComparer: Color.equals,
   valueConverter: value => {
@@ -130,7 +147,7 @@ export const indicatorColorUnselectedProperty = new Property({
 });
 indicatorColorUnselectedProperty.register(CarouselCommon);
 
-export const indicatorOffsetProperty = new Property({
+export const indicatorOffsetProperty = new Property<CarouselCommon, any>({
   name: 'indicatorOffset',
   defaultValue: '0,0',
   valueChanged: (view, oldValue, newValue) => {
@@ -140,7 +157,7 @@ export const indicatorOffsetProperty = new Property({
 indicatorOffsetProperty.register(CarouselCommon);
 
 // iOS only
-export const autoPagingIntervalProperty = new Property({
+export const autoPagingIntervalProperty = new Property<CarouselCommon, any>({
   name: 'autoPagingInterval',
   defaultValue: 0,
   valueConverter: value => {
@@ -152,7 +169,7 @@ export const autoPagingIntervalProperty = new Property({
 });
 autoPagingIntervalProperty.register(CarouselCommon);
 
-export const finiteProperty = new Property({
+export const finiteProperty = new Property<CarouselCommon, any>({
   name: 'finite',
   valueConverter: booleanConverter,
   valueChanged: (view, oldValue, newValue) => {
@@ -161,7 +178,7 @@ export const finiteProperty = new Property({
 });
 finiteProperty.register(CarouselCommon);
 
-export const bounceProperty = new Property({
+export const bounceProperty = new Property<CarouselCommon, any>({
   name: 'bounce',
   valueConverter: booleanConverter,
   valueChanged: (view, oldValue, newValue) => {
@@ -170,7 +187,7 @@ export const bounceProperty = new Property({
 });
 bounceProperty.register(CarouselCommon);
 
-export const scrollEnabledProperty = new Property({
+export const scrollEnabledProperty = new Property<CarouselCommon, any>({
   name: 'scrollEnabled',
   valueConverter: booleanConverter,
   valueChanged: (view, oldValue, newValue) => {
@@ -180,7 +197,7 @@ export const scrollEnabledProperty = new Property({
 scrollEnabledProperty.register(CarouselCommon);
 
 // Android only
-export const indicatorAnimationProperty = new Property({
+export const indicatorAnimationProperty = new Property<CarouselCommon, any>({
   name: 'indicatorAnimation',
   affectsLayout: true,
   valueChanged: (view, oldValue, newValue) => {
@@ -189,7 +206,7 @@ export const indicatorAnimationProperty = new Property({
 });
 indicatorAnimationProperty.register(CarouselCommon);
 
-export const indicatorAnimationDurationProperty = new Property({
+export const indicatorAnimationDurationProperty = new Property<CarouselCommon, any>({
   name: 'indicatorAnimationDuration',
   affectsLayout: true,
   valueConverter: value => {
@@ -201,7 +218,7 @@ export const indicatorAnimationDurationProperty = new Property({
 });
 indicatorAnimationDurationProperty.register(CarouselCommon);
 
-export const indicatorAlignmentProperty = new Property({
+export const indicatorAlignmentProperty = new Property<CarouselCommon, any>({
   name: 'indicatorAlignment',
   defaultValue: 'BOTTOM',
   valueChanged: (view, oldValue, newValue) => {
@@ -210,7 +227,7 @@ export const indicatorAlignmentProperty = new Property({
 });
 indicatorAlignmentProperty.register(CarouselCommon);
 
-export const indicatorRadiusProperty = new Property({
+export const indicatorRadiusProperty = new Property<CarouselCommon, any>({
   name: 'indicatorRadius',
   affectsLayout: true,
   valueConverter: value => {
@@ -222,7 +239,7 @@ export const indicatorRadiusProperty = new Property({
 });
 indicatorRadiusProperty.register(CarouselCommon);
 
-export const indicatorPaddingProperty = new Property({
+export const indicatorPaddingProperty = new Property<CarouselCommon, any>({
   name: 'indicatorPadding',
   affectsLayout: true,
   valueConverter: value => {
