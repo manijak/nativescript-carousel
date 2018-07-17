@@ -39,24 +39,98 @@ export class CarouselCommon extends AbsoluteLayout {
   public static pageScrollingEvent = 'pageScrolling';
   public static pageScrollStateChangedEvent = 'pageScrolled';
 
+  /**
+   * Returns the native iOS DKCarouselView instance.
+   */
+  public ios: any;
+
+  /**
+   * Returns the native android ViewPager instance.
+   */
+  public android: any;
+
+  /**
+   * Assign a data-array to generate the slides and apply the bindingContext. If items is populated then you must use the template-option.
+   */
+  public items: ObservableArray<CarouselItem>;
+
+  /**
+   * Defines the view template for each slide-view to be generated.
+   */
+  public itemTemplate;
+
+  /**
+   * Sets/Gets the active page by index
+   */
   public selectedPage;
-  public items;
-  public showIndicator;
+
+  /**
+   * Shows or hides the page-indicator
+   */
+  public showIndicator: boolean;
+
+  /**
+   * Sets the active indicator color. Default is semi-transparent white. Use hex or color-name.
+   */
   public indicatorColor;
-  public indicatorOffset;
+
+  /**
+   * Sets the color of unselected indicators
+   */
   public indicatorColorUnselected;
-  public autoPagingInterval;
+
+  /**
+   * By default the indicator is centered at the bottom. You can use points (x,y) to move the indicator. E.g. indicatorOffset="100,100"
+   */
+  public indicatorOffset;
+
+  /**
+   * iOS Only - If set to 'true' scrolling will bounce at the first/last page (non-infinite). Default is 'false'.
+   */
   public bounce;
+
+  /**
+   * iOS Only - If true last slide will wrap back to first and visa versa
+   */
   public finite;
+
+  /**
+   * iOS Only - Enables/Disables user scroll on the Carousel.
+   */
   public scrollEnabled;
-  public indicatorAnimationDuration;
+
+  /**
+   * iOS Only - Defines the interval in seconds to wait before the next slide is shown. Default is 0 (off).
+   */
+  public autoPagingInterval;
+
+  /**
+   * Android Only - Sets the pager-indicator animation type. Choose between: color, slide, scale, worm, thin_worm, fill, drop or none. Default is none.
+   */
   public indicatorAnimation;
+
+  /**
+   * Android Only - Sets the pager-indicator animation duration in milliseconds. Default is 500.
+   */
+  public indicatorAnimationDuration;
+
+  /**
+   * Android Only - Sets the pager-indicator alignment. Choose between top or bottom. Default is bottom.
+   */
   public indicatorAlignment;
+
+  /**
+   * Android Only - Sets the pager-indicator dot radius.
+   */
   public indicatorRadius;
+
+  /**
+   * Android Only - Sets the pager-indicator dot padding.
+   */
   public indicatorPadding;
 
   /**
-   * If true console logs will be output to help debug the Video events.
+   * If true console logs will be output to help debug the Carousel events.
    */
   public set debug(value: boolean) {
     CarouselUtil.debug = value;
@@ -70,6 +144,7 @@ export class CarouselCommon extends AbsoluteLayout {
 export class CarouselItem extends ContentView {
   constructor() {
     super();
+    CLog(CLogTypes.info, `CarouselItem constructor...`);
   }
 
   onLoaded() {

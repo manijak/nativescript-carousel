@@ -195,7 +195,7 @@ export class Carousel extends CarouselCommon {
   }
 }
 
-let knownTemplates;
-(function(knownTemplates) {
-  knownTemplates.itemTemplate = 'itemTemplate';
-})((knownTemplates = exports.knownTemplates || (exports.knownTemplates = {})));
+// let knownTemplates;
+// (function(knownTemplates) {
+//   knownTemplates.itemTemplate = 'itemTemplate';
+// })((knownTemplates = exports.knownTemplates || (exports.knownTemplates = {})));

@@ -5,6 +5,8 @@
 .vscode
 .vscode/
 demo/
+node_modules/
+scripts/
 screenshots/
 .sln
 *.sln

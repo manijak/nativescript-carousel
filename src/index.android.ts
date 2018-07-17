@@ -21,17 +21,11 @@ const VIEWS_STATES = '_viewStates';
 declare const com: any;
 
 export class Carousel extends CarouselCommon {
-  public items;
-  public itemTemplate;
-  public showIndicator: boolean;
-  public indicatorOffset;
-  public indicatorAlignment;
-  public selectedPage;
-  public _childrenCount;
   private _androidViewId = -1;
   private _indicatorViewId = -1;
   private _pageIndicatorView;
   private _pagerIndicatorLayoutParams;
+  public _childrenCount; // public so it's accessible inside extended classes using WeakRef
   public CarouselPagerAdapterClass: CarouselPagerAdapterClassInner;
   public CarouselPageChangedListenerClass: CarouselPageChangedListener;
 
