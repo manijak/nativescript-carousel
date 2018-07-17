@@ -1,6 +1,6 @@
 /// <reference path="./node_modules/tns-platform-declarations/android.d.ts" />
 
-import * as builder from 'tns-core-modules/ui/builder';
+import { parse } from 'tns-core-modules/ui/builder';
 import { View } from 'tns-core-modules/ui/core/view';
 import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
 import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
@@ -20,6 +20,11 @@ import {
 const VIEWS_STATES = '_viewStates';
 declare const com: any;
 
+// let knownTemplates;
+// (function(knownTemplates) {
+//   knownTemplates.itemTemplate = 'itemTemplate';
+// })((knownTemplates = exports.knownTemplates || (exports.knownTemplates = {})));
+
 export class Carousel extends CarouselCommon {
   private _androidViewId = -1;
   private _indicatorViewId = -1;
@@ -33,8 +38,8 @@ export class Carousel extends CarouselCommon {
     super();
     CLog(CLogTypes.info, 'Carousel constructor...');
 
-    this.CarouselPagerAdapterClass = new CarouselPagerAdapterClassInner().onInit(new WeakRef(this));
-    this.CarouselPageChangedListenerClass = new CarouselPageChangedListener().onInit(new WeakRef(this));
+    this.CarouselPagerAdapterClass = new CarouselPagerAdapterClassInner(new WeakRef(this));
+    this.CarouselPageChangedListenerClass = new CarouselPageChangedListener(new WeakRef(this));
 
     CLog(
       CLogTypes.info,
@@ -170,7 +175,7 @@ export class Carousel extends CarouselCommon {
 
     this.nativeView.setOnPageChangeListener(this.CarouselPageChangedListenerClass);
 
-    CLog(CLogTypes.info, `returning this.nativeView`);
+    CLog(CLogTypes.info, `Carousel createNativeView returning this.nativeView = ${this.nativeView}`);
     return this.nativeView;
   }
 
@@ -210,8 +215,7 @@ export class Carousel extends CarouselCommon {
       this._pageIndicatorView.setSelection(this.selectedPage);
     }
 
-    // is this right call?
-    super.onLoaded.call(this);
+    super.onLoaded();
   }
 
   initNativeView() {
@@ -232,7 +236,7 @@ export class Carousel extends CarouselCommon {
     const length = this.items.length;
     for (let i = 0; i < length; i++) {
       const viewToAdd = !isNullOrUndefined(this.itemTemplate)
-        ? builder.parse(this.itemTemplate, this)
+        ? parse(this.itemTemplate, this)
         : this._getDefaultItemContent(i);
       const dataItem = this._getDataItem(i);
       viewToAdd.bindingContext = dataItem;
@@ -265,30 +269,24 @@ export class Carousel extends CarouselCommon {
   }
 }
 
-let knownTemplates;
-(function(knownTemplates) {
-  knownTemplates.itemTemplate = 'itemTemplate';
-})((knownTemplates = exports.knownTemplates || (exports.knownTemplates = {})));
-
 class CarouselPagerAdapterClassInner extends android.support.v4.view.PagerAdapter {
   private owner: WeakRef<Carousel>;
-  constructor() {
+  constructor(owner: WeakRef<Carousel>) {
     super();
-    return global.__native(this);
-  }
-
-  onInit(owner: WeakRef<Carousel>) {
     this.owner = owner;
-    return this;
+    return global.__native(this);
   }
 
   getCount() {
     CLog(CLogTypes.info, `CarouselPagerAdapterClassInner getCount...`);
+    let result;
     if (isNullOrUndefined(this.owner.get().items) || !isNumber(this.owner.get().items.length)) {
-      return this.owner ? this.owner.get()._childrenCount : 0;
+      result = this.owner ? this.owner.get()._childrenCount : 0;
     } else {
-      return this.owner ? this.owner.get().items.length : 0;
+      result = this.owner ? this.owner.get().items.length : 0;
     }
+    CLog(CLogTypes.info, `CarouselPagerAdapterClassInner getCount result = ${result}`);
+    return result;
   }
 
   getItemPosition(item) {
@@ -368,14 +366,11 @@ class CarouselPagerAdapterClassInner extends android.support.v4.view.PagerAdapte
 
 class CarouselPageChangedListener extends android.support.v4.view.ViewPager.SimpleOnPageChangeListener {
   private owner: WeakRef<Carousel>;
-  constructor() {
-    super();
-    return global.__native(this);
-  }
 
-  onInit(owner: WeakRef<Carousel>) {
+  constructor(owner: WeakRef<Carousel>) {
+    super();
     this.owner = owner;
-    return this;
+    return global.__native(this);
   }
 
   onPageSelected(position) {

@@ -2,7 +2,7 @@
 /// <reference path="./objc!DKCarouselView.d.ts" />
 
 import { screen } from 'tns-core-modules/platform';
-import * as builder from 'tns-core-modules/ui/builder';
+import { parse } from 'tns-core-modules/ui/builder';
 import { isNullOrUndefined, isNumber } from 'utils/types';
 import {
   autoPagingIntervalProperty,
@@ -76,7 +76,12 @@ export class Carousel extends CarouselCommon {
   }
 
   createNativeView() {
-    this.nativeView = new DKCarouselView(CGRectMake(0, 0, screen.mainScreen.widthDIPs, 0));
+    // this.nativeView = new DKCarouselView(CGRectMake(0, 0, screen.mainScreen.widthDIPs, 0));
+
+    // Brad - trying this ^^^ might be correct so can just bypass TS warning if so
+    this.nativeView = new DKCarouselView(
+      UIView.alloc().initWithFrame(CGRectMake(0, 0, screen.mainScreen.widthDIPs, 0))
+    );
     return this.nativeView;
   }
 
@@ -128,10 +133,11 @@ export class Carousel extends CarouselCommon {
   }
 
   onLoaded() {
-    super.onLoaded.call(this);
     if (this._isDirty) {
       this.refresh();
     }
+
+    super.onLoaded();
   }
 
   refresh() {
@@ -163,7 +169,7 @@ export class Carousel extends CarouselCommon {
       const length = this.items.length;
 
       for (let i = 0; i < length; i++) {
-        const viewToAdd = !isNullOrUndefined(this.itemTemplate) ? builder.parse(this.itemTemplate, this) : null;
+        const viewToAdd = !isNullOrUndefined(this.itemTemplate) ? parse(this.itemTemplate, this) : null;
         if (!viewToAdd) continue;
         const dataItem = this._getDataItem(i);
         viewToAdd.bindingContext = dataItem;

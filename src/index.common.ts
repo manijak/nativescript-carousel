@@ -1,12 +1,13 @@
 import { Color } from 'tns-core-modules/color/color';
 import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
-import { ContentView } from 'tns-core-modules/ui/content-view/content-view';
-import { booleanConverter, Property } from 'tns-core-modules/ui/core/view/view';
+import { booleanConverter, Property, Template, View } from 'tns-core-modules/ui/core/view';
 import {
   addWeakEventListener,
   removeWeakEventListener
 } from 'tns-core-modules/ui/core/weak-event-listener/weak-event-listener';
+import { Label } from 'tns-core-modules/ui/label';
 import { AbsoluteLayout } from 'tns-core-modules/ui/layouts/absolute-layout/absolute-layout';
+import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout';
 import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
 
 export class CarouselUtil {
@@ -72,7 +73,7 @@ export class CarouselCommon extends AbsoluteLayout {
   /**
    * Defines the view template for each slide-view to be generated.
    */
-  public itemTemplate;
+  public itemTemplate: string | Template;
 
   /**
    * Sets/Gets the active page by index
@@ -154,16 +155,25 @@ export class CarouselCommon extends AbsoluteLayout {
   constructor() {
     super();
   }
+
+  public _getDefaultItemContent(index: number): View {
+    const lbl = new Label();
+    lbl.bind({
+      targetProperty: 'text',
+      sourceProperty: '$value'
+    });
+    return lbl;
+  }
 }
 
-export class CarouselItem extends ContentView {
+export class CarouselItem extends StackLayout {
   constructor() {
     super();
     CLog(CLogTypes.info, `CarouselItem constructor...`);
   }
 
   onLoaded() {
-    super.onLoaded.call(this);
+    super.onLoaded();
   }
 }
 
@@ -176,7 +186,7 @@ export const itemTemplateProperty = new Property<CarouselCommon, any>({
   name: 'itemTemplate',
   affectsLayout: true,
   valueChanged: (view, oldValue, newValue) => {
-    view.refresh();
+    view.refresh(true);
   }
 });
 itemTemplateProperty.register(CarouselCommon);
@@ -184,17 +194,7 @@ itemTemplateProperty.register(CarouselCommon);
 export const itemsProperty = new Property<CarouselCommon, any>({
   name: 'items',
   affectsLayout: true,
-  valueChanged: (target, oldValue, newValue) => {
-    if (oldValue instanceof ObservableArray) {
-      removeWeakEventListener(oldValue, ObservableArray.changeEvent, target.onItemsChanged, target);
-    }
-    if (newValue instanceof ObservableArray) {
-      addWeakEventListener(newValue, ObservableArray.changeEvent, target.onItemsChanged, target);
-    }
-    if (!isNullOrUndefined(target.items) && isNumber(target.items.length)) {
-      target.refresh();
-    }
-  }
+  valueChanged: onItemsChanged
 });
 itemsProperty.register(CarouselCommon);
 
@@ -347,3 +347,17 @@ export const indicatorPaddingProperty = new Property<CarouselCommon, any>({
   }
 });
 indicatorPaddingProperty.register(CarouselCommon);
+
+function onItemsChanged(carousel: CarouselCommon, oldValue, newValue) {
+  if (oldValue instanceof ObservableArray) {
+    removeWeakEventListener(oldValue, ObservableArray.changeEvent, carousel.refresh, carousel);
+  }
+
+  if (newValue instanceof ObservableArray) {
+    addWeakEventListener(newValue, ObservableArray.changeEvent, carousel.refresh, carousel);
+  }
+
+  if (!isNullOrUndefined(carousel.items) && isNumber(carousel.items.length)) {
+    carousel.refresh(false);
+  }
+}
