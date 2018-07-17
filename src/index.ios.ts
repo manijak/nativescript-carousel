@@ -1,4 +1,5 @@
 /// <reference path="./node_modules/tns-platform-declarations/ios.d.ts" />
+/// <reference path="./objc!DKCarouselView.d.ts" />
 
 import { screen } from 'tns-core-modules/platform';
 import * as builder from 'tns-core-modules/ui/builder';
@@ -15,7 +16,7 @@ import {
   scrollEnabledProperty,
   selectedPageProperty,
   showIndicatorProperty
-} from './index-common';
+} from './index.common';
 
 export class Carousel extends CarouselCommon {
   public nativeView;
@@ -122,7 +123,7 @@ export class Carousel extends CarouselCommon {
     nativeView.setDidChangeBlock(null);
     nativeView.setDidScrollBlock(null);
     nativeView.setDidSelectBlock(null);
-    nativeView.setItems(new NSMutableArray());
+    nativeView.setItems(NSMutableArray.new());
     this.removeChildren();
   }
 
@@ -139,9 +140,10 @@ export class Carousel extends CarouselCommon {
       return;
     }
     this._isDirty = false;
-    this.nativeView.setItems(new NSMutableArray());
+    // this.nativeView.setItems(new NSMutableArray());
+    this.nativeView.setItems(NSMutableArray.new());
     if (isNullOrUndefined(this.items) || !isNumber(this.items.length)) {
-      const nsArray = new NSMutableArray();
+      const nsArray = NSMutableArray.new();
       this.eachChildView(view1 => {
         if (view1 instanceof CarouselItem) {
           view1.width = 100;
@@ -155,8 +157,11 @@ export class Carousel extends CarouselCommon {
       this.nativeView.setItems(nsArray);
     } else {
       this.removeChildren();
-      const nsArray = new NSMutableArray();
+
+      // const nsArray = new NSMutableArray();
+      const nsArray = NSMutableArray.new();
       const length = this.items.length;
+
       for (let i = 0; i < length; i++) {
         const viewToAdd = !isNullOrUndefined(this.itemTemplate) ? builder.parse(this.itemTemplate, this) : null;
         if (!viewToAdd) continue;
@@ -164,6 +169,7 @@ export class Carousel extends CarouselCommon {
         viewToAdd.bindingContext = dataItem;
         this.addChild(viewToAdd);
       }
+
       this.eachChildView(view => {
         if (view instanceof CarouselItem) {
           view.width = 100;

@@ -15,7 +15,7 @@ import {
   indicatorPaddingProperty,
   indicatorRadiusProperty,
   selectedPageProperty
-} from './index-common';
+} from './index.common';
 
 const VIEWS_STATES = '_viewStates';
 declare const com: any;

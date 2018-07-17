@@ -6,6 +6,7 @@ src/*.js
 *.log
 *.d.ts
 !index.d.ts
+!objc!DKCarouselView.d.ts
 demo/lib
 demo/*.d.ts
 demo/platforms

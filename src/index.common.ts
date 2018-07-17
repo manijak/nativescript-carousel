@@ -1,9 +1,12 @@
-import { Color } from 'tns-core-modules/color';
-import { ObservableArray } from 'tns-core-modules/data/observable-array';
-import { ContentView } from 'tns-core-modules/ui/content-view';
-import { booleanConverter, Property } from 'tns-core-modules/ui/core/view';
-import { addWeakEventListener, removeWeakEventListener } from 'tns-core-modules/ui/core/weak-event-listener';
-import { AbsoluteLayout } from 'tns-core-modules/ui/layouts/absolute-layout';
+import { Color } from 'tns-core-modules/color/color';
+import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
+import { ContentView } from 'tns-core-modules/ui/content-view/content-view';
+import { booleanConverter, Property } from 'tns-core-modules/ui/core/view/view';
+import {
+  addWeakEventListener,
+  removeWeakEventListener
+} from 'tns-core-modules/ui/core/weak-event-listener/weak-event-listener';
+import { AbsoluteLayout } from 'tns-core-modules/ui/layouts/absolute-layout/absolute-layout';
 import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
 
 export class CarouselUtil {
@@ -72,6 +75,10 @@ export class CarouselItem extends ContentView {
   onLoaded() {
     super.onLoaded.call(this);
   }
+}
+
+export namespace knownTemplates {
+  export const itemTemplate = 'itemTemplate';
 }
 
 // Common
