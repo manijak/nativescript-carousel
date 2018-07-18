@@ -177,6 +177,7 @@ export class Carousel extends CarouselCommon {
   }
 
   onLoaded() {
+    super.onLoaded();
     if (this.showIndicator !== false) {
       this._pagerIndicatorLayoutParams.height = android.support.v4.view.ViewPager.LayoutParams.WRAP_CONTENT;
       this._pagerIndicatorLayoutParams.width = android.support.v4.view.ViewPager.LayoutParams.MATCH_PARENT;
@@ -211,8 +212,6 @@ export class Carousel extends CarouselCommon {
       this._pageIndicatorView.setCount(this._childrenCount);
       this._pageIndicatorView.setSelection(this.selectedPage);
     }
-
-    super.onLoaded();
   }
 
   initNativeView() {
