@@ -16,15 +16,15 @@
                 </ns:CarouselItem>
 
                 <ns:CarouselItem id="slide2" backgroundColor="#6497b1" verticalAlignment="middle">
-                    <Label text="Slide 2" />
+                    <Label text="Slide 2" backgroundColor="#50000000" horizontalAlignment="center"/>
                 </ns:CarouselItem>
 
                 <ns:CarouselItem id="slide3" backgroundColor="#005b96" verticalAlignment="middle">
-                    <Label text="Slide 3" />
+                    <Label text="Slide 3" backgroundColor="#50000000" horizontalAlignment="center"/>
                 </ns:CarouselItem>
 
                 <ns:CarouselItem id="slide4" backgroundColor="#03396c" verticalAlignment="middle">
-                    <Label text="Slide 4" />
+                    <Label text="Slide 4" backgroundColor="#50000000" horizontalAlignment="center"/>
                 </ns:CarouselItem>
 
             </ns:Carousel>
