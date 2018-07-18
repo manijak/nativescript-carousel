@@ -1,10 +1,12 @@
 .DS_Store?
 ehthumbs.db
 Thumbs.db
+src/*.js
 *.js.map
 *.log
 *.d.ts
 !index.d.ts
+!objc!DKCarouselView.d.ts
 demo/lib
 demo/*.d.ts
 demo/platforms
