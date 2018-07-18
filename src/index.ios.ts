@@ -15,8 +15,12 @@ import {
   indicatorOffsetProperty,
   scrollEnabledProperty,
   selectedPageProperty,
-  showIndicatorProperty
+  showIndicatorProperty,
+  CLog,
+  CLogTypes
 } from './index.common';
+
+export * from './index.common';
 
 export class Carousel extends CarouselCommon {
   public nativeView;
@@ -86,6 +90,7 @@ export class Carousel extends CarouselCommon {
   }
 
   initNativeView() {
+    CLog(CLogTypes.info, `initNativeView...`, this.nativeView);
     const nativeView = this.nativeView;
     this._isDirty = true;
 
@@ -133,27 +138,30 @@ export class Carousel extends CarouselCommon {
   }
 
   onLoaded() {
+    CLog(CLogTypes.info, `onLoaded...`);
+    super.onLoaded();
+
     if (this._isDirty) {
       this.refresh();
     }
-
-    super.onLoaded();
   }
 
   refresh() {
+    CLog(CLogTypes.info, `refresh...`);
     if (!this.isLoaded || !this.nativeView) {
       this._isDirty = true;
       return;
     }
     this._isDirty = false;
-    // this.nativeView.setItems(new NSMutableArray());
     this.nativeView.setItems(NSMutableArray.new());
+
     if (isNullOrUndefined(this.items) || !isNumber(this.items.length)) {
       const nsArray = NSMutableArray.new();
+      CLog(CLogTypes.info, `children count: `, this.getChildrenCount());
       this.eachChildView(view1 => {
         if (view1 instanceof CarouselItem) {
-          view1.width = 100;
-          view1.height = 100;
+          view1.width = this.width;
+          view1.height = this.height;
           const dkCarouselViewItem1 = new DKCarouselViewItem();
           dkCarouselViewItem1.view = view1.ios;
           nsArray.addObject(dkCarouselViewItem1);
@@ -164,9 +172,9 @@ export class Carousel extends CarouselCommon {
     } else {
       this.removeChildren();
 
-      // const nsArray = new NSMutableArray();
       const nsArray = NSMutableArray.new();
       const length = this.items.length;
+      CLog(CLogTypes.info, `items length: `, length);
 
       for (let i = 0; i < length; i++) {
         const viewToAdd = !isNullOrUndefined(this.itemTemplate) ? parse(this.itemTemplate, this) : null;
@@ -178,8 +186,8 @@ export class Carousel extends CarouselCommon {
 
       this.eachChildView(view => {
         if (view instanceof CarouselItem) {
-          view.width = 100;
-          view.height = 100;
+          view.width = this.width;
+          view.height = this.height;
           const dkCarouselViewItem = new DKCarouselViewItem();
           dkCarouselViewItem.view = view.ios;
           nsArray.addObject(dkCarouselViewItem);
@@ -200,8 +208,3 @@ export class Carousel extends CarouselCommon {
     return this.items.getItem ? this.items.getItem(index) : this.items[index];
   }
 }
-
-// let knownTemplates;
-// (function(knownTemplates) {
-//   knownTemplates.itemTemplate = 'itemTemplate';
-// })((knownTemplates = exports.knownTemplates || (exports.knownTemplates = {})));

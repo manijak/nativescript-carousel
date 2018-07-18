@@ -17,13 +17,10 @@ import {
   selectedPageProperty
 } from './index.common';
 
+export * from './index.common';
+
 const VIEWS_STATES = '_viewStates';
 declare const com: any;
-
-// let knownTemplates;
-// (function(knownTemplates) {
-//   knownTemplates.itemTemplate = 'itemTemplate';
-// })((knownTemplates = exports.knownTemplates || (exports.knownTemplates = {})));
 
 export class Carousel extends CarouselCommon {
   private _androidViewId = -1;

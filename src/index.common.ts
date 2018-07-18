@@ -68,7 +68,7 @@ export class CarouselCommon extends AbsoluteLayout {
   /**
    * Assign a data-array to generate the slides and apply the bindingContext. If items is populated then you must use the template-option.
    */
-  public items: ObservableArray<CarouselItem>;
+  public items: ObservableArray<any>;
 
   /**
    * Defines the view template for each slide-view to be generated.
@@ -185,7 +185,7 @@ export namespace knownTemplates {
 export const itemTemplateProperty = new Property<CarouselCommon, any>({
   name: 'itemTemplate',
   affectsLayout: true,
-  valueChanged: (view, oldValue, newValue) => {
+  valueChanged: (view: any, oldValue, newValue) => {
     view.refresh(true);
   }
 });
@@ -348,16 +348,16 @@ export const indicatorPaddingProperty = new Property<CarouselCommon, any>({
 });
 indicatorPaddingProperty.register(CarouselCommon);
 
-function onItemsChanged(carousel: CarouselCommon, oldValue, newValue) {
+function onItemsChanged(view: any, oldValue, newValue) {
   if (oldValue instanceof ObservableArray) {
-    removeWeakEventListener(oldValue, ObservableArray.changeEvent, carousel.refresh, carousel);
+    removeWeakEventListener(oldValue, ObservableArray.changeEvent, view.refresh, view);
   }
 
   if (newValue instanceof ObservableArray) {
-    addWeakEventListener(newValue, ObservableArray.changeEvent, carousel.refresh, carousel);
+    addWeakEventListener(newValue, ObservableArray.changeEvent, view.refresh, view);
   }
 
-  if (!isNullOrUndefined(carousel.items) && isNumber(carousel.items.length)) {
-    carousel.refresh(false);
+  if (!isNullOrUndefined(view.items) && isNumber(view.items.length)) {
+    view.refresh(false);
   }
 }
