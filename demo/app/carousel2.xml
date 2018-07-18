@@ -16,10 +16,10 @@
            <ns:Carousel id="myCarousel" height="100%" width="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent"
                 android:indicatorAnimation="slide" items="{{ myDataArray }}" indicatorColor="#fff" indicatorOffset="0, 0" showIndicator="true">
                 <ns:Carousel.itemTemplate>
-                    <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}">
-                        <GridLayout rows="*" columns="*">
+                    <ns:CarouselItem backgroundColor="{{ color }}" verticalAlignment="middle">
+                        <GridLayout>
                             <Image src="{{ image }}" stretch="aspectFill" />
-                            <Label text="{{ title }}"  horizontalAlignment="center" verticalAlignment="center"/>
+                            <Label text="{{ title }}" horizontalAlignment="center" backgroundColor="#50000000" height="30" />
                         </GridLayout>
                     </ns:CarouselItem>
                 </ns:Carousel.itemTemplate>

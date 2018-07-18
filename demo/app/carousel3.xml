@@ -16,14 +16,14 @@
         </StackLayout>
 
         <GridLayout height="250">
-            <ns:Carousel id="myCarousel" height="250" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" 
+            <ns:Carousel id="myCarousel" height="100%" width="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" 
             items="{{ myDataArray }}" indicatorColor="#fff" indicatorColorUnselected="#50ffffff"
             ios:autoPagingInterval="3" android:indicatorAnimation="scale">
                 <ns:Carousel.itemTemplate>
-                    <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}">
-                         <GridLayout rows="*" columns="*">
+                    <ns:CarouselItem  verticalAlignment="middle" backgroundColor="{{ color }}">
+                         <GridLayout>
                             <Image src="{{ image }}" stretch="aspectFill" />
-                            <Label text="{{ title }}" horizontalAlignment="center" verticalAlignment="center" backgroundColor="#90000000" />
+                            <Label text="{{ title }}" horizontalAlignment="center" backgroundColor="#50000000" height="30" />
                         </GridLayout>
                     </ns:CarouselItem>
                 </ns:Carousel.itemTemplate>
