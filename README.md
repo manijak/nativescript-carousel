@@ -32,15 +32,18 @@ xmlns:ns="nativescript-carousel"
 #### Manually create each slide by using `CarouselItem`
 
 ```xml
-<ns:Carousel height="250" pageChanged="myChangeEvent">
-    <ns:CarouselItem id="slide1"  verticalAlignment="center" backgroundColor="#b3cde0">
-        <Label text="Slide 1" verticalAlignment="center" horizontalAlignment="center"/>
+<ns:Carousel height="100%" width="100%" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff000" finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap" color="white">                
+    <ns:CarouselItem id="slide1" backgroundColor="#b3cde0" verticalAlignment="middle">
+        <Label text="Slide 1" backgroundColor="#50000000" horizontalAlignment="center"/>
     </ns:CarouselItem>
-    <ns:CarouselItem id="slide2" verticalAlignment="center" backgroundColor="#6497b1">
-        <Label text="Slide 2" verticalAlignment="center" horizontalAlignment="center"/>
+    <ns:CarouselItem id="slide2" backgroundColor="#6497b1" verticalAlignment="middle">
+        <Label text="Slide 2" backgroundColor="#50000000" horizontalAlignment="center"/>
     </ns:CarouselItem>
-    <ns:CarouselItem id="slide3" verticalAlignment="center" backgroundColor="#005b96">
-        <Label text="Slide 3" verticalAlignment="center" horizontalAlignment="center"/>
+    <ns:CarouselItem id="slide3" backgroundColor="#005b96" verticalAlignment="middle">
+        <Label text="Slide 3" backgroundColor="#50000000" horizontalAlignment="center"/>
+    </ns:CarouselItem>
+    <ns:CarouselItem id="slide4" backgroundColor="#03396c" verticalAlignment="middle">
+        <Label text="Slide 4" backgroundColor="#50000000" horizontalAlignment="center"/>
     </ns:CarouselItem>
 </ns:Carousel>
 ```
@@ -48,11 +51,13 @@ xmlns:ns="nativescript-carousel"
 #### Or use a template by wrapping a single `CarouselItem` with `Carousel.itemTemplate` and assigning the `items` property with an array of data.
 
 ```xml
-<ns:Carousel items="{{ myDataArray }}" height="250" pageChanged="myChangeEvent" pageScrolling="myScrollingEvent">
+<ns:Carousel id="myCarousel" items="{{ myDataArray }}" height="100%" width="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" android:indicatorAnimation="slide"  indicatorColor="#fff" indicatorOffset="0,0" showIndicator="true">
     <ns:Carousel.itemTemplate>
-        <ns:CarouselItem  verticalAlignment="center" backgroundColor="{{ color }}" tap="myTapEvent">
-            <Label text="{{ title }}"  horizontalAlignment="center"/>
-            <Image src="{{ image }}" height="100" />
+        <ns:CarouselItem backgroundColor="{{ color }}" verticalAlignment="middle">
+            <GridLayout>
+                <Image src="{{ image }}" stretch="aspectFill" />
+                <Label text="{{ title }}" horizontalAlignment="center" backgroundColor="#50000000" height="30" />
+            </GridLayout>
         </ns:CarouselItem>
     </ns:Carousel.itemTemplate>
 </ns:Carousel>
@@ -169,6 +174,10 @@ Sets the pager-indicator dot padding.
 
 ## Changelog
 
+**4.0.0**
+- Mirgration to TypeScript, typings added (thanks @bradmartin)
+- Cleanup in demo app, added ng-demo (thanks @bradmartin)
+
 **3.1.1**
 
 - Made comaptible for recent TNS 3.2.x releases.
@@ -262,6 +271,7 @@ Sets the pager-indicator dot padding.
 
 ## Collaborators
 
+- [bradmartin](https://github.com/bradmartin)
 - [sitefinitysteve](https://github.com/sitefinitysteve)
 - [EddyVerbruggen](https://github.com/EddyVerbruggen)
 - [Pip3r4o](https://github.com/Pip3r4o)

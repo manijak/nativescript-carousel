@@ -57,7 +57,11 @@
     "Android",
     "manijak"
   ],
-  "author": "Nedim Erkocevic <nedim@fkzeljo.com> (https://github.com/manijak)",
+  "author": {
+    "name": "Nedim Erkocevic",
+    "email": "nedim@fkzeljo.com",
+    "url": "https://github.com/manijak"
+  },
   "contributors": [
     {
       "name": "Brad Martin",
