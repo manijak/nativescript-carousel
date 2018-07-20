@@ -94,6 +94,9 @@ export class Carousel extends CarouselCommon {
       case 'SCALE':
         animationType = com.rd.animation.type.AnimationType.SCALE;
         break;
+      // case 'SCALE_DOWN':
+      //   animationType = com.rd.animation.type.AnimationType.SCALE_DOWN;
+      //   break;
       case 'FILL':
         animationType = com.rd.animation.type.AnimationType.FILL;
         break;
@@ -274,7 +277,6 @@ class CarouselPagerAdapterClassInner extends android.support.v4.view.PagerAdapte
   }
 
   getCount() {
-    CLog(CLogTypes.info, `CarouselPagerAdapterClassInner getCount...`);
     let result;
     if (isNullOrUndefined(this.owner.get().items) || !isNumber(this.owner.get().items.length)) {
       result = this.owner ? this.owner.get()._childrenCount : 0;
@@ -286,12 +288,10 @@ class CarouselPagerAdapterClassInner extends android.support.v4.view.PagerAdapte
   }
 
   getItemPosition(item) {
-    CLog(CLogTypes.info, `CarouselPagerAdapterClassInner getItemPosition...`);
     return android.support.v4.view.PagerAdapter.POSITION_NONE;
   }
 
   isViewFromObject(view, _object) {
-    CLog(CLogTypes.info, `CarouselPagerAdapterClassInner isViewFromObject...`);
     return view === _object;
   }
 
