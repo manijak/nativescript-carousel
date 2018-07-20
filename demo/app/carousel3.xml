@@ -1,40 +1,39 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" xmlns:ns="nativescript-carousel">
-<Page.actionBar>
-    <ActionBar title="Features"></ActionBar>
-</Page.actionBar>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" 
+    xmlns:ns="nativescript-carousel">
+    <Page.actionBar>
+        <ActionBar title="Features"></ActionBar>
+    </Page.actionBar>
 
-<ScrollView>
-    <StackLayout>
-        <StackLayout android:visibility="collapsed" >
-            <Label text="Here auto-paging is enabled with an interval of 3 seconds." textWrap="true" margin="10,5,0,5"/>
-            <Label text="You can also capture the tap and change events." textWrap="true" margin="10,5,0,5"/>
-            <Label text="Page-indicator can be turned on/off and its color changed" textWrap="true" margin="10,5,20,5"/>
+    <ScrollView>
+        <StackLayout>
+            <StackLayout android:visibility="collapsed">
+                <Label text="Here auto-paging is enabled with an interval of 3 seconds." textWrap="true" margin="10,5,0,5"/>
+                <Label text="You can also capture the tap and change events." textWrap="true" margin="10,5,0,5"/>
+                <Label text="Page-indicator can be turned on/off and its color changed" textWrap="true" margin="10,5,20,5"/>
+            </StackLayout>
+            <StackLayout ios:visibility="collapsed">
+                <Label text="You can also capture the change events." textWrap="true" margin="10,5,0,5"/>
+                <Label text="Page-indicator can have different animations and change color" textWrap="true" margin="10,5,20,5"/>
+            </StackLayout>
+
+            <GridLayout height="250">
+                <ns:Carousel id="myCarousel" height="100%" width="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" items="{{ myDataArray }}" indicatorColor="#fff" indicatorColorUnselected="#50ffffff" ios:autoPagingInterval="3" android:indicatorAnimation="scale">
+                    <ns:Carousel.itemTemplate>
+                        <ns:CarouselItem verticalAlignment="middle" backgroundColor="{{ color }}">
+                            <GridLayout>
+                                <Image src="{{ image }}" stretch="aspectFill" />
+                                <Label text="{{ title }}" horizontalAlignment="center" backgroundColor="#50000000" height="30" />
+                            </GridLayout>
+                        </ns:CarouselItem>
+                    </ns:Carousel.itemTemplate>
+                </ns:Carousel>
+            </GridLayout>
+            <Label text="Indicator animation type: 'scale'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"/>
+
+            <Button text="Toggle indicator" tap="toggleIndicator" margin="10,10,0,10" android:visibility="collapsed"/>
+            <Button text="Toggle indicator color" tap="toggleColor" margin="10,10,0,10"/>
+            <Label text="{{ changeEventText }}" textWrap="true" margin="10,0,0,0"/>
+            <Label text="{{ tappedViewText }}" textWrap="true" margin="0,0,0,0"/>
         </StackLayout>
-        <StackLayout ios:visibility="collapsed" >
-            <Label text="You can also capture the change events." textWrap="true" margin="10,5,0,5"/>
-            <Label text="Page-indicator can have different animations and change color" textWrap="true" margin="10,5,20,5"/>
-        </StackLayout>
-
-        <GridLayout height="250">
-            <ns:Carousel id="myCarousel" height="100%" width="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" 
-            items="{{ myDataArray }}" indicatorColor="#fff" indicatorColorUnselected="#50ffffff"
-            ios:autoPagingInterval="3" android:indicatorAnimation="scale">
-                <ns:Carousel.itemTemplate>
-                    <ns:CarouselItem  verticalAlignment="middle" backgroundColor="{{ color }}">
-                         <GridLayout>
-                            <Image src="{{ image }}" stretch="aspectFill" />
-                            <Label text="{{ title }}" horizontalAlignment="center" backgroundColor="#50000000" height="30" />
-                        </GridLayout>
-                    </ns:CarouselItem>
-                </ns:Carousel.itemTemplate>
-            </ns:Carousel>    
-        </GridLayout>
-        <Label text="Indicator animation type: 'scale'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"/>
-
-        <Button text="Toggle indicator" tap="toggleIndicator" margin="10,10,0,10" android:visibility="collapsed"/>
-        <Button text="Toggle indicator color" tap="toggleColor" margin="10,10,0,10"/>
-        <Label text="{{ changeEventText }}" textWrap="true" margin="10,0,0,0"/>
-        <Label text="{{ tappedViewText }}" textWrap="true" margin="0,0,0,0"/>
-    </StackLayout>    
-</ScrollView>
+    </ScrollView>
 </Page>

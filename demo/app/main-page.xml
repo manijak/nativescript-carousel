@@ -1,14 +1,14 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
-<Page.actionBar>
-	<ActionBar title="Carousel"></ActionBar>
-</Page.actionBar>
+  <Page.actionBar>
+    <ActionBar title="Carousel"></ActionBar>
+  </Page.actionBar>
 
-<StackLayout>
-  <Label text="Tap buttons to see Carousel in action" textWrap="true" margin="10,0,20,0"/>
-  
-  <Button text="Static Carousel" tap="carousel1" />
-  <Button text="Dynamic Carousel" tap="carousel2" />
-  <Button text="Advanced Carousel" tap="carousel3" />
+  <StackLayout>
+    <Label text="Tap buttons to see Carousel in action" textWrap="true" margin="10,0,20,0"/>
 
-</StackLayout>
+    <Button text="Static Carousel" tap="carousel1" />
+    <Button text="Dynamic Carousel" tap="carousel2" />
+    <Button text="Advanced Carousel" tap="carousel3" />
+
+  </StackLayout>
 </Page>

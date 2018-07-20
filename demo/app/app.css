@@ -1,12 +1,12 @@
-﻿Button {
-    background-color: #415677;
-    color: white;
-    margin: 0 10 15 10;
-    border-color:#000;
-    border-width: 1;
-    border-radius: 2;
-    padding: 4;
+﻿button {
+  background-color: #415677;
+  color: white;
+  margin: 0 10 15 10;
+  border-color: #000;
+  border-width: 1;
+  border-radius: 2;
+  padding: 4;
 }
-Label{
-    text-align: center;
+label {
+  text-align: center;
 }
