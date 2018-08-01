@@ -6,7 +6,7 @@ import {
   removeWeakEventListener
 } from 'tns-core-modules/ui/core/weak-event-listener/weak-event-listener';
 import { Label } from 'tns-core-modules/ui/label';
-import { AbsoluteLayout } from 'tns-core-modules/ui/layouts/absolute-layout/absolute-layout';
+import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
 import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout';
 import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
 
@@ -34,7 +34,7 @@ export const CLog = (type: CLogTypes = 0, ...args) => {
   }
 };
 
-export class CarouselCommon extends AbsoluteLayout {
+export class CarouselCommon extends GridLayout {
   /**
    * String value when hooking into the pageChanged event.
    */
