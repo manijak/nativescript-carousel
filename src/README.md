@@ -174,9 +174,12 @@ Sets the pager-indicator dot padding.
 
 ## Changelog
 
+**4.0.2**
+- Carousel now extends from GridLayout instead of AbsoluteLayout (better positioning). (Thanks @bradmartin)
+
 **4.0.0**
-- Mirgration to TypeScript, typings added (thanks @bradmartin)
-- Cleanup in demo app, added ng-demo (thanks @bradmartin)
+- Mirgration to TypeScript, typings added (Thanks @bradmartin)
+- Cleanup in demo app, added ng-demo (Thanks @bradmartin)
 
 **3.1.1**
 
