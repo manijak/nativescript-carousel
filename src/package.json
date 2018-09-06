@@ -2,7 +2,7 @@
   "name": "@essent/nativescript-carousel",
   "description": "Carousel component for NativeScript (iOS & Android).",
   "main": "index",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "typings": "index.d.ts",
   "nativescript": {
     "platforms": {
