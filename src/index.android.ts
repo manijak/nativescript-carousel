@@ -191,7 +191,7 @@ export class Carousel extends CarouselCommon {
       const x = ar[0] ? Number(ar[0]) : 0;
       const y = ar[1] ? Number(ar[1]) : 0;
 
-      const defaultVerticalMargin = 50;
+      const defaultVerticalMargin = 25;
       const verticalOffset = layout.toDevicePixels(defaultVerticalMargin + (y < 0 ? Math.abs(y) : -Math.abs(y))); // Reverse +- to be the same as ios
       const horizontalOffset = layout.toDevicePixels(x);
 
