@@ -191,14 +191,14 @@ export const itemTemplateProperty = new Property<CarouselCommon, any>({
 });
 itemTemplateProperty.register(CarouselCommon);
 
-export const itemsProperty = new Property<CarouselCommon, any>({
+export const itemsProperty = new Property<CarouselCommon, ObservableArray<any>>({
   name: 'items',
   affectsLayout: true,
   valueChanged: onItemsChanged
 });
 itemsProperty.register(CarouselCommon);
 
-export const selectedPageProperty = new Property<CarouselCommon, any>({
+export const selectedPageProperty = new Property<CarouselCommon, number>({
   name: 'selectedPage',
   defaultValue: 0,
   valueConverter: value => {
@@ -210,7 +210,7 @@ export const selectedPageProperty = new Property<CarouselCommon, any>({
 });
 selectedPageProperty.register(CarouselCommon);
 
-export const showIndicatorProperty = new Property<CarouselCommon, any>({
+export const showIndicatorProperty = new Property<CarouselCommon, boolean>({
   name: 'showIndicator',
   defaultValue: true,
   valueConverter: booleanConverter,
@@ -220,7 +220,7 @@ export const showIndicatorProperty = new Property<CarouselCommon, any>({
 });
 showIndicatorProperty.register(CarouselCommon);
 
-export const indicatorColorProperty = new Property<CarouselCommon, any>({
+export const indicatorColorProperty = new Property<CarouselCommon, Color>({
   name: 'indicatorColor',
   equalityComparer: Color.equals,
   valueConverter: value => {
@@ -232,7 +232,7 @@ export const indicatorColorProperty = new Property<CarouselCommon, any>({
 });
 indicatorColorProperty.register(CarouselCommon);
 
-export const indicatorColorUnselectedProperty = new Property<CarouselCommon, any>({
+export const indicatorColorUnselectedProperty = new Property<CarouselCommon, Color>({
   name: 'indicatorColorUnselected',
   equalityComparer: Color.equals,
   valueConverter: value => {
@@ -254,7 +254,7 @@ export const indicatorOffsetProperty = new Property<CarouselCommon, any>({
 indicatorOffsetProperty.register(CarouselCommon);
 
 // iOS only
-export const autoPagingIntervalProperty = new Property<CarouselCommon, any>({
+export const autoPagingIntervalProperty = new Property<CarouselCommon, number>({
   name: 'autoPagingInterval',
   defaultValue: 0,
   valueConverter: value => {
@@ -266,7 +266,7 @@ export const autoPagingIntervalProperty = new Property<CarouselCommon, any>({
 });
 autoPagingIntervalProperty.register(CarouselCommon);
 
-export const finiteProperty = new Property<CarouselCommon, any>({
+export const finiteProperty = new Property<CarouselCommon, boolean>({
   name: 'finite',
   valueConverter: booleanConverter,
   valueChanged: (view, oldValue, newValue) => {
@@ -275,7 +275,7 @@ export const finiteProperty = new Property<CarouselCommon, any>({
 });
 finiteProperty.register(CarouselCommon);
 
-export const bounceProperty = new Property<CarouselCommon, any>({
+export const bounceProperty = new Property<CarouselCommon, boolean>({
   name: 'bounce',
   valueConverter: booleanConverter,
   valueChanged: (view, oldValue, newValue) => {
@@ -284,7 +284,7 @@ export const bounceProperty = new Property<CarouselCommon, any>({
 });
 bounceProperty.register(CarouselCommon);
 
-export const scrollEnabledProperty = new Property<CarouselCommon, any>({
+export const scrollEnabledProperty = new Property<CarouselCommon, boolean>({
   name: 'scrollEnabled',
   valueConverter: booleanConverter,
   valueChanged: (view, oldValue, newValue) => {
@@ -294,7 +294,7 @@ export const scrollEnabledProperty = new Property<CarouselCommon, any>({
 scrollEnabledProperty.register(CarouselCommon);
 
 // Android only
-export const indicatorAnimationProperty = new Property<CarouselCommon, any>({
+export const indicatorAnimationProperty = new Property<CarouselCommon, IndicatorAnimation>({
   name: 'indicatorAnimation',
   affectsLayout: true,
   valueChanged: (view, oldValue, newValue) => {
@@ -303,7 +303,7 @@ export const indicatorAnimationProperty = new Property<CarouselCommon, any>({
 });
 indicatorAnimationProperty.register(CarouselCommon);
 
-export const indicatorAnimationDurationProperty = new Property<CarouselCommon, any>({
+export const indicatorAnimationDurationProperty = new Property<CarouselCommon, number>({
   name: 'indicatorAnimationDuration',
   affectsLayout: true,
   valueConverter: value => {
@@ -324,7 +324,7 @@ export const indicatorAlignmentProperty = new Property<CarouselCommon, any>({
 });
 indicatorAlignmentProperty.register(CarouselCommon);
 
-export const indicatorRadiusProperty = new Property<CarouselCommon, any>({
+export const indicatorRadiusProperty = new Property<CarouselCommon, number>({
   name: 'indicatorRadius',
   affectsLayout: true,
   valueConverter: value => {
@@ -336,7 +336,7 @@ export const indicatorRadiusProperty = new Property<CarouselCommon, any>({
 });
 indicatorRadiusProperty.register(CarouselCommon);
 
-export const indicatorPaddingProperty = new Property<CarouselCommon, any>({
+export const indicatorPaddingProperty = new Property<CarouselCommon, number>({
   name: 'indicatorPadding',
   affectsLayout: true,
   valueConverter: value => {
