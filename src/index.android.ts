@@ -51,6 +51,17 @@ export class Carousel extends CarouselCommon {
     return this.nativeView;
   }
 
+  get adapter(): android.support.v4.view.PagerAdapter {
+    return this.android.getAdapter();
+  }
+
+  set pageIndicatorCount(value: number) {
+    if (value) {
+        this.adapter.notifyDataSetChanged();
+        this._pageIndicatorView.setCount(value);
+    }
+  }
+
   [indicatorColorProperty.setNative](value) {
     CLog(CLogTypes.info, `indicatorColorProperty.setNative value = ${value}`);
     if (!value) {
