@@ -374,5 +374,6 @@ export enum IndicatorAnimation {
   // 'SCALE_DOWN' = 'SCALE_DOWN', // available with native lib 1.0.0 version
   'THIN_WORM' = 'THIN_WORM',
   'DROP' = 'DROP',
-  'SWAP' = 'SWAP'
+  'SWAP' = 'SWAP',
+  'FILL' = 'FILL'
 }
