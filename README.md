@@ -32,7 +32,7 @@ xmlns:ns="nativescript-carousel"
 #### Manually create each slide by using `CarouselItem`
 
 ```xml
-<ns:Carousel height="100%" width="100%" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff000" finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap" color="white">                
+<ns:Carousel height="100%" width="100%" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff000" finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap" color="white">
     <ns:CarouselItem id="slide1" backgroundColor="#b3cde0" verticalAlignment="middle">
         <Label text="Slide 1" backgroundColor="#50000000" horizontalAlignment="center"/>
     </ns:CarouselItem>
@@ -156,6 +156,10 @@ Sets the pager-indicator dot radius.
 
 Sets the pager-indicator dot padding.
 
+- **pageIndicatorCount**
+
+Set the indicator count which will change the underlying Android data adapter. See issue [#5 discussion](https://github.com/manijak/nativescript-carousel/issues/5#issuecomment-414993988)
+
 ## Demo
 
 | iOS                                                                                              | Android                                                                                                  |
@@ -174,9 +178,18 @@ Sets the pager-indicator dot padding.
 
 ## Changelog
 
+**4.1.0**
+
+- Added setter for `pageIndicatorCount` for Android to enable dynamically changing the length of the carousel items array without Android throwing a crash about the adapster set changing incorrectly.
+
+**4.0.2**
+
+- Carousel now extends from GridLayout instead of AbsoluteLayout (better positioning). (Thanks @bradmartin)
+
 **4.0.0**
-- Mirgration to TypeScript, typings added (thanks @bradmartin)
-- Cleanup in demo app, added ng-demo (thanks @bradmartin)
+
+- Mirgration to TypeScript, typings added (Thanks @bradmartin)
+- Cleanup in demo app, added ng-demo (Thanks @bradmartin)
 
 **3.1.1**
 

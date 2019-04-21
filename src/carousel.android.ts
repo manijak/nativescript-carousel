@@ -2,6 +2,7 @@ import { parse } from 'tns-core-modules/ui/builder';
 import { View } from 'tns-core-modules/ui/core/view';
 import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
 import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
+import { layout } from 'tns-core-modules/utils/utils';
 
 import {
   CarouselCommon,
@@ -46,6 +47,17 @@ export class Carousel extends CarouselCommon {
 
   get android(): any {
     return this.nativeView;
+  }
+
+  get adapter(): android.support.v4.view.PagerAdapter {
+    return this.android.getAdapter();
+  }
+
+  set pageIndicatorCount(value: number) {
+    if (value) {
+        this.adapter.notifyDataSetChanged();
+        this._pageIndicatorView.setCount(value);
+    }
   }
 
   [indicatorColorProperty.setNative](value) {
@@ -188,9 +200,9 @@ export class Carousel extends CarouselCommon {
       const x = ar[0] ? Number(ar[0]) : 0;
       const y = ar[1] ? Number(ar[1]) : 0;
 
-      const defaultVerticalMargin = 50;
-      const verticalOffset = defaultVerticalMargin + (y < 0 ? Math.abs(y) : -Math.abs(y)); // Reverse +- to be the same as ios
-      const horizontalOffset = x;
+      const defaultVerticalMargin = 25;
+      const verticalOffset = layout.toDevicePixels(defaultVerticalMargin + (y < 0 ? Math.abs(y) : -Math.abs(y))); // Reverse +- to be the same as ios
+      const horizontalOffset = layout.toDevicePixels(x);
 
       if (this.indicatorAlignment === 'TOP') {
         this._pagerIndicatorLayoutParams.setMargins(horizontalOffset, verticalOffset, 0, 0);
