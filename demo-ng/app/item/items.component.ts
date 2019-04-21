@@ -1,9 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Carousel, IndicatorAnimation } from 'nativescript-carousel';
 import { isAndroid } from 'tns-core-modules/platform';
-import { alert } from 'tns-core-modules/ui/dialogs';
-import { Item } from './item';
-import { ItemService } from './item.service';
 
 @Component({
   selector: 'ns-items',
@@ -12,19 +9,15 @@ import { ItemService } from './item.service';
 })
 export class ItemsComponent implements OnInit, AfterViewInit {
   @ViewChild('carousel') carouselRef: ElementRef;
-  items: Item[];
 
-  // This pattern makes use of Angular’s dependency injection implementation to inject an instance of the ItemService service into this class.
-  // Angular knows about this service because it is included in your app’s main NgModule, defined in app.module.ts.
-  constructor(private itemService: ItemService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.items = this.itemService.getItems();
-  }
+  ngOnInit(): void { }
 
   ngAfterViewInit() {
     const carousel = this.carouselRef.nativeElement as Carousel;
-    if (isAndroid) {
+
+    /* if (isAndroid) {
       setTimeout(() => {
         carousel.indicatorAnimation = IndicatorAnimation.WORM;
         alert({
@@ -32,6 +25,6 @@ export class ItemsComponent implements OnInit, AfterViewInit {
           okButtonText: 'Okay'
         });
       }, 5000);
-    }
+    } */
   }
 }
