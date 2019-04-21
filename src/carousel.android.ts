@@ -1,9 +1,8 @@
-/// <reference path="./node_modules/tns-platform-declarations/android.d.ts" />
-
 import { parse } from 'tns-core-modules/ui/builder';
 import { View } from 'tns-core-modules/ui/core/view';
 import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
 import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
+
 import {
   CarouselCommon,
   CLog,
@@ -15,9 +14,9 @@ import {
   indicatorPaddingProperty,
   indicatorRadiusProperty,
   selectedPageProperty
-} from './index.common';
+} from './carousel.common';
 
-export * from './index.common';
+export * from './carousel.common';
 
 const VIEWS_STATES = '_viewStates';
 declare const com: any;

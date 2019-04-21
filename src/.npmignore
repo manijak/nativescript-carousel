@@ -1,21 +1,6 @@
-# generated files
-*.webinfo
-.vs
-.vs/
-.vscode
-.vscode/
-demo/
-node_modules/
-scripts/
-screenshots/
-.sln
-*.sln
-*.png
-CONTRIBUTING.md
-*.ts
-!index.d.ts
 *.map
+*.ts
+!carousel.d.ts
+!platforms/ios/typings/*.ts
 tsconfig.json
-*.log
-*.gif
-tslint.json
+scripts

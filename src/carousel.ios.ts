@@ -1,9 +1,6 @@
-/// <reference path="./node_modules/tns-platform-declarations/ios.d.ts" />
-/// <reference path="./objc!DKCarouselView.d.ts" />
-
 import { screen } from 'tns-core-modules/platform';
 import { parse } from 'tns-core-modules/ui/builder';
-import { isNullOrUndefined, isNumber } from 'utils/types';
+import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
 import {
   autoPagingIntervalProperty,
   bounceProperty,
@@ -18,9 +15,9 @@ import {
   showIndicatorProperty,
   CLog,
   CLogTypes
-} from './index.common';
+} from './carousel.common';
 
-export * from './index.common';
+export * from './carousel.common';
 
 export class Carousel extends CarouselCommon {
   public nativeView;
