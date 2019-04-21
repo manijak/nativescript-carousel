@@ -19,7 +19,7 @@ exports.pageLoaded = args => {
   myCarousel = page.getViewById('myCarousel');
 
   // Change the indicator animation on Android after 5 seconds
-  setTimeout(() => {
+  /* setTimeout(() => {
     if (isAndroid) {
       myCarousel.indicatorAnimation = IndicatorAnimation.THIN_WORM;
       dialogs.alert({
@@ -27,7 +27,7 @@ exports.pageLoaded = args => {
         okButtonText: 'Okay'
       });
     }
-  }, 5000);
+  }, 5000); */
 };
 
 exports.myChangeEvent = args => {

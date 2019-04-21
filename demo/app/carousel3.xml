@@ -17,7 +17,9 @@
             </StackLayout>
 
             <GridLayout height="250">
-                <ns:Carousel id="myCarousel" height="100%" width="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" items="{{ myDataArray }}" indicatorColor="#fff" indicatorColorUnselected="#50ffffff" ios:autoPagingInterval="3" android:indicatorAnimation="scale">
+                <ns:Carousel id="myCarousel" height="100%" width="100%" color="white" 
+                    pageChanged="myChangeEvent" pageTapped="mySelectedEvent" items="{{ myDataArray }}" 
+                    indicatorColor="#fff" indicatorColorUnselected="#50ffffff" ios:autoPagingInterval="3" android:indicatorAnimation="THIN_WORM">
                     <ns:Carousel.itemTemplate>
                         <ns:CarouselItem verticalAlignment="middle" backgroundColor="{{ color }}">
                             <GridLayout>
@@ -28,7 +30,7 @@
                     </ns:Carousel.itemTemplate>
                 </ns:Carousel>
             </GridLayout>
-            <Label text="Indicator animation type: 'scale'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"/>
+            <Label text="Indicator animation type: 'THIN_WORM'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"/>
 
             <Button text="Toggle indicator" tap="toggleIndicator" margin="10,10,0,10" android:visibility="collapsed"/>
             <Button text="Toggle indicator color" tap="toggleColor" margin="10,10,0,10"/>
