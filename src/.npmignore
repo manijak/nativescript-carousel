@@ -1,6 +1,6 @@
 *.map
 *.ts
+*.d.ts
 !carousel.d.ts
-!platforms/ios/typings/*.ts
 tsconfig.json
 scripts
