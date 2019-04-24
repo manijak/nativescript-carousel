@@ -1,4 +1,4 @@
-import * as common from './index.common';
+import * as common from './carousel.common';
 import { Color } from 'tns-core-modules/color/color';
 import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
 import { Property, Template, View } from 'tns-core-modules/ui/core/view';

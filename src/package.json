@@ -89,9 +89,9 @@
     "semver": "^6.0.0"
   },
   "lint-staged": {
-		"*.ts, *.js, *.css, *.scss, *.md": [
-			"prettier --write",
-			"git add"
-		]
-	}
+    "*.ts, *.js, *.css, *.scss, *.md": [
+      "prettier --write",
+      "git add"
+    ]
+  }
 }

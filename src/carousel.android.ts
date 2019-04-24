@@ -183,7 +183,6 @@ export class Carousel extends CarouselCommon {
     CLog(CLogTypes.info, `this._pageIndicatorView = ${this._pageIndicatorView}`);
 
     this.nativeView.setAdapter(this.CarouselPagerAdapterClass);
-
     this.nativeView.setOnPageChangeListener(this.CarouselPageChangedListenerClass);
 
     CLog(CLogTypes.info, `Carousel createNativeView returning this.nativeView = ${this.nativeView}`);
@@ -229,6 +228,7 @@ export class Carousel extends CarouselCommon {
   }
 
   initNativeView() {
+    CLog(CLogTypes.info, `initNativeView...`);
     this.refresh();
   }
 
@@ -391,7 +391,7 @@ class CarouselPageChangedListener extends android.support.v4.view.ViewPager.Simp
   }
 
   onPageScrollStateChanged(state) {
-    CLog(CLogTypes.info, `CarouselPageChangedListener onPageScrollStateChanged...`);
+    //CLog(CLogTypes.info, `CarouselPageChangedListener onPageScrollStateChanged...`);
     this.owner.get().notify({
       eventName: CarouselCommon.pageScrollStateChangedEvent,
       object: this.owner.get(),
@@ -400,7 +400,7 @@ class CarouselPageChangedListener extends android.support.v4.view.ViewPager.Simp
   }
 
   onPageScrolled(position, positionOffset, positionOffsetPixels) {
-    CLog(CLogTypes.info, `CarouselPageChangedListener onPageScrolled...`);
+    //CLog(CLogTypes.info, `CarouselPageChangedListener onPageScrolled...`);
     const data = {
       eventName: CarouselCommon.pageScrollingEvent,
       object: this.owner.get(),
