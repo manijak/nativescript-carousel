@@ -14,6 +14,7 @@ export class CarouselAdvancedComponent implements OnInit, AfterViewInit {
     items: SlideItem[];
     currentPage: number = 1;
     tappedPage: number = 0;
+    indicatorEnabled: boolean = true;
 
     carouselView: Carousel;
     constructor(private itemService: ItemService) { }
@@ -29,6 +30,11 @@ export class CarouselAdvancedComponent implements OnInit, AfterViewInit {
     toggleColor():void {
         this.carouselView.indicatorColor = '#FED700';
         this.carouselView.indicatorColorUnselected = '#50FED700';
+    }
+
+    toggleIndicator(): void{
+        this.carouselView.showIndicator = !this.indicatorEnabled;
+        this.indicatorEnabled = !this.indicatorEnabled;
     }
 
     pageChangedEvent(args: any):void{
