@@ -8,14 +8,14 @@ import { isAndroid } from 'tns-core-modules/platform';
   templateUrl: './items.component.html'
 })
 export class ItemsComponent implements OnInit, AfterViewInit {
-  @ViewChild('carousel') carouselRef: ElementRef;
+  //@ViewChild('carousel') carouselRef: ElementRef;
 
   constructor() {}
 
   ngOnInit(): void { }
 
   ngAfterViewInit() {
-    const carousel = this.carouselRef.nativeElement as Carousel;
+    //const carousel = this.carouselRef.nativeElement as Carousel;
 
     /* if (isAndroid) {
       setTimeout(() => {

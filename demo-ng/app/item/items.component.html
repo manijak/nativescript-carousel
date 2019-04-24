@@ -1,22 +1,11 @@
 <ActionBar title="Angular Carousel App" class="action-bar">
 </ActionBar>
-<GridLayout rows="40, auto, 300, 50">
-    <Label row="0" text="Text on the page in row 1 of grid" color="green" textWrap="true"></Label>
 
-    <!-- Carousel - wrapped in grid to show indicators on android -->
-    <GridLayout row="2">
-        <Carousel #carousel showIndicator="true" ios:indicatorOffset="0,-10" ios:finite="true" ios:bounce="true" android:indicatorAnimation="THIN_WORM"
-            indicatorColor="#66ccff" indicatorColorUnselected="#cceeff" backgroundColor="blue">
+<StackLayout>
+    <Label text="Tap buttons to see Carousel in action" textWrap="true" margin="10,0,20,0"></Label>
 
-            <CarouselItem backgroundColor="green" width="100%">
-                <Label class="h2 text-center" color="white" textWrap="true" text="Page 1"></Label>
-            </CarouselItem>
-            <CarouselItem backgroundColor="orange">
-                <Label class="h2 text-center" color="white" textWrap="true" text="Page 2"></Label>
-            </CarouselItem>
+    <Button text="Static Carousel" [nsRouterLink]="['/static']" pageTransition="slide"></Button>
+    <Button text="Dynamic Carousel" [nsRouterLink]="['/dynamic']" pageTransition="slide"></Button>
+    <Button text="Advanced Carousel" [nsRouterLink]="['/advanced']" pageTransition="slide"></Button>
 
-        </Carousel>
-    </GridLayout>
-
-    <!-- <Label row="3" text="After 5 seconds the indicator animation will change to WORM on ANDROID" textWrap="true"></Label> -->
-</GridLayout>
+  </StackLayout>

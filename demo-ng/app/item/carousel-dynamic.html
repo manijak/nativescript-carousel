@@ -1,0 +1,32 @@
+<ActionBar title="Carousel - Dynamic views" class="action-bar"></ActionBar>
+<ScrollView>
+    <StackLayout>
+        <Label text="Define a template and assign the 'items' array." textWrap="true" margin="10,0,0,0"></Label>
+        <Label text="Also works well innside a ScrollView." textWrap="true" margin="0,0,20,0"></Label>
+
+        <StackLayout height="100" verticalAlignment="center">
+            <Label text="Some content here..." textWrap="true"></Label>
+        </StackLayout>
+
+        <GridLayout height="250">
+            <ns:Carousel #dynamicCarousel height="100%" width="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" 
+                android:indicatorAnimation="slide" indicatorColor="#fff" indicatorOffset="0, -10" showIndicator="true">
+
+                    <ns:CarouselItem *ngFor="let item of items" [backgroundColor]="item.color" verticalAlignment="middle">
+                        <GridLayout>
+                            <Image [src]="item.image" stretch="aspectFill"></Image>
+                            <Label [text]="item.title" horizontalAlignment="center" backgroundColor="#50000000" height="30"></Label>
+                        </GridLayout>
+                    </ns:CarouselItem>
+                    
+            </ns:Carousel>
+        </GridLayout>
+
+        <Label text="Indicator animation type: 'slide'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"></Label>
+
+        <Button text="Select page 3" (tap)="selectPage()" margin="10,10,0,10"></Button>
+        <StackLayout height="400" margin="10,0,0,0">
+            <Label text="Some content here... this is a ScrollView" textWrap="true"></Label>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

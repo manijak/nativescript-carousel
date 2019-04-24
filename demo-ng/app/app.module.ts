@@ -2,7 +2,9 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
-import { ItemDetailComponent } from './item/item-detail.component';
+import { CarouselStaticComponent } from './item/carousel-static.component';
+import { CarouselDynamicComponent } from './item/carousel-dynamic.component';
+import { CarouselAdvancedComponent } from './item/carousel-advanced.component';
 import { ItemService } from './item/item.service';
 import { ItemsComponent } from './item/items.component';
 
@@ -15,7 +17,7 @@ import { ItemsComponent } from './item/items.component';
 @NgModule({
   bootstrap: [AppComponent],
   imports: [NativeScriptModule, AppRoutingModule],
-  declarations: [AppComponent, ItemsComponent, ItemDetailComponent],
+  declarations: [AppComponent, ItemsComponent, CarouselStaticComponent, CarouselDynamicComponent, CarouselAdvancedComponent],
   providers: [ItemService],
   schemas: [NO_ERRORS_SCHEMA]
 })
