@@ -20,7 +20,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "nativescript-carousel": "file:../src",
+    "nativescript-carousel": "4.1.0",
     "nativescript-theme-core": "^1.0.4",
     "nativescript-vue": "^2.2.2",
     "tns-core-modules": "~5.3.1"
