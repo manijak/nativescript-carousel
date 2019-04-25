@@ -6,7 +6,7 @@
       <Label row="0" text="Text on the page in row 1 of grid" color="green" textWrap="true"></Label>
       
       <GridLayout row="2">
-          <Carousel #carousel ios:indicatorOffset="0,-10" ios:finite="true" ios:bounce="false" showIndicator="true" indicatorAnimation="SWAP"
+          <Carousel #carousel @pageChanged="myChangeEvent" ios:indicatorOffset="0,-10" ios:finite="true" ios:bounce="false" showIndicator="true" indicatorAnimation="SWAP"
               indicatorColor="#66ccff" indicatorColorUnselected="#cceeff">
               
               <CarouselItem backgroundColor="green">
@@ -39,7 +39,11 @@
     methods: {
       onTextRecognitionResult() {
         console.log("onTextRecognitionResult");
-      }
+      },
+	  myChangeEvent: function(args) {
+		var changeEventText = 'Page changed to index: ' + args.index;
+		console.log(changeEventText);
+      },
     }
   }
 </script>
