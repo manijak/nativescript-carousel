@@ -19,7 +19,6 @@ Run `tns plugin add nativescript-carousel` in the ROOT directory of your project
 - (iOS) PagerIndicator animations not available for iOS, only Android.
 - (Android) In order to show the PageIndicators on top of the Carousel, wrap the `<Carousel>` inside a `<GridLayout>`.
 - (Android) Auto- and Infinite-paging not available.
-- (Angular) Only static slides work, the dynamic ones with binding do not (for now).
 
 ## Usage
 
