@@ -1,4 +1,4 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" 
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" 
     xmlns:ns="nativescript-carousel">
     <Page.actionBar>
         <ActionBar title="Carousel - Static views"></ActionBar>
@@ -10,20 +10,20 @@
 
         <GridLayout margin="20,0,0,0" height="250">
             <ns:Carousel debug="true" height="100%" width="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff000" finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap">
-                
-                <ns:CarouselItem id="slide1" backgroundColor="#b3cde0" verticalAlignment="middle">
+
+                <ns:CarouselItem id="slide1">
                     <Label text="Slide 1" backgroundColor="#50000000" horizontalAlignment="center"/>
                 </ns:CarouselItem>
 
-                <ns:CarouselItem id="slide2" backgroundColor="#6497b1" verticalAlignment="middle">
+                <ns:CarouselItem id="slide2">
                     <Label text="Slide 2" backgroundColor="#50000000" horizontalAlignment="center"/>
                 </ns:CarouselItem>
 
-                <ns:CarouselItem id="slide3" backgroundColor="#005b96" verticalAlignment="middle">
+                <ns:CarouselItem id="slide3">
                     <Label text="Slide 3" backgroundColor="#50000000" horizontalAlignment="center"/>
                 </ns:CarouselItem>
 
-                <ns:CarouselItem id="slide4" backgroundColor="#03396c" verticalAlignment="middle">
+                <ns:CarouselItem id="slide4">
                     <Label text="Slide 4" backgroundColor="#50000000" horizontalAlignment="center"/>
                 </ns:CarouselItem>
 

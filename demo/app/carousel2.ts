@@ -10,17 +10,18 @@ pageData.set('myDataArray', [
   { title: 'Slide 4', color: '#03396c', image: '~/res/04.jpg' }
 ]);
 
-exports.pageLoaded = args => {
+export function onNavigatedTo(args) {
+  console.log('carousel', new Carousel());
   var page = args.object;
   page.bindingContext = pageData;
   myCarousel = page.getViewById('myCarousel');
-};
+}
 
-exports.selectPageEvent = args => {
+export function selectPageEvent(args) {
   if (!myCarousel) return;
   myCarousel.selectedPage = 2;
-};
+}
 
-exports.myScrollingEvent = args => {
+export function myScrollingEvent(args) {
   console.log('Scrolling: ' + args.state.offset);
-};
+}
