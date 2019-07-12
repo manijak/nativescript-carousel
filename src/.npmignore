@@ -1,6 +1,15 @@
+demo/
+*.png
+*.log
+screens/
 *.map
 *.ts
-*.d.ts
 !carousel.d.ts
 tsconfig.json
-scripts
+tslint.json
+typings/
+scripts/*
+platforms/android/*
+!platforms/android/include.gradle
+!platforms/android/*.aar
+!platforms/android/*.jar
