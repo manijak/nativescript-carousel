@@ -1,21 +1,7 @@
 import { screen } from 'tns-core-modules/platform';
 import { parse } from 'tns-core-modules/ui/builder';
 import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
-import {
-  autoPagingIntervalProperty,
-  bounceProperty,
-  CarouselCommon,
-  CarouselItem,
-  finiteProperty,
-  indicatorColorProperty,
-  indicatorColorUnselectedProperty,
-  indicatorOffsetProperty,
-  scrollEnabledProperty,
-  selectedPageProperty,
-  showIndicatorProperty,
-  CLog,
-  CLogTypes
-} from './carousel.common';
+import { autoPagingIntervalProperty, bounceProperty, CarouselCommon, CarouselItem, CarouselUtil, finiteProperty, indicatorColorProperty, indicatorColorUnselectedProperty, indicatorOffsetProperty, Log, scrollEnabledProperty, selectedPageProperty, showIndicatorProperty } from './carousel.common';
 
 export * from './carousel.common';
 
@@ -28,6 +14,7 @@ export class Carousel extends CarouselCommon {
 
   constructor() {
     super();
+    CarouselUtil.debug = this.debug;
   }
 
   get ios(): any {
@@ -83,11 +70,12 @@ export class Carousel extends CarouselCommon {
     this.nativeView = new DKCarouselView(
       UIView.alloc().initWithFrame(CGRectMake(0, 0, screen.mainScreen.widthDIPs, 0))
     );
+
+    Log.D('nativeView', this.nativeView);
     return this.nativeView;
   }
 
   initNativeView() {
-    CLog(CLogTypes.info, `initNativeView...`, this.nativeView);
     const nativeView = this.nativeView;
     this._isDirty = true;
 
@@ -135,7 +123,6 @@ export class Carousel extends CarouselCommon {
   }
 
   onLoaded() {
-    CLog(CLogTypes.info, `onLoaded...`);
     super.onLoaded();
 
     if (this._isDirty) {
@@ -144,7 +131,7 @@ export class Carousel extends CarouselCommon {
   }
 
   refresh() {
-    CLog(CLogTypes.info, `refresh...`);
+    Log.D(`refresh()`);
     if (!this.isLoaded || !this.nativeView) {
       this._isDirty = true;
       return;
@@ -154,7 +141,7 @@ export class Carousel extends CarouselCommon {
 
     if (isNullOrUndefined(this.items) || !isNumber(this.items.length)) {
       const nsArray = NSMutableArray.new();
-      CLog(CLogTypes.info, `children count: `, this.getChildrenCount());
+      Log.D(`children count: `, this.getChildrenCount());
       this.eachChildView(view1 => {
         if (view1 instanceof CarouselItem) {
           view1.width = this.width;
@@ -171,7 +158,7 @@ export class Carousel extends CarouselCommon {
 
       const nsArray = NSMutableArray.new();
       const length = this.items.length;
-      CLog(CLogTypes.info, `items length: `, length);
+      Log.D(`items length: `, length);
 
       for (let i = 0; i < length; i++) {
         const viewToAdd = !isNullOrUndefined(this.itemTemplate) ? parse(this.itemTemplate, this) : null;
@@ -196,6 +183,7 @@ export class Carousel extends CarouselCommon {
   }
 
   public onItemsChanged(data) {
+    Log.D('onItemsChanged', data);
     if (!isNullOrUndefined(this.items) && isNumber(this.items.length)) {
       this.refresh();
     }

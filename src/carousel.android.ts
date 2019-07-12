@@ -3,24 +3,18 @@ import { View } from 'tns-core-modules/ui/core/view';
 import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
 import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
 import { layout } from 'tns-core-modules/utils/utils';
-
-import {
-  CarouselCommon,
-  CLog,
-  CLogTypes,
-  indicatorAnimationDurationProperty,
-  indicatorAnimationProperty,
-  indicatorColorProperty,
-  indicatorColorUnselectedProperty,
-  indicatorPaddingProperty,
-  indicatorRadiusProperty,
-  selectedPageProperty
-} from './carousel.common';
-
-export * from './carousel.common';
+import { CarouselCommon, CarouselUtil, indicatorAnimationDurationProperty, indicatorAnimationProperty, indicatorColorProperty, indicatorColorUnselectedProperty, indicatorPaddingProperty, indicatorRadiusProperty, Log, selectedPageProperty } from './carousel.common';
 
 const VIEWS_STATES = '_viewStates';
-declare const com: any;
+
+const PagerNamespace = useAndroidX() ? androidx.viewpager.widget : (android.support.v4 as any).view;
+function useAndroidX() {
+  return global.androidx && androidx.viewpager;
+}
+
+declare const global, com: any;
+
+export * from './carousel.common';
 
 export class Carousel extends CarouselCommon {
   private _androidViewId = -1;
@@ -33,13 +27,13 @@ export class Carousel extends CarouselCommon {
 
   constructor() {
     super();
-    CLog(CLogTypes.info, 'Carousel constructor...');
+    CarouselUtil.debug = this.debug;
+    Log.D('Carousel constructor');
 
     this.CarouselPagerAdapterClass = new CarouselPagerAdapterClassInner(new WeakRef(this));
     this.CarouselPageChangedListenerClass = new CarouselPageChangedListener(new WeakRef(this));
 
-    CLog(
-      CLogTypes.info,
+    Log.D(
       `this.CarouselPagerAdapterClass = ${this.CarouselPagerAdapterClass}`,
       `this.CarouselPageChangedListenerClass = ${this.CarouselPageChangedListenerClass}`
     );
@@ -49,19 +43,23 @@ export class Carousel extends CarouselCommon {
     return this.nativeView;
   }
 
-  get adapter(): android.support.v4.view.PagerAdapter {
+  /**
+   * Returns androidx.viewpager.widget.PagerAdapter on AndroidX enabled apps.
+   * Returns android.support.v4.view.PagerAdapter on non androidX apps.
+   */
+  get adapter(): any {
     return this.android.getAdapter();
   }
 
   set pageIndicatorCount(value: number) {
     if (value) {
-        this.adapter.notifyDataSetChanged();
-        this._pageIndicatorView.setCount(value);
+      this.adapter.notifyDataSetChanged();
+      this._pageIndicatorView.setCount(value);
     }
   }
 
   [indicatorColorProperty.setNative](value) {
-    CLog(CLogTypes.info, `indicatorColorProperty.setNative value = ${value}`);
+    Log.D(`indicatorColorProperty.setNative value = ${value}`);
     if (!value) {
       return;
     }
@@ -69,7 +67,7 @@ export class Carousel extends CarouselCommon {
   }
 
   [indicatorColorUnselectedProperty.setNative](value) {
-    CLog(CLogTypes.info, `indicatorColorUnselectedProperty.setNative value = ${value}`);
+    Log.D(`indicatorColorUnselectedProperty.setNative value = ${value}`);
     if (!value) {
       return;
     }
@@ -77,13 +75,13 @@ export class Carousel extends CarouselCommon {
   }
 
   [selectedPageProperty.setNative](value) {
-    CLog(CLogTypes.info, `selectedPageProperty.setNative value = ${value}`);
+    Log.D(`selectedPageProperty.setNative value = ${value}`);
     this.selectedPage = value;
     this.nativeView.setCurrentItem(value);
   }
 
   [indicatorAnimationProperty.setNative](value) {
-    CLog(CLogTypes.info, `indicatorAnimationProperty.setNative value = ${value}`);
+    Log.D(`indicatorAnimationProperty.setNative value = ${value}`);
 
     if (!value) {
       return;
@@ -130,7 +128,7 @@ export class Carousel extends CarouselCommon {
   }
 
   [indicatorAnimationDurationProperty.setNative](value) {
-    CLog(CLogTypes.info, `indicatorAnimationDurationProperty.setNative value = ${value}`);
+    Log.D(`indicatorAnimationDurationProperty.setNative value = ${value}`);
 
     if (!value) {
       return;
@@ -141,7 +139,7 @@ export class Carousel extends CarouselCommon {
   }
 
   [indicatorRadiusProperty.setNative](value) {
-    CLog(CLogTypes.info, `indicatorRadiusProperty.setNative value = ${value}`);
+    Log.D(`indicatorRadiusProperty.setNative value = ${value}`);
     if (!value) {
       return;
     }
@@ -151,7 +149,7 @@ export class Carousel extends CarouselCommon {
   }
 
   [indicatorPaddingProperty.setNative](value) {
-    CLog(CLogTypes.info, `indicatorPaddingProperty.setNative value = ${value}`);
+    Log.D(`indicatorPaddingProperty.setNative value = ${value}`);
     if (!value) {
       return;
     }
@@ -161,39 +159,36 @@ export class Carousel extends CarouselCommon {
   }
 
   createNativeView() {
-    CLog(CLogTypes.info, `Carousel createNativeView`);
+    Log.D(`Carousel createNativeView`);
 
     if (this._androidViewId < 0) {
       this._androidViewId = android.view.View.generateViewId();
     }
-    CLog(CLogTypes.info, `this._androidViewId = ${this._androidViewId}`);
 
     if (this._indicatorViewId < 0) {
       this._indicatorViewId = android.view.View.generateViewId();
     }
-    CLog(CLogTypes.info, `this._indicatorViewId = ${this._indicatorViewId}`);
 
-    this.nativeView = new android.support.v4.view.ViewPager(this._context);
+    this.nativeView = new PagerNamespace.ViewPager(this._context);
     this.nativeView.setId(this._androidViewId);
-    CLog(CLogTypes.info, `this.nativeView = ${this.nativeView}`);
+    Log.D(`this.nativeView = ${this.nativeView}`);
 
     this._pageIndicatorView = new com.rd.PageIndicatorView(this._context);
     this._pageIndicatorView.setId(this._indicatorViewId);
     this._pagerIndicatorLayoutParams = new org.nativescript.widgets.CommonLayoutParams();
-    CLog(CLogTypes.info, `this._pageIndicatorView = ${this._pageIndicatorView}`);
 
     this.nativeView.setAdapter(this.CarouselPagerAdapterClass);
     this.nativeView.setOnPageChangeListener(this.CarouselPageChangedListenerClass);
 
-    CLog(CLogTypes.info, `Carousel createNativeView returning this.nativeView = ${this.nativeView}`);
     return this.nativeView;
   }
 
   onLoaded() {
     super.onLoaded();
+
     if (this.showIndicator !== false) {
-      this._pagerIndicatorLayoutParams.height = android.support.v4.view.ViewPager.LayoutParams.WRAP_CONTENT;
-      this._pagerIndicatorLayoutParams.width = android.support.v4.view.ViewPager.LayoutParams.MATCH_PARENT;
+      this._pagerIndicatorLayoutParams.height = -2; // PagerNamespace.ViewPager.LayoutParams.WRAP_CONTENT;
+      this._pagerIndicatorLayoutParams.width = -1; // PagerNamespace.ViewPager.LayoutParams.MATCH_PARENT;
 
       const ar = this.indicatorOffset.split(',');
       const x = ar[0] ? Number(ar[0]) : 0;
@@ -228,12 +223,10 @@ export class Carousel extends CarouselCommon {
   }
 
   initNativeView() {
-    CLog(CLogTypes.info, `initNativeView...`);
     this.refresh();
   }
 
   refresh() {
-    CLog(CLogTypes.info, `refresh...`);
     if (isNullOrUndefined(this.items) || !isNumber(this.items.length)) {
       return;
     }
@@ -264,22 +257,20 @@ export class Carousel extends CarouselCommon {
   }
 
   public onLayout(left, top, right, bottom) {
-    CLog(CLogTypes.info, `onLayout...`);
     View.layoutChild(this, this, 0, 0, right - left, bottom - top);
   }
 
   private _getDataItem(index) {
-    CLog(CLogTypes.info, `_getDataItem...`);
     return this.items.getItem ? this.items.getItem(index) : this.items[index];
   }
 
   public onItemsChanged(data) {
-    CLog(CLogTypes.info, `_onItemsChanged...`);
+    Log.D(`_onItemsChanged()`, data);
     this.refresh();
   }
 }
 
-class CarouselPagerAdapterClassInner extends android.support.v4.view.PagerAdapter {
+class CarouselPagerAdapterClassInner extends PagerNamespace.PagerAdapter {
   private owner: WeakRef<Carousel>;
   constructor(owner: WeakRef<Carousel>) {
     super();
@@ -294,12 +285,11 @@ class CarouselPagerAdapterClassInner extends android.support.v4.view.PagerAdapte
     } else {
       result = this.owner ? this.owner.get().items.length : 0;
     }
-    CLog(CLogTypes.info, `CarouselPagerAdapterClassInner getCount result = ${result}`);
     return result;
   }
 
   getItemPosition(item) {
-    return android.support.v4.view.PagerAdapter.POSITION_NONE;
+    return androidx.viewpager.widget.PagerAdapter.POSITION_NONE;
   }
 
   isViewFromObject(view, _object) {
@@ -307,7 +297,7 @@ class CarouselPagerAdapterClassInner extends android.support.v4.view.PagerAdapte
   }
 
   instantiateItem(container, index) {
-    CLog(CLogTypes.info, `CarouselPagerAdapterClassInner instantiateItem...`);
+    Log.D(`CarouselPagerAdapterClassInner instantiateItem()`, container, index);
     const item = this.owner.get().getChildAt(index);
     if (!item) {
       return null;
@@ -332,7 +322,7 @@ class CarouselPagerAdapterClassInner extends android.support.v4.view.PagerAdapte
   }
 
   destroyItem(container, index, _object) {
-    CLog(CLogTypes.info, `CarouselPagerAdapterClassInner destroyItem...`);
+    Log.D(`CarouselPagerAdapterClassInner destroyItem()`, container, index, _object);
     const item = this.owner.get().getChildAt(index);
     if (!item) {
       return null;
@@ -343,7 +333,7 @@ class CarouselPagerAdapterClassInner extends android.support.v4.view.PagerAdapte
   }
 
   saveState() {
-    CLog(CLogTypes.info, `CarouselPagerAdapterClassInner saveState...`);
+    Log.D(`CarouselPagerAdapterClassInner saveState()`);
     if (!this[VIEWS_STATES]) {
       this[VIEWS_STATES] = new android.util.SparseArray();
     }
@@ -364,14 +354,14 @@ class CarouselPagerAdapterClassInner extends android.support.v4.view.PagerAdapte
   }
 
   restoreState(state, loader) {
-    CLog(CLogTypes.info, `CarouselPagerAdapterClassInner restoreState...`);
+    Log.D(`CarouselPagerAdapterClassInner restoreState()`, state, loader);
     const bundle = state;
     bundle.setClassLoader(loader);
     this[VIEWS_STATES] = bundle.getSparseParcelableArray(VIEWS_STATES);
   }
 }
 
-class CarouselPageChangedListener extends android.support.v4.view.ViewPager.SimpleOnPageChangeListener {
+class CarouselPageChangedListener extends PagerNamespace.ViewPager.SimpleOnPageChangeListener {
   private owner: WeakRef<Carousel>;
 
   constructor(owner: WeakRef<Carousel>) {
@@ -381,7 +371,7 @@ class CarouselPageChangedListener extends android.support.v4.view.ViewPager.Simp
   }
 
   onPageSelected(position) {
-    CLog(CLogTypes.info, `CarouselPageChangedListener onPageSelected...`);
+    Log.D(`CarouselPageChangedListener onPageSelected()`);
     this.owner.get().notify({
       eventName: CarouselCommon.pageChangedEvent,
       object: this.owner.get(),
@@ -391,7 +381,7 @@ class CarouselPageChangedListener extends android.support.v4.view.ViewPager.Simp
   }
 
   onPageScrollStateChanged(state) {
-    //CLog(CLogTypes.info, `CarouselPageChangedListener onPageScrollStateChanged...`);
+    Log.D(`CarouselPageChangedListener onPageScrollStateChanged()`);
     this.owner.get().notify({
       eventName: CarouselCommon.pageScrollStateChangedEvent,
       object: this.owner.get(),
@@ -400,7 +390,7 @@ class CarouselPageChangedListener extends android.support.v4.view.ViewPager.Simp
   }
 
   onPageScrolled(position, positionOffset, positionOffsetPixels) {
-    //CLog(CLogTypes.info, `CarouselPageChangedListener onPageScrolled...`);
+    Log.D(`CarouselPageChangedListener onPageScrolled()`, position, positionOffset, positionOffsetPixels);
     const data = {
       eventName: CarouselCommon.pageScrollingEvent,
       object: this.owner.get(),
