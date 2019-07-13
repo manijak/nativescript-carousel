@@ -10,7 +10,7 @@ import { Carousel } from "nativescript-carousel";
     templateUrl: "./carousel-advanced.html",
 })
 export class CarouselAdvancedComponent implements OnInit, AfterViewInit {
-    @ViewChild('advCarousel') carouselRef: ElementRef;
+    @ViewChild('advCarousel', { static: false }) carouselRef: ElementRef;
     items: SlideItem[];
     currentPage: number = 1;
     tappedPage: number = 0;

@@ -70,8 +70,8 @@ export class Carousel extends CarouselCommon {
     this.nativeView = new DKCarouselView(
       UIView.alloc().initWithFrame(CGRectMake(0, 0, screen.mainScreen.widthDIPs, 0))
     );
-
-    Log.D('nativeView', this.nativeView);
+    
+    Log.D('createNativeView', this.nativeView);
     return this.nativeView;
   }
 
@@ -111,6 +111,8 @@ export class Carousel extends CarouselCommon {
       };
       this.notify(data);
     });
+
+    Log.D('initNativeView', this.nativeView);
   }
 
   disposeNativeView() {
@@ -127,6 +129,7 @@ export class Carousel extends CarouselCommon {
 
     if (this._isDirty) {
       this.refresh();
+      Log.D(`onLoaded()`);
     }
   }
 
