@@ -1,10 +1,7 @@
 import { Color } from 'tns-core-modules/color/color';
 import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
 import { booleanConverter, Property, Template, View } from 'tns-core-modules/ui/core/view';
-import {
-  addWeakEventListener,
-  removeWeakEventListener
-} from 'tns-core-modules/ui/core/weak-event-listener/weak-event-listener';
+import { addWeakEventListener, removeWeakEventListener } from 'tns-core-modules/ui/core/weak-event-listener/weak-event-listener';
 import { Label } from 'tns-core-modules/ui/label';
 import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
 import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout';
@@ -14,25 +11,14 @@ export class CarouselUtil {
   public static debug: boolean = false;
 }
 
-export enum CLogTypes {
-  info,
-  warning,
-  error
-}
-
-export const CLog = (type: CLogTypes = 0, ...args) => {
-  if (CarouselUtil.debug) {
-    if (type === 0) {
-      // Info
-      console.log('NativeScript-Carousel: INFO', args);
-    } else if (type === 1) {
-      // Warning
-      console.log('NativeScript-Carousel: WARNING', args);
-    } else if (type === 2) {
-      console.log('NativeScript-Carousel: ERROR', args);
+export class Log {
+  static D(...args) {
+    if (CarouselUtil.debug === true) {
+      console.log('NativeScript-Carousel DEBUG: ', ...args);
+      console.log('---------------------------------------------------');
     }
   }
-};
+}
 
 export class CarouselCommon extends GridLayout {
   /**
@@ -148,8 +134,12 @@ export class CarouselCommon extends GridLayout {
   /**
    * If true console logs will be output to help debug the Carousel events.
    */
-  public set debug(value: boolean) {
+  set debug(value: boolean) {
     CarouselUtil.debug = value;
+  }
+
+  get debug() {
+    return CarouselUtil.debug;
   }
 
   constructor() {
@@ -169,7 +159,6 @@ export class CarouselCommon extends GridLayout {
 export class CarouselItem extends StackLayout {
   constructor() {
     super();
-    CLog(CLogTypes.info, `CarouselItem constructor...`);
   }
 
   onLoaded() {
@@ -182,6 +171,17 @@ export namespace knownTemplates {
 }
 
 // Common
+
+export const debugProperty = new Property<CarouselCommon, boolean>({
+  name: 'debug',
+  defaultValue: false,
+  valueConverter: booleanConverter,
+  valueChanged: (view, oldValue, newValue) => {
+    CarouselUtil.debug = newValue;
+  }
+});
+debugProperty.register(CarouselCommon);
+
 export const itemTemplateProperty = new Property<CarouselCommon, any>({
   name: 'itemTemplate',
   affectsLayout: true,

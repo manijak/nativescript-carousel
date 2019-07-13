@@ -1,0 +1,10 @@
+button {
+  border-radius: 2;
+  font-size: 16;
+  background-color: #336699;
+  color: #fff;
+}
+
+label {
+  text-align: center;
+}

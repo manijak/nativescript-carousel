@@ -1,4 +1,3 @@
-import * as common from './carousel.common';
 import { Color } from 'tns-core-modules/color/color';
 import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
 import { Property, Template, View } from 'tns-core-modules/ui/core/view';
@@ -40,7 +39,7 @@ export declare class Carousel extends CarouselCommon {
   onItemsChanged(data: any): void;
 }
 
-declare class CarouselPagerAdapterClassInner extends android.support.v4.view.PagerAdapter {
+declare class CarouselPagerAdapterClassInner extends androidx.viewpager.widget.PagerAdapter {
   private owner;
   constructor(owner: WeakRef<Carousel>);
   getCount(): any;
@@ -51,7 +50,7 @@ declare class CarouselPagerAdapterClassInner extends android.support.v4.view.Pag
   saveState(): android.os.Bundle;
   restoreState(state: any, loader: any): void;
 }
-declare class CarouselPageChangedListener extends android.support.v4.view.ViewPager.SimpleOnPageChangeListener {
+declare class CarouselPageChangedListener extends androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener {
   private owner;
   constructor(owner: WeakRef<Carousel>);
   onPageSelected(position: any): void;
@@ -95,6 +94,7 @@ export declare namespace knownTemplates {
   const itemTemplate = 'itemTemplate';
 }
 
+export declare const debugProperty: Property<CarouselCommon, boolean>;
 export declare const itemTemplateProperty: Property<CarouselCommon, any>;
 export declare const itemsProperty: Property<CarouselCommon, ObservableArray<any>>;
 export declare const selectedPageProperty: Property<CarouselCommon, number>;
@@ -112,7 +112,6 @@ export declare const indicatorAlignmentProperty: Property<CarouselCommon, any>;
 export declare const indicatorRadiusProperty: Property<CarouselCommon, number>;
 export declare const indicatorPaddingProperty: Property<CarouselCommon, number>;
 
-
 /**
  * ** ANDROID ONLY ** - Enum to indicator animation type.
  */
@@ -127,4 +126,11 @@ export enum IndicatorAnimation {
   'THIN_WORM' = 'THIN_WORM',
   'DROP' = 'DROP',
   'SWAP' = 'SWAP'
+}
+
+export declare class CarouselUtil {
+  static debug: boolean;
+}
+export declare class Log {
+  static D(...args: any[]): void;
 }

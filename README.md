@@ -289,6 +289,13 @@ Set the indicator count which will change the underlying Android data adapter. S
 - [Pip3r4o](https://github.com/Pip3r4o)
 - [MattNer0](https://github.com/MattNer0)
 
-## Help
+## Contributing
 
 I will accept pull requests that improve this and assign credit.
+
+- Fork and clone the repository
+- `cd src && npm run setup`
+- `npm run demo.android` for android development
+- `npm run demo.ios` for iOS development
+- `npm run demo-ng.ios` for iOS Angular app
+- `npm run demo-ng.android` for Android Angular
