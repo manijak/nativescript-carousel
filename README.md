@@ -177,6 +177,12 @@ Set the indicator count which will change the underlying Android data adapter. S
 
 ## Changelog
 
+**4.2.0**
+
+- AndroidX update for NS6. Thanks @bradmartin!
+- Code cleanup, typings fix. 
+- Demos updated. Proper Vue-demo added.
+
 **4.1.0**
 
 - Added setter for `pageIndicatorCount` for Android to enable dynamically changing the length of the carousel items array without Android throwing a crash about the adapster set changing incorrectly.
