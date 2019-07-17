@@ -1,6 +1,6 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatedTo="onNavigatedTo">
   <Page.actionBar>
-    <ActionBar title="Carousel"></ActionBar>
+    <ActionBar title="Carousel Demo"></ActionBar>
   </Page.actionBar>
 
   <StackLayout>

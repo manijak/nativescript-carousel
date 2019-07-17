@@ -1,7 +1,9 @@
 import { screen } from 'tns-core-modules/platform';
 import { parse } from 'tns-core-modules/ui/builder';
 import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
-import { autoPagingIntervalProperty, bounceProperty, CarouselCommon, CarouselItem, CarouselUtil, finiteProperty, indicatorColorProperty, indicatorColorUnselectedProperty, indicatorOffsetProperty, Log, scrollEnabledProperty, selectedPageProperty, showIndicatorProperty } from './carousel.common';
+import { autoPagingIntervalProperty, bounceProperty, CarouselCommon, CarouselItem, 
+         CarouselUtil, finiteProperty, indicatorColorProperty, indicatorColorUnselectedProperty, indicatorOffsetProperty, 
+         Log, scrollEnabledProperty, selectedPageProperty, showIndicatorProperty } from './carousel.common';
 
 export * from './carousel.common';
 
@@ -64,9 +66,6 @@ export class Carousel extends CarouselCommon {
   }
 
   createNativeView() {
-    // this.nativeView = new DKCarouselView(CGRectMake(0, 0, screen.mainScreen.widthDIPs, 0));
-
-    // Brad - trying this ^^^ might be correct so can just bypass TS warning if so
     this.nativeView = new DKCarouselView(
       UIView.alloc().initWithFrame(CGRectMake(0, 0, screen.mainScreen.widthDIPs, 0))
     );
@@ -142,7 +141,8 @@ export class Carousel extends CarouselCommon {
     this._isDirty = false;
     this.nativeView.setItems(NSMutableArray.new());
 
-    if (isNullOrUndefined(this.items) || !isNumber(this.items.length)) {
+    if (isNullOrUndefined(this.itemTemplate)) {
+      Log.D(`Using generic-mode`);
       const nsArray = NSMutableArray.new();
       Log.D(`children count: `, this.getChildrenCount());
       this.eachChildView(view1 => {
@@ -156,7 +156,10 @@ export class Carousel extends CarouselCommon {
         return true;
       });
       this.nativeView.setItems(nsArray);
-    } else {
+      Log.D(`items set: `, nsArray.count);
+    } 
+    else {
+      Log.D(`Using template-mode`);
       this.removeChildren();
 
       const nsArray = NSMutableArray.new();
@@ -182,6 +185,7 @@ export class Carousel extends CarouselCommon {
         return true;
       });
       this.nativeView.setItems(nsArray);
+      Log.D(`items set: `, nsArray.count);
     }
   }
 

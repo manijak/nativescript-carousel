@@ -1,5 +1,7 @@
 import Vue from "nativescript-vue";
-import Demo from "./components/Demo";
+import Menu from "./components/Menu";
+
+Vue.config.silent = false;
 
 Vue.registerElement('Carousel', () => require('nativescript-carousel').Carousel);
 Vue.registerElement('CarouselItem', () => require('nativescript-carousel').CarouselItem);
@@ -7,10 +9,10 @@ Vue.registerElement('CarouselItem', () => require('nativescript-carousel').Carou
 new Vue({
     template: `
         <Frame>
-            <Demo />
+            <Menu />
         </Frame>`,
 
     components: {
-        Demo
+        Menu
     }
 }).$start();
