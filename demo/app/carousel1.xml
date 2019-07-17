@@ -1,12 +1,12 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" 
     xmlns:ns="nativescript-carousel">
     <Page.actionBar>
-        <ActionBar title="Carousel - Static views"></ActionBar>
+        <ActionBar title="Static Carousel Demo"></ActionBar>
     </Page.actionBar>
 
     <GridLayout class="carousel-layout-fix">
         <ns:Carousel debug="true" height="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff000" 
-            finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap">
+            finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap" indicatorOffset="0, -30">
 
             <ns:CarouselItem id="slide1" verticalAlignment="middle">
                 <Label text="Each slide is defined in the XML." textWrap="true" margin="30" />

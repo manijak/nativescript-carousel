@@ -11,9 +11,8 @@ import { ItemService } from "./item.service";
     templateUrl: "./carousel-dynamic.html",
 })
 export class CarouselDynamicComponent implements OnInit, AfterViewInit {
-    @ViewChild('dynamicCarousel') carouselRef: ElementRef;
+    @ViewChild('dynamicCarousel', { static: false }) carouselRef: ElementRef;
     items: SlideItem[];
-
     carouselView: Carousel;
 
     constructor(private itemService: ItemService) { }

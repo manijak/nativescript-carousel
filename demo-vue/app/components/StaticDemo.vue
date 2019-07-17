@@ -1,6 +1,6 @@
 <template>
   <Page class="page">
-    <ActionBar class="action-bar" title="Carousel Static Demo"/>
+    <ActionBar title="Carousel Static Demo"/>
 
      <GridLayout class="carousel-layout-fix">
         <Carousel id="carousel" @pageChanged="myChangeEvent" ios:indicatorOffset="0,-30" ios:finite="true" ios:bounce="false" showIndicator="true" indicatorAnimation="SWAP"

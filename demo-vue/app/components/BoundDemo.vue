@@ -1,6 +1,6 @@
 <template>
   <Page class="page" @onloaded="onLoaded">
-    <ActionBar class="action-bar" title="Carousel Binding Demo"/>
+    <ActionBar title="Carousel Binding Demo"/>
 
     <StackLayout>
         <Label text="Define a single CarouselItem element with the 'v-for' tag pointed at your array." textWrap="true" margin="10,0,50,0"/>
@@ -40,13 +40,6 @@
                   { title: 'Slide 2', color: '#6497b1', image: '~/assets/images/02.jpg' },
                   { title: 'Slide 3', color: '#005b96', image: '~/assets/images/03.jpg' },
                   { title: 'Slide 4', color: '#03396c', image: '~/assets/images/04.jpg' }],
-
-        /*myItemTemplate: `<StackLayout backgroundColor="{{ color }}" verticalAlignment="middle">
-                            <GridLayout tap="myTapPageEvent">
-                                <Image src="{{ image }}" stretch="aspectFill" />
-                                <Label text="{{ title }}" horizontalAlignment="center" backgroundColor="#50000000" height="30" />
-                            </GridLayout>
-                          </StackLayout>` */
       }
     },
     computed: {
@@ -84,27 +77,7 @@
 </script>
 
 <style scoped>
-  ActionBar {
-      background-color: #53ba82;
-      color: #ffffff;
-  }
   Page{
     background: linear-gradient(-45deg, #1d976c, #93f9b9);
-  }
-  Label {
-    text-align: center;
-  }
-
-  Button {
-        font-size: 16;
-        border-radius: 2;
-        background-color: #298f64;
-        color: #63d4a5;
-        margin: 16;
-    }
-
-  .carousel-layout-fix{
-    padding: 0.1 0;
-    margin: -0.1 0;
   }
 </style>

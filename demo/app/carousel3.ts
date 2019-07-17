@@ -1,31 +1,22 @@
 import { Carousel } from 'nativescript-carousel';
 import { Observable } from 'tns-core-modules/data/observable';
+import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
 
 let myCarousel: Carousel = null;
-const pageData = new Observable();
-const myDataArray = [
+let pageData = new Observable();
+var myDataArray = new ObservableArray([
   { title: 'Slide 1', color: '#b3cde0', image: '~/res/01.jpg' },
   { title: 'Slide 2', color: '#6497b1', image: '~/res/02.jpg' },
   { title: 'Slide 3', color: '#005b96', image: '~/res/03.jpg' },
   { title: 'Slide 4', color: '#03396c', image: '~/res/04.jpg' }
-];
-pageData.set('myDataArray', myDataArray);
+]);
 
 export function pageLoaded(args) {
   const page = args.object;
   page.bindingContext = pageData;
-  myCarousel = page.getViewById('myCarousel');
+  pageData.set('myDataArray', myDataArray);
 
-  // Change the indicator animation on Android after 5 seconds
-  // setTimeout(() => {
-  //   if (isAndroid) {
-  //     myCarousel.indicatorAnimation = IndicatorAnimation.THIN_WORM;
-  //     dialogs.alert({
-  //       message: 'Indicator Animation changed to THIN_WORM.',
-  //       okButtonText: 'Okay'
-  //     });
-  //   }
-  // }, 5000);
+  myCarousel = page.getViewById('myCarousel');
 }
 
 export function myChangeEvent(args) {

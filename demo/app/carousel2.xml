@@ -1,22 +1,18 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatedTo="onNavigatedTo" 
     xmlns:ns="nativescript-carousel">
     <Page.actionBar>
-        <ActionBar title="Dynamic"></ActionBar>
+        <ActionBar title="Data Bound Carousel"></ActionBar>
     </Page.actionBar>
 
     <ScrollView>
         <StackLayout>
-            <Label text="Define a template and assign the 'items' array." textWrap="true" margin="10,0,0,0"/>
-            <Label text="Also works well innside a ScrollView." textWrap="true" margin="0,0,20,0" />
+            <Label text="Define a template and assign the 'items' array." textWrap="true" margin="20,0,40,0"/>
 
-            <StackLayout height="100" verticalAlignment="center">
-                <Label text="Some content here..." textWrap="true"/>
-            </StackLayout>
-
-            <GridLayout height="250">
-                <ns:Carousel id="myCarousel" debug="false" height="100%" width="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" android:indicatorAnimation="slide" items="{{ myDataArray }}" indicatorColor="#fff" indicatorOffset="0, -10" showIndicator="true">
+            <GridLayout height="350" margin="0,0,50,0">
+                <ns:Carousel id="myCarousel" debug="true" height="100%" width="100%" color="white" pageChanged="myChangeEvent"
+                        android:indicatorAnimation="slide" items="{{ myData }}" indicatorColor="#fff" indicatorOffset="0, -10" showIndicator="true">
                     <ns:Carousel.itemTemplate>
-                        <ns:CarouselItem backgroundColor="{{ color }}" verticalAlignment="middle">
+                        <ns:CarouselItem backgroundColor="{{ color }}" verticalAlignment="middle" tap="myTapEvent">
                             <GridLayout>
                                 <Image src="{{ image }}" stretch="aspectFill" />
                                 <Label text="{{ title }}" horizontalAlignment="center" backgroundColor="#50000000" height="30" />
@@ -28,10 +24,9 @@
 
             <Label text="Indicator animation type: 'slide'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"/>
 
-            <Button text="Select page 3" tap="selectPageEvent" margin="10,10,0,10"/>
-            <StackLayout height="400" margin="10,0,0,0">
-                <Label text="Some content here..." textWrap="true" />
-            </StackLayout>
+            <Button text="Select page 3" tap="selectPageThree" margin="10,10,0,10"/>
+            <Button text="Add page" tap="addNewPage" margin="10,10,0,10"/>
+            <Label text="Tap the button to add more pages" textWrap="true" margin="10,10,0,10" />
         </StackLayout>
     </ScrollView>
 </Page>

@@ -1,0 +1,18 @@
+@import '~nativescript-theme-core/css/core.light.css';
+
+ActionBar {
+    background-color: #53ba82;
+    color: #ffffff;
+}
+
+Label {
+  text-align: center;
+}
+
+Button {
+      font-size: 16;
+      border-radius: 2;
+      background-color: #298f64;
+      color: #fff;
+      margin: 16;
+  }

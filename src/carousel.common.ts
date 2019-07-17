@@ -171,7 +171,6 @@ export namespace knownTemplates {
 }
 
 // Common
-
 export const debugProperty = new Property<CarouselCommon, boolean>({
   name: 'debug',
   defaultValue: false,

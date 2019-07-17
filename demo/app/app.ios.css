@@ -9,3 +9,8 @@ button {
 label {
   text-align: center;
 }
+
+ActionBar {
+  background-color: #0b4a8a;
+  color: #ffffff;
+}

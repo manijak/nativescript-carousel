@@ -7,8 +7,8 @@
     <Label text="Tap buttons to see Carousel in action" textWrap="true" margin="10,0,20,0"/>
 
     <Button text="Static Carousel" tap="carousel1" />
-    <Button text="Dynamic Carousel" tap="carousel2" />
-    <Button text="Advanced Carousel" tap="carousel3" />
+    <Button text="Data-Bound Carousel" tap="carousel2" />
+    <Button text="Extras & Events" tap="carousel3" />
 
   </StackLayout>
 </Page>
