@@ -138,6 +138,12 @@ export class Carousel extends CarouselCommon {
       this._isDirty = true;
       return;
     }
+
+    if(isNullOrUndefined(this.items)){
+      Log.D(`Items list is null...`);
+      return;
+    }
+
     this._isDirty = false;
     this.nativeView.setItems(NSMutableArray.new());
 
