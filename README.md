@@ -177,6 +177,10 @@ Set the indicator count which will change the underlying Android data adapter. S
 
 ## Changelog
 
+**4.2.1**
+
+- Hotfix for static items. Sorry!
+
 **4.2.0**
 
 - AndroidX update for NS6. Thanks @bradmartin!

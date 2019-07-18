@@ -139,11 +139,6 @@ export class Carousel extends CarouselCommon {
       return;
     }
 
-    if(isNullOrUndefined(this.items)){
-      Log.D(`Items list is null...`);
-      return;
-    }
-
     this._isDirty = false;
     this.nativeView.setItems(NSMutableArray.new());
 
@@ -166,8 +161,13 @@ export class Carousel extends CarouselCommon {
     } 
     else {
       Log.D(`Using template-mode`);
-      this.removeChildren();
 
+      if(isNullOrUndefined(this.items)){
+        Log.D(`Items list is null...`);
+        return;
+      }
+
+      this.removeChildren();
       const nsArray = NSMutableArray.new();
       const length = this.items.length;
       Log.D(`items length: `, length);
