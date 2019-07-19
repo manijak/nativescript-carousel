@@ -17,15 +17,15 @@ Run `tns plugin add nativescript-carousel` in the ROOT directory of your project
 ## Limitations
 
 - (iOS) PagerIndicator animations not available for iOS, only Android.
-- (Android) In order to show the PageIndicators on top of the Carousel, wrap the `<Carousel>` inside a `<GridLayout>`.
 - (Android) Auto- and Infinite-paging not available.
 
 ## Usage
 
 Check out the demos included in this repo for instructions on how to use the Carousel with your choice of framework:
-Vanilla TS demo: [VanillaDemo](https://github.com/manijak/nativescript-carousel/tree/master/demo
-Angular demo: [AngularDemo](https://github.com/manijak/nativescript-carousel/tree/master/demo-ng
-Vue demo: [VueDemo](https://github.com/manijak/nativescript-carousel/tree/master/demo-vue)   
+
+[Vanilla TS demo](https://github.com/manijak/nativescript-carousel/tree/master/demo)
+[Angular demo](https://github.com/manijak/nativescript-carousel/tree/master/demo-ng)
+[Vue demo](https://github.com/manijak/nativescript-carousel/tree/master/demo-vue)   
 
 
 ## Attributes - Common

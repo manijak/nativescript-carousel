@@ -22,9 +22,10 @@ Run `tns plugin add nativescript-carousel` in the ROOT directory of your project
 ## Usage
 
 Check out the demos included in this repo for instructions on how to use the Carousel with your choice of framework:
-Vanilla TS demo: [VanillaDemo](https://github.com/manijak/nativescript-carousel/tree/master/demo
-Angular demo: [AngularDemo](https://github.com/manijak/nativescript-carousel/tree/master/demo-ng
-Vue demo: [VueDemo](https://github.com/manijak/nativescript-carousel/tree/master/demo-vue)   
+
+[Vanilla TS demo](https://github.com/manijak/nativescript-carousel/tree/master/demo)
+[Angular demo](https://github.com/manijak/nativescript-carousel/tree/master/demo-ng)
+[Vue demo](https://github.com/manijak/nativescript-carousel/tree/master/demo-vue)   
 
 
 ## Attributes - Common
