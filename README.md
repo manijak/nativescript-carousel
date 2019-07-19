@@ -22,60 +22,11 @@ Run `tns plugin add nativescript-carousel` in the ROOT directory of your project
 
 ## Usage
 
-_Make sure you include the namespace on the Page element:_
+Check out the demos included in this repo for instructions on how to use the Carousel with your choice of framework:
+Vanilla TS demo: [VanillaDemo](https://github.com/manijak/nativescript-carousel/tree/master/demo
+Angular demo: [AngularDemo](https://github.com/manijak/nativescript-carousel/tree/master/demo-ng
+Vue demo: [VueDemo](https://github.com/manijak/nativescript-carousel/tree/master/demo-vue)   
 
-```xml
-xmlns:ns="nativescript-carousel"
-```
-
-#### Manually create each slide by using `CarouselItem`
-
-```xml
-<ns:Carousel height="100%" width="100%" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff000" finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap" color="white">
-    <ns:CarouselItem id="slide1" backgroundColor="#b3cde0" verticalAlignment="middle">
-        <Label text="Slide 1" backgroundColor="#50000000" horizontalAlignment="center"/>
-    </ns:CarouselItem>
-    <ns:CarouselItem id="slide2" backgroundColor="#6497b1" verticalAlignment="middle">
-        <Label text="Slide 2" backgroundColor="#50000000" horizontalAlignment="center"/>
-    </ns:CarouselItem>
-    <ns:CarouselItem id="slide3" backgroundColor="#005b96" verticalAlignment="middle">
-        <Label text="Slide 3" backgroundColor="#50000000" horizontalAlignment="center"/>
-    </ns:CarouselItem>
-    <ns:CarouselItem id="slide4" backgroundColor="#03396c" verticalAlignment="middle">
-        <Label text="Slide 4" backgroundColor="#50000000" horizontalAlignment="center"/>
-    </ns:CarouselItem>
-</ns:Carousel>
-```
-
-#### Or use a template by wrapping a single `CarouselItem` with `Carousel.itemTemplate` and assigning the `items` property with an array of data.
-
-```xml
-<ns:Carousel id="myCarousel" items="{{ myDataArray }}" height="100%" width="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" android:indicatorAnimation="slide"  indicatorColor="#fff" indicatorOffset="0,0" showIndicator="true">
-    <ns:Carousel.itemTemplate>
-        <ns:CarouselItem backgroundColor="{{ color }}" verticalAlignment="middle">
-            <GridLayout>
-                <Image src="{{ image }}" stretch="aspectFill" />
-                <Label text="{{ title }}" horizontalAlignment="center" backgroundColor="#50000000" height="30" />
-            </GridLayout>
-        </ns:CarouselItem>
-    </ns:Carousel.itemTemplate>
-</ns:Carousel>
-```
-
-#### Events
-
-For both platforms, you can create tap-events on the `CarouselItem` or elements innside it, then check against `selectedPage` to get the index.
-
-```js
-exports.myChangeEvent = function(args) {
-  var changeEventText = 'Page changed to index: ' + args.index;
-  console.log(changeEventText);
-};
-
-exports.myScrollingEvent = function(args) {
-  console.log('Scrolling: ' + args.state.offset);
-};
-```
 
 ## Attributes - Common
 
@@ -176,6 +127,14 @@ Set the indicator count which will change the underlying Android data adapter. S
 | ![anim_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_worm.gif) | ![anim_thin_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_thin_worm.gif) | ![anim_fill](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_fill.gif) | ![anim_drop](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_drop.gif) | ![anim_swap](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_swap.gif) |
 
 ## Changelog
+
+**4.2.5**
+
+- Fix for the dreadded `PagerAdapter changed the adapter's contents without calling PagerAdapter#notifyDataSetChanged!` error on Android.
+- Hotfix on the AndroidX migration.
+- Minor refactor in the `refresh()` function. Safer to call on demand.
+- Redesigned all demo apps. Added more advanced examples. 
+- 4.x will be the last Nativescript 5.x version. All future versions will be Nativescript 6.x only and that includes AndroidX. 
 
 **4.2.1**
 
@@ -309,3 +268,5 @@ I will accept pull requests that improve this and assign credit.
 - `npm run demo.ios` for iOS development
 - `npm run demo-ng.ios` for iOS Angular app
 - `npm run demo-ng.android` for Android Angular
+- `npm run demo-vue.ios` for iOS Vue app
+- `npm run demo-vue.android` for Android Vue
