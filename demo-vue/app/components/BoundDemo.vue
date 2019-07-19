@@ -70,7 +70,8 @@
           var pagenr = this.myData.length + 1;
           var color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
           this.myData.push({ title: `Slide ${pagenr}`, color: color, image: '' });
-          this.$refs.myCarousel.nativeView.selectedPage = this.myData.length-1;
+          
+          //this.$refs.myCarousel.nativeView.selectedPage = this.myData.length-1;
       }
     }
   }

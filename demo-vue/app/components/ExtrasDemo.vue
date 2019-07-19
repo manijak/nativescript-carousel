@@ -15,7 +15,8 @@
           </StackLayout>
 
           <GridLayout height="300">
-              <Carousel ref="myCarousel" height="100%" width="100%" color="white" @pageChanged="myChangePageEvent" indicatorColor="#9b5504" indicatorColorUnselected="#609b5504" 
+              <Carousel ref="myCarousel" debug="true" height="100%" width="100%" :items="myData" colow="white"
+                @pageChanged="myChangePageEvent" indicatorColor="#9b5504" indicatorColorUnselected="#609b5504" 
                 ios:autoPagingInterval="3" android:indicatorAnimation="swap">
                 <CarouselItem v-for="(item, i) in myData" :key="i" verticalAlignment="middle" :backgroundColor="item.color" @tap="myTapPageEvent">
                     <GridLayout>
@@ -66,9 +67,11 @@
     created() {},
     methods: {
       myChangePageEvent(args) {
+        console.log('current page: ', args.index);
         this.currentPage = args.index;
       },
 	    myTapPageEvent: function(args) {
+        console.log('tap page: ', this.$refs.myCarousel.nativeView.selectedPage);
         this.tappedPage = this.$refs.myCarousel.nativeView.selectedPage;
       },
       toggleIndicator: function(){

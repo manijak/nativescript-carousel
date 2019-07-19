@@ -3,7 +3,7 @@
 android {
   defaultConfig {  
     generatedDensities = []
-    applicationId = "__PACKAGE__"
+    applicationId = "org.nativescript.carouseldemovue"
   }
   aaptOptions {  
     additionalParameters "--no-version-vectors"  

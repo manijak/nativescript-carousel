@@ -8,6 +8,9 @@
     "id": "org.nativescript.carouseldemovue",
     "tns-ios": {
       "version": "5.4.2"
+    },
+    "tns-android": {
+      "version": "5.4.0"
     }
   },
   "scripts": {

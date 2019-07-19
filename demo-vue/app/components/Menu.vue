@@ -7,6 +7,8 @@
         <Button class="btn" text="Static Carousel" @tap="carouselStatic" />
         <Button class="btn" text="Data-Bound Carousel" @tap="carouselBound" />
         <Button class="btn" text="Extras & Events" @tap="carouselExtras" />
+
+        <Image src="~/assets/images/vue-logo.png" width="66" margin="20,0,0,0"></Image>
     </StackLayout>
 
   </Page>
