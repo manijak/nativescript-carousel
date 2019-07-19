@@ -159,7 +159,7 @@ export class Carousel extends CarouselCommon {
   }
 
   createNativeView() {
-    Log.D(`Carousel createNativeView`);
+    Log.D(`createNativeView`);
 
     if (this._androidViewId < 0) {
       this._androidViewId = android.view.View.generateViewId();
@@ -185,6 +185,7 @@ export class Carousel extends CarouselCommon {
 
   onLoaded() {
     super.onLoaded();
+    Log.D(`onLoaded`);
 
     if (this.showIndicator !== false) {
       this._pagerIndicatorLayoutParams.height = -2; // PagerNamespace.ViewPager.LayoutParams.WRAP_CONTENT;
@@ -223,35 +224,49 @@ export class Carousel extends CarouselCommon {
   }
 
   initNativeView() {
+    Log.D(`initNativeView`);
     this.refresh();
   }
 
-  refresh() {
-    if (isNullOrUndefined(this.items) || !isNumber(this.items.length)) {
-      return;
+  getItemCount(): number {
+    let itemCount: number;
+    if (!isNullOrUndefined(this.items) && isNumber(this.items.length)) {
+      itemCount = this.items.length;
+    } else {
+      itemCount = this.getChildrenCount();
     }
+    return itemCount; 
+  }
+
+  refresh() {
+    Log.D(`refresh()`);
     if (!this.nativeView) {
       return;
     }
 
-    this.removeChildren();
-
-    const length = this.items.length;
-    for (let i = 0; i < length; i++) {
-      const viewToAdd = !isNullOrUndefined(this.itemTemplate)
-        ? parse(this.itemTemplate, this)
-        : this._getDefaultItemContent(i);
-      const dataItem = this._getDataItem(i);
-      viewToAdd.bindingContext = dataItem;
-      this.addChild(viewToAdd);
+    let itemsCount = this.getItemCount();
+    Log.D(`Items count: `, itemsCount);
+    if(isNullOrUndefined(itemsCount)){
+      return;
     }
 
-    // get the adapter
-    const adapter = this.nativeView.getAdapter();
-    if (adapter) {
-      adapter.notifyDataSetChanged();
-      this._pageIndicatorView.setCount(this.items.length);
+    // Using 'items' property and 'itemTemplate' to populate Carousel. Remove all parent children first then add all items.
+    if (!isNullOrUndefined(this.itemTemplate)) {
+      this.removeChildren();
+      for (let i = 0; i < itemsCount; i++) {
+        const viewToAdd = !isNullOrUndefined(this.itemTemplate) ? parse(this.itemTemplate, this) : this._getDefaultItemContent(i);
+        const dataItem = this._getDataItem(i);
+        viewToAdd.bindingContext = dataItem;
+        this.addChild(viewToAdd);
+      }
+    }
+
+    // Notify adapter and indicatorView that items have changed. 
+    if (this.adapter) {
+      Log.D(`notifyDataSetChanged`);
+      this.adapter.notifyDataSetChanged();
       this.nativeView.setCurrentItem(this.selectedPage);
+      this._pageIndicatorView.setCount(itemsCount);
       this._pageIndicatorView.setSelection(this.selectedPage);
     }
   }
@@ -278,8 +293,8 @@ class CarouselPagerAdapterClassInner extends PagerNamespace.PagerAdapter {
     return global.__native(this);
   }
 
-  getCount() {
-    let result;
+  getCount(): number {
+    let result: number;
     if (isNullOrUndefined(this.owner.get().items) || !isNumber(this.owner.get().items.length)) {
       result = this.owner ? this.owner.get()._childrenCount : 0;
     } else {
@@ -289,7 +304,7 @@ class CarouselPagerAdapterClassInner extends PagerNamespace.PagerAdapter {
   }
 
   getItemPosition(item) {
-    return androidx.viewpager.widget.PagerAdapter.POSITION_NONE;
+    return PagerNamespace.PagerAdapter.POSITION_UNCHANGED;
   }
 
   isViewFromObject(view, _object) {
@@ -308,7 +323,7 @@ class CarouselPagerAdapterClassInner extends PagerNamespace.PagerAdapter {
     } else {
       item.parent.android.removeView(item.android);
     }
-
+    
     if (this[VIEWS_STATES]) {
       item.nativeView.restoreHierarchyState(this[VIEWS_STATES]);
     }
@@ -318,6 +333,7 @@ class CarouselPagerAdapterClassInner extends PagerNamespace.PagerAdapter {
       android.view.ViewGroup.LayoutParams.MATCH_PARENT,
       android.view.ViewGroup.LayoutParams.MATCH_PARENT
     );
+
     return item.nativeView;
   }
 
@@ -327,9 +343,8 @@ class CarouselPagerAdapterClassInner extends PagerNamespace.PagerAdapter {
     if (!item) {
       return null;
     }
-
-    const nativeView = item.nativeView;
-    container.removeView(nativeView);
+    
+    container.removeView(item.nativeView);
   }
 
   saveState() {
@@ -371,7 +386,7 @@ class CarouselPageChangedListener extends PagerNamespace.ViewPager.SimpleOnPageC
   }
 
   onPageSelected(position) {
-    Log.D(`CarouselPageChangedListener onPageSelected()`);
+    Log.D(`CarouselPageChangedListener onPageSelected()`, position);
     this.owner.get().notify({
       eventName: CarouselCommon.pageChangedEvent,
       object: this.owner.get(),
@@ -381,7 +396,7 @@ class CarouselPageChangedListener extends PagerNamespace.ViewPager.SimpleOnPageC
   }
 
   onPageScrollStateChanged(state) {
-    Log.D(`CarouselPageChangedListener onPageScrollStateChanged()`);
+    //Log.D(`CarouselPageChangedListener onPageScrollStateChanged()`);
     this.owner.get().notify({
       eventName: CarouselCommon.pageScrollStateChangedEvent,
       object: this.owner.get(),
@@ -390,7 +405,7 @@ class CarouselPageChangedListener extends PagerNamespace.ViewPager.SimpleOnPageC
   }
 
   onPageScrolled(position, positionOffset, positionOffsetPixels) {
-    Log.D(`CarouselPageChangedListener onPageScrolled()`, position, positionOffset, positionOffsetPixels);
+    //Log.D(`CarouselPageChangedListener onPageScrolled()`, position, positionOffset, positionOffsetPixels);
     const data = {
       eventName: CarouselCommon.pageScrollingEvent,
       object: this.owner.get(),
