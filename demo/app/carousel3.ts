@@ -23,8 +23,8 @@ export function myChangeEvent(args) {
   pageData.set('changeEventText', `Page changed to index = ${args.index}`);
 }
 
-export function mySelectedEvent(args) {
-  pageData.set('tappedViewText', `Tapped index = ${args.index}`);
+export function myPageTapEvent(args) {
+  pageData.set('tappedViewText', `Tapped index = ${myCarousel.selectedPage}`);
 }
 
 let indicatorEnabled = true;

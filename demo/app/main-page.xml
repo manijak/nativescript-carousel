@@ -9,6 +9,7 @@
     <Button text="Static Carousel" tap="carousel1" />
     <Button text="Data-Bound Carousel" tap="carousel2" />
     <Button text="Extras & Events" tap="carousel3" />
-
+    
+    <Image src="~/res/js-ts-logo.png" height="66" margin="20,0,0,0"></Image>
   </StackLayout>
 </Page>

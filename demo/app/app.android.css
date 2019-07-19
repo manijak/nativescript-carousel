@@ -1,4 +1,6 @@
 button {
+  border-radius: 2;
+  font-size: 16;
   margin: 15;
   background-color: #336699;
   color: #fff;
@@ -8,3 +10,7 @@ label {
     text-align: center;
   }
   
+  ActionBar {
+    background-color: #0b4a8a;
+    color: #ffffff;
+  }

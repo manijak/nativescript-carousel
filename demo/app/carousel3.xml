@@ -16,12 +16,12 @@
                 <Label text="Page-indicator can have different animations and change color" textWrap="true" margin="10,5,20,5"/>
             </StackLayout>
 
-            <GridLayout height="250">
+            <GridLayout height="350">
                 <ns:Carousel id="myCarousel" loaded="carouselLoaded" height="100%" width="100%" color="white" 
-                    pageChanged="myChangeEvent" pageTapped="mySelectedEvent" items="{{ myDataArray }}" 
+                    pageChanged="myChangeEvent" items="{{ myDataArray }}" 
                     indicatorColor="#9b5504" indicatorColorUnselected="#609b5504" ios:autoPagingInterval="3" android:indicatorAnimation="THIN_WORM">
                     <ns:Carousel.itemTemplate>
-                        <ns:CarouselItem verticalAlignment="middle" backgroundColor="{{ color }}">
+                        <ns:CarouselItem verticalAlignment="middle" backgroundColor="{{ color }}" tap="myPageTapEvent">
                             <GridLayout>
                                 <Image src="{{ image }}" stretch="aspectFill" />
                                 <Label text="{{ title }}" horizontalAlignment="center" backgroundColor="#50000000" height="30" />

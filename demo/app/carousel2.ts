@@ -4,6 +4,7 @@ import { ObservableArray } from 'tns-core-modules/data/observable-array/observab
 
 let myCarousel: Carousel;
 const pageData = new Observable();
+
 var items = new ObservableArray([{ title: 'Slide 1', color: '#b3cde0', image: '~/res/01.jpg' },
   { title: 'Slide 2', color: '#6497b1', image: '~/res/02.jpg' },
   { title: 'Slide 3', color: '#005b96', image: '~/res/03.jpg' },
@@ -28,7 +29,7 @@ export function myChangeEvent(args) {
 }
 
 export function myTapEvent(args) {
-  console.log('Tapped page: ' + myCarousel.selectedPage);
+  console.log('Tapped page: ' + (myCarousel.selectedPage+1));
 }
 
 export function addNewPage(){

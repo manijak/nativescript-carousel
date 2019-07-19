@@ -8,7 +8,7 @@
         <StackLayout>
             <Label text="Define a template and assign the 'items' array." textWrap="true" margin="20,0,40,0"/>
 
-            <GridLayout height="350" margin="0,0,50,0">
+            <GridLayout height="350" margin="0,0,30,0">
                 <ns:Carousel id="myCarousel" debug="true" height="100%" width="100%" color="white" pageChanged="myChangeEvent"
                         android:indicatorAnimation="slide" items="{{ myData }}" indicatorColor="#fff" indicatorOffset="0, -10" showIndicator="true">
                     <ns:Carousel.itemTemplate>
