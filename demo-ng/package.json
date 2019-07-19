@@ -1,8 +1,8 @@
 {
-  "description": "NativeScript Application",
-  "license": "SEE LICENSE IN <your-license-filename>",
-  "readme": "NativeScript Application",
-  "repository": "<fill-your-repository-here>",
+  "name": "demo-angular-carousel",
+  "version": "1.0.0",
+  "description": "Angular demo of the nativescript-carousel",
+  "license": "MIT",
   "nativescript": {
     "id": "org.nativescript.demongcarousel",
     "tns-ios": {

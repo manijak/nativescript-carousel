@@ -1,4 +1,8 @@
 {
+  "name": "demo-ts-carousel",
+  "version": "1.0.0",
+  "description": "Vanilla TS demo of the nativescript-carousel",
+  "license": "MIT",
   "nativescript": {
     "id": "org.carousel.demo",
     "tns-ios": {
