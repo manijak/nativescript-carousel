@@ -1,18 +1,18 @@
-<ActionBar title="Carousel - Advanced views" class="action-bar"></ActionBar>
+<ActionBar title="Extras & Events Demo"></ActionBar>
 
 <ScrollView>
     <StackLayout>
         <StackLayout android:visibility="collapsed">
             <Label text="Here auto-paging is enabled with an interval of 3 seconds." textWrap="true" margin="10,5,0,5"></Label>
-            <Label text="You can also capture the tap and change events." textWrap="true" margin="10,5,0,5"></Label>
+            <Label text="You can capture the tap and change events." textWrap="true" margin="10,5,0,5"></Label>
             <Label text="Page-indicator can be turned on/off and its color changed" textWrap="true" margin="10,5,20,5"></Label>
         </StackLayout>
         <StackLayout ios:visibility="collapsed">
-            <Label text="You can also capture the change events." textWrap="true" margin="10,5,0,5"></Label>
+            <Label text="You can capture the change events." textWrap="true" margin="10,5,0,5"></Label>
             <Label text="Page-indicator can have different animations and change color" textWrap="true" margin="10,5,20,5"></Label>
         </StackLayout>
 
-        <GridLayout height="250">
+        <GridLayout height="350">
             <ns:Carousel #advCarousel height="100%" width="100%" color="white" 
                 (pageChanged)="pageChangedEvent($event)" indicatorColor="#fff" indicatorColorUnselected="#50ffffff" 
                 ios:autoPagingInterval="3" android:indicatorAnimation="swap">

@@ -1,9 +1,8 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from "@angular/core";
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, Input } from "@angular/core";
 import { Carousel } from "nativescript-carousel";
 
 import { SlideItem } from "./slideItem";
 import { ItemService } from "./item.service";
-
 
 @Component({
     selector: "ns-carousel-dynamic",
@@ -11,21 +10,51 @@ import { ItemService } from "./item.service";
     templateUrl: "./carousel-dynamic.html",
 })
 export class CarouselDynamicComponent implements OnInit, AfterViewInit {
-    @ViewChild('dynamicCarousel', { static: false }) carouselRef: ElementRef;
-    items: SlideItem[];
-    carouselView: Carousel;
-
+    @ViewChild("myCarousel", { static: false }) carouselView: ElementRef<Carousel>;
+    _myData: SlideItem[];
     constructor(private itemService: ItemService) { }
 
     ngOnInit(): void {
-        this.items = this.itemService.getItems();
+        this.myData = this.itemService.getItems();
+        console.log("oninit", this.myData.length);
+    }
+    
+    ngAfterViewInit(): void {}
+    
+    @Input("myData") set myData(items: SlideItem[]) {
+        this._myData = items;
+        console.log('array updated', this.myData.length);
+    }
+    get myData(): SlideItem[]{
+        return this._myData;
     }
 
-    ngAfterViewInit(): void {
-        this.carouselView = this.carouselRef.nativeElement as Carousel;
+    myChangePageEvent(args: any): void {
+        var changeEventText = 'Changed to slide index: ' + (args.index);
+        console.log(changeEventText);
+    }
+    myTapPageEvent(): void {
+        console.log('Tapped page: ' + (this.carouselView.nativeElement.selectedPage+1));
+    }
+    selectPageThree(): void {
+        this.carouselView.nativeElement.selectedPage = 2;
     }
 
-    selectPage(): void {
-        this.carouselView.selectedPage = 2;
+    addNewPage(): void {
+        let itemList = [...this.myData];
+        let pagenr = this.myData.length + 1;
+        let color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+        itemList.push({ pageNr: pagenr, title: `Slide ${pagenr}`, color: color, image: '' });
+        console.log('push item, update array');
+        this.myData = itemList;
+
+        setTimeout(() => {
+            if (this.carouselView) {
+                let selectPage = this.myData.length-1;
+                console.log('focus on page index: ', selectPage);
+                this.carouselView.nativeElement.selectedPage = selectPage;
+            }
+        },300);
+
     }
 }

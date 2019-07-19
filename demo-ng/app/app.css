@@ -4,7 +4,7 @@ button {
   border-radius: 2;
   font-size: 16;
   margin: 15;
-  background-color: #a33401;
+  background-color: #e90262;
   color: #fff;
 }
 label {
@@ -12,6 +12,6 @@ label {
 }
 
 ActionBar {
-  background-color: #bb3601;
+  background-color: #e90262;
   color: #ffffff;
 }
