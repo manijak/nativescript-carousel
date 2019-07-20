@@ -6,7 +6,6 @@
 *.js.map
 *.log
 
-package-lock.json
 hooks
 node_modules
 !webpack.config.js

@@ -22,7 +22,7 @@
                 </ns:Carousel>
             </GridLayout>
 
-            <Label text="Indicator animation type: 'slide'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"/>
+            <Label text="Indicator animation type: 'slide'" textWrap="true" ios:visibility="collapsed"/>
 
             <Button text="Select page 3" tap="selectPageThree" margin="10,10,0,10"/>
             <Button text="Add page" tap="addNewPage" margin="10,10,0,10"/>
