@@ -6,7 +6,7 @@
         <Label text="Define a single CarouselItem element with the 'v-for' tag pointed at your array." textWrap="true" margin="10,0,50,0"/>
         
         <GridLayout height="350">
-            <Carousel ref="myCarousel" v-if="hasItems" debug="true" 
+            <Carousel ref="myCarousel" debug="true" 
               height="100%" width="100%" color="white" @pageChanged="myChangePageEvent" 
               android:indicatorAnimation="slide" indicatorColor="#fff" indicatorOffset="0, -10" showIndicator="true">
                 
@@ -32,6 +32,7 @@
 
 <script>
   const carousel = require("nativescript-carousel");
+  import { isAndroid, isIOS } from 'tns-core-modules/platform';
 
   export default {
     data() {
@@ -53,7 +54,6 @@
             this.$refs.myCarousel.nativeView.refresh();
         },
     },
-    created() {},
     methods: {
       onLoaded () {},
       myChangePageEvent(args) {
@@ -67,11 +67,16 @@
           this.$refs.myCarousel.nativeView.selectedPage = 2;
       },
       addNewPage: function(args){
+        let itemList = [...this.myData];
           var pagenr = this.myData.length + 1;
           var color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
-          this.myData.push({ title: `Slide ${pagenr}`, color: color, image: '' });
+          itemList.push({ title: `Slide ${pagenr}`, color: color, image: '' });
+          console.log('push item, update array');
+          this.myData = itemList;
           
-          //this.$refs.myCarousel.nativeView.selectedPage = this.myData.length-1;
+          if(isIOS){
+            this.$refs.myCarousel.nativeView.selectedPage = this.myData.length-1;
+          }
       }
     }
   }
