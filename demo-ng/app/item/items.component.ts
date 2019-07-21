@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   moduleId: module.id,
   templateUrl: './items.component.html'
 })
+
 export class ItemsComponent{
   constructor() {}
 }
