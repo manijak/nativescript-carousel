@@ -10,7 +10,7 @@ var items = new ObservableArray([{ title: 'Slide 1', color: '#b3cde0', image: '~
   { title: 'Slide 3', color: '#005b96', image: '~/res/03.jpg' },
   { title: 'Slide 4', color: '#03396c', image: '~/res/04.jpg' }]);
 
-export function onNavigatedTo(args) {
+export function pageLoaded(args) {
   var page = args.object;
   page.bindingContext = pageData;
   pageData.set('myData', items);
