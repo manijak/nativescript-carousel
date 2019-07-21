@@ -11,6 +11,7 @@ node_modules
 !webpack.config.js
 
 src/*.d.ts
+src/dist
 !src/index.d.ts
 !src/references.d.ts
 !src/scripts/*.js
@@ -35,3 +36,4 @@ demo-vue/platforms
 
 publish/src
 publish/package
+publish/dist
