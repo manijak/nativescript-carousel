@@ -2,12 +2,12 @@
   "name": "nativescript-carousel",
   "description": "Carousel component for NativeScript (iOS & Android).",
   "main": "carousel",
-  "version": "4.2.6",
+  "version": "6.0.0",
   "typings": "carousel.d.ts",
   "nativescript": {
     "platforms": {
-      "ios": "3.0.0",
-      "android": "3.0.0"
+      "ios": "6.0.0",
+      "android": "6.0.0"
     },
     "plugin": {
       "nan": "true",
@@ -18,8 +18,14 @@
     }
   },
   "scripts": {
-    "tsc": "tsc -skipLibCheck",
-    "build": "npm i && npm run tsc",
+    "tsc": "tsc -skipLibCheck --outDir dist",
+    "tsc.dist": "npm run dist.clean && tsc -skipLibCheck --outDir dist && npm run dist.copy",
+    "dist.copy": "cp -R platforms dist && cp ../README.md dist && cp carousel.d.ts dist && cp package.json dist",
+    "dist.clean": "rimraf dist",
+    "dist.tscwatch": "npm run tsc.dist -- -w",
+    "plugin.tscwatch": "npm run tsc -- -w",
+    "build2": "cd ../publish && sh ./build.sh",
+    "build": "npm i && npm run tsc.dist",
     "clean": "npm run demo.clean && npm run demo-ng.clean && npm run demo-vue.clean",
     "demo.clean": "cd ../demo && rimraf platforms node_modules hooks",
     "demo-ng.clean": "cd ../demo-ng && rimraf platforms node_modules hooks",
@@ -28,8 +34,8 @@
     "demo.android": "cd ../demo && tns run android",
     "demo-ng.ios": "cd ../demo-ng && tns run ios",
     "demo-ng.android": "cd ../demo-ng && tns run android",
-    "demo-vue.ios": "cd ../demo-vue && tns run ios --bundle",
-    "demo-vue.android": "cd ../demo-vue && tns run android --bundle",
+    "demo-vue.ios": "cd ../demo-vue && tns run ios",
+    "demo-vue.android": "cd ../demo-vue && tns run android",
     "test": "npm run tslint && npm run tslint.demo && cd ../demo && tns build ios && tns build android",
     "setup": "npm run build && cd ../demo && npm i && cd ../demo-ng && npm i && cd ../demo-vue && npm i",
     "tslint": "tslint --config '../tslint.json' '*.ts' --exclude '**/node_modules/**'",
@@ -38,8 +44,7 @@
     "prepublishOnly": "npm run build",
     "development.setup": "npm run setup && cd ../demo && cd ../src",
     "generate.typings.ios": "cd ../demo && TNS_DEBUG_METADATA_PATH=\"$(pwd)/metadata\" tns build ios && TNS_TYPESCRIPT_DECLARATIONS_PATH=\"$(pwd)/typings\" tns build ios && echo 'Now look for your library typings in demo/typings!'",
-    "make-changelog": "cd ../ && github_changelog_generator -u manijak -p nativescript-carousel",
-    "plugin.tscwatch": "npm run tsc -- -w"
+    "make-changelog": "cd ../ && github_changelog_generator -u manijak -p nativescript-carousel"
   },
   "repository": {
     "type": "git",
@@ -72,11 +77,11 @@
   "license": "MIT",
   "homepage": "https://github.com/manijak/nativescript-carousel",
   "devDependencies": {
-    "husky": "^3.0.0",
+    "husky": "^3.0.1",
     "lint-staged": "^9.2.0",
     "prettier": "^1.18.2",
-    "tns-core-modules": "^5.4.3",
-    "tns-platform-declarations": "androidx",
+    "tns-core-modules": "^6.0.1",
+    "tns-platform-declarations": "^6.0.1",
     "typescript": "~3.5.3",
     "prompt": "^1.0.0",
     "rimraf": "^2.6.3",

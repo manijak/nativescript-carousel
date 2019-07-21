@@ -24,5 +24,9 @@
     "demo",
     "node_modules"
   ],
+  "include": [
+    "../src",
+    "**/*"
+  ],
   "compileOnSave": false
 }
