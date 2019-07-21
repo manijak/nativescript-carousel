@@ -1,13 +1,14 @@
-@import '~nativescript-theme-core/css/core.light.css';
+@import '~nativescript-theme-core/css/ruby.css';
 
-button {
+Button {
   border-radius: 2;
   font-size: 16;
   margin: 15;
   background-color: #e90262;
   color: #fff;
 }
-label {
+
+Label {
   text-align: center;
 }
 
