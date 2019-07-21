@@ -22,7 +22,6 @@
     "tsc.dist": "npm run dist.clean && tsc -skipLibCheck --outDir dist && npm run dist.copy",
     "dist.copy": "cp -R platforms dist && cp ../README.md dist && cp carousel.d.ts dist && cp package.json dist",
     "dist.clean": "rimraf dist",
-    "dist.tscwatch": "npm run tsc.dist -- -w",
     "plugin.tscwatch": "npm run tsc -- -w",
     "build2": "cd ../publish && sh ./build.sh",
     "build": "npm i && npm run tsc.dist",
