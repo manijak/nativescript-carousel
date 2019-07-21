@@ -6,12 +6,7 @@ import { layout } from 'tns-core-modules/utils/utils';
 import { CarouselCommon, CarouselUtil, indicatorAnimationDurationProperty, indicatorAnimationProperty, indicatorColorProperty, indicatorColorUnselectedProperty, indicatorPaddingProperty, indicatorRadiusProperty, Log, selectedPageProperty } from './carousel.common';
 
 const VIEWS_STATES = '_viewStates';
-
-const PagerNamespace = useAndroidX() ? androidx.viewpager.widget : (android.support.v4 as any).view;
-function useAndroidX() {
-  return global.androidx && androidx.viewpager;
-}
-
+const PagerNamespace = androidx.viewpager.widget;
 declare const global, com: any;
 
 export * from './carousel.common';
@@ -294,13 +289,7 @@ class CarouselPagerAdapterClassInner extends PagerNamespace.PagerAdapter {
   }
 
   getCount(): number {
-    let result: number;
-    if (isNullOrUndefined(this.owner.get().items) || !isNumber(this.owner.get().items.length)) {
-      result = this.owner ? this.owner.get()._childrenCount : 0;
-    } else {
-      result = this.owner ? this.owner.get().items.length : 0;
-    }
-    return result;
+    return this.owner.get().getItemCount();
   }
 
   getItemPosition(item) {
@@ -311,16 +300,23 @@ class CarouselPagerAdapterClassInner extends PagerNamespace.PagerAdapter {
     return view === _object;
   }
 
-  instantiateItem(container, index) {
-    Log.D(`CarouselPagerAdapterClassInner instantiateItem()`, container, index);
+  instantiateItem(container: androidx.viewpager.widget.ViewPager, index: number) {
+    Log.D(`-------> CarouselPagerAdapter instantiateItem()`, index);
+    Log.D(`-------> PagerAdapter: Collection count: `, container.getChildCount());
+    Log.D(`-------> PagerAdapter: Carousel count: `, this.owner.get().getChildrenCount());
+    Log.D(`-------> PagerAdapter: Items count: `, this.getCount());
+
     const item = this.owner.get().getChildAt(index);
+    //Log.D(`PagerAdapter getChildAt: `, item);
     if (!item) {
       return null;
     }
 
     if (item.parent !== this.owner.get()) {
+      //Log.D(`addChild`);
       this.owner.get().addChild(item);
     } else {
+      //Log.D(`Remove parent`);
       item.parent.android.removeView(item.android);
     }
     
@@ -328,17 +324,15 @@ class CarouselPagerAdapterClassInner extends PagerNamespace.PagerAdapter {
       item.nativeView.restoreHierarchyState(this[VIEWS_STATES]);
     }
 
-    container.addView(
-      item.nativeView,
-      android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-      android.view.ViewGroup.LayoutParams.MATCH_PARENT
-    );
+    //Log.D(`addView()`);
+    container.addView(item.nativeView);
 
+    //Log.D(`return nativeView`);
     return item.nativeView;
   }
 
   destroyItem(container, index, _object) {
-    Log.D(`CarouselPagerAdapterClassInner destroyItem()`, container, index, _object);
+    Log.D(`CarouselPagerAdapterClassInner destroyItem()`, index);
     const item = this.owner.get().getChildAt(index);
     if (!item) {
       return null;
