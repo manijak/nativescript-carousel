@@ -36,8 +36,7 @@ export function addNewPage(){
   var pagenr = items.length + 1;
   var color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
   items.push({ title: `Slide ${pagenr}`, color: color, image: '' });
-  pageData.set('myData', items);
-
+  
   myCarousel.selectedPage = items.length-1;
 }
 
