@@ -11,7 +11,7 @@ import { ItemService } from "./item.service";
 })
 export class CarouselDynamicComponent implements OnInit, AfterViewInit {
     @ViewChild("myCarousel", { static: false }) carouselView: ElementRef<Carousel>;
-    _myData: SlideItem[];
+    myData: SlideItem[];
     constructor(private itemService: ItemService) { }
 
     ngOnInit(): void {
@@ -21,14 +21,6 @@ export class CarouselDynamicComponent implements OnInit, AfterViewInit {
     
     ngAfterViewInit(): void {}
     
-    @Input("myData") set myData(items: SlideItem[]) {
-        this._myData = items;
-        console.log('array updated', this.myData.length);
-    }
-    get myData(): SlideItem[]{
-        return this._myData;
-    }
-
     myChangePageEvent(args: any): void {
         var changeEventText = 'Changed to slide index: ' + (args.index);
         console.log(changeEventText);
@@ -54,7 +46,7 @@ export class CarouselDynamicComponent implements OnInit, AfterViewInit {
                 console.log('focus on page index: ', selectPage);
                 this.carouselView.nativeElement.selectedPage = selectPage;
             }
-        },300);
+        },100);
 
     }
 }
