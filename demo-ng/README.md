@@ -11,7 +11,7 @@ registerElement('CarouselItem', () => CarouselItem);
 ## Manually create each slide by using `CarouselItem` without data-binding
 
 ```xml
-<Carousel height="100%" width="100%" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff000" finite="true" bounce="false" showIndicator="true" verticalAlignment="top"        android:indicatorAnimation="swap" color="white">
+<Carousel height="100%" width="100%" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff000" finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap" color="white">
     <CarouselItem id="slide1" backgroundColor="#b3cde0" verticalAlignment="middle">
         <Label text="Slide 1" backgroundColor="#50000000" horizontalAlignment="center"/>
     </CarouselItem>
@@ -72,11 +72,11 @@ From the `src` folder you can run a set of npm scripts based on what you want to
 Navigate to the `src` folder:
 `cd src`
 
+Build the Carousel plugin:
+`npm run build`
+
 Run iOS demo:
 `npm run demo-ng.ios`
 
 Run Android demo:
 `npm run demo-ng.android`
-
-You might have to build the carousel plugin pior to running the demos:
-`npm build`

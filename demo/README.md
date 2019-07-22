@@ -68,11 +68,11 @@ From the `src` folder you can run a set of npm scripts based on what you want to
 Navigate to the `src` folder:
 `cd src`
 
+Build the Carousel plugin:
+`npm run build`
+
 Run iOS demo:
 `npm run demo.ios`
 
 Run Android demo:
 `npm run demo.android`
-
-You might have to build the carousel plugin pior to running the demos:
-`npm build`

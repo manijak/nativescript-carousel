@@ -32,6 +32,7 @@ Vue.registerElement('CarouselItem', () => require('nativescript-carousel').Carou
 **Warning: This method is a bit of a "hack" in order to get the data-bound Carousel working with Vue. There are certain conditions that need to be met in order for the data-bound Carousel to work properly:** 
 
 You need to assign your data-array the `CarouselItem` using the `v-for="(item, i) in myData"` directive.
+You also need to add a watcher on your data-array for the Carousel to refresh.
 
 **Example:**
 ```xml
@@ -45,6 +46,14 @@ You need to assign your data-array the `CarouselItem` using the `v-for="(item, i
         </CarouselItem>
     </Carousel>
 </GridLayout>
+```
+```js
+watch: {
+    async myData(to) {
+        await this.$nextTick()
+        this.$refs.myCarousel.nativeView.refresh();
+    },
+}
 ```
 
 ## Events
@@ -69,11 +78,11 @@ From the `src` folder you can run a set of npm scripts based on what you want to
 Navigate to the `src` folder:
 `cd src`
 
+Build the Carousel plugin:
+`npm run build`
+
 Run iOS demo:
 `npm run demo-vue.ios`
 
 Run Android demo:
 `npm run demo-vue.android`
-
-You might have to build the carousel plugin pior to running the demos:
-`npm build`

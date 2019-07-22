@@ -130,6 +130,14 @@ Set the indicator count which will change the underlying Android data adapter. S
 
 ## Changelog
 
+**6.0.0**
+
+- NativeScript 6.0 & AndroidX migration.
+- IndicatorView gradle bumped to 1.0.3 (androidx).
+- Some refactorings on the Android side for the plugin to work better with Angular & Vue.
+- Demos updated, again.
+- Instructions for each demo updated.
+
 **4.2.5**
 
 - Fix for the dreadded `PagerAdapter changed the adapter's contents without calling PagerAdapter#notifyDataSetChanged!` error on Android.
