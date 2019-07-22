@@ -6,7 +6,7 @@
         <Label text="Define a single CarouselItem element with the 'v-for' tag pointed at your array." textWrap="true" margin="10,0,50,0"/>
         
         <GridLayout height="350">
-            <Carousel ref="myCarousel" debug="true" 
+            <Carousel ref="myCarousel" debug="true"
               height="100%" width="100%" color="white" @pageChanged="myChangePageEvent" 
               android:indicatorAnimation="slide" indicatorColor="#fff" indicatorOffset="0, -10" showIndicator="true">
                 
@@ -74,9 +74,7 @@
           console.log('push item, update array');
           this.myData = itemList;
           
-          if(isIOS){
-            this.$refs.myCarousel.nativeView.selectedPage = this.myData.length-1;
-          }
+          this.$refs.myCarousel.nativeView.selectedPage = this.myData.length-1;
       }
     }
   }
