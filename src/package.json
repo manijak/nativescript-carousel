@@ -23,7 +23,6 @@
     "dist.copy": "cp -R platforms dist && cp ../README.md dist && cp carousel.d.ts dist && cp package.json dist",
     "dist.clean": "rimraf dist",
     "plugin.tscwatch": "npm run tsc -- -w",
-    "build2": "cd ../publish && sh ./build.sh",
     "build": "npm i && npm run tsc.dist",
     "clean": "npm run demo.clean && npm run demo-ng.clean && npm run demo-vue.clean",
     "demo.clean": "cd ../demo && rimraf platforms node_modules hooks",
