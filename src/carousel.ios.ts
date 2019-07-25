@@ -1,10 +1,11 @@
+import * as app from "tns-core-modules/application";
 import { screen } from 'tns-core-modules/platform';
 import { parse } from 'tns-core-modules/ui/builder';
 import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
+import { DeviceOrientation } from 'tns-core-modules/ui/enums';
 import { autoPagingIntervalProperty, bounceProperty, CarouselCommon, CarouselItem, 
          CarouselUtil, finiteProperty, indicatorColorProperty, indicatorColorUnselectedProperty, indicatorOffsetProperty, 
          Log, scrollEnabledProperty, selectedPageProperty, showIndicatorProperty } from './carousel.common';
-
 export * from './carousel.common';
 
 export class Carousel extends CarouselCommon {
@@ -13,10 +14,14 @@ export class Carousel extends CarouselCommon {
   public itemTemplate;
   public selectedPage;
   private _isDirty: boolean;
+  private currentOrientation: string;
 
   constructor() {
     super();
     CarouselUtil.debug = this.debug;
+
+    this.currentOrientation = DeviceOrientation.unknown;
+    app.on('orientationChanged', this.onOrientationChanged);
   }
 
   get ios(): any {
@@ -66,10 +71,11 @@ export class Carousel extends CarouselCommon {
   }
 
   createNativeView() {
-    this.nativeView = new DKCarouselView(
-      UIView.alloc().initWithFrame(CGRectMake(0, 0, screen.mainScreen.widthDIPs, 0))
-    );
+    const viewWidth = this.getActualSize().width === 0 ? screen.mainScreen.widthDIPs : this.getActualSize().width;
+    const viewHeight = this.getActualSize().height === 0 ? screen.mainScreen.heightDIPs : this.getActualSize().height;
+    Log.D('createNativeView size', viewWidth, viewHeight);
     
+    this.nativeView = DKCarouselView.alloc().initWithFrame(CGRectMake(0, 0, viewWidth, viewHeight));
     Log.D('createNativeView', this.nativeView);
     return this.nativeView;
   }
@@ -132,6 +138,14 @@ export class Carousel extends CarouselCommon {
     }
   }
 
+  onOrientationChanged = (evt) => {
+    Log.D(`OrientationChanged to `, evt.newValue);
+    if(this.currentOrientation != evt.newValue){
+      this.currentOrientation = evt.newValue;
+      this.refresh();
+    }
+  };
+
   refresh() {
     Log.D(`refresh()`);
     if (!this.isLoaded || !this.nativeView) {
@@ -142,16 +156,17 @@ export class Carousel extends CarouselCommon {
     this._isDirty = false;
     this.nativeView.setItems(NSMutableArray.new());
 
+
     if (isNullOrUndefined(this.itemTemplate)) {
       Log.D(`Using generic-mode`);
       const nsArray = NSMutableArray.new();
       Log.D(`children count: `, this.getChildrenCount());
-      this.eachChildView(view1 => {
-        if (view1 instanceof CarouselItem) {
-          view1.width = this.width;
-          view1.height = this.height;
+      this.eachChildView(staticView => {
+        if (staticView instanceof CarouselItem) {
+          staticView.width = this.width;
+          staticView.height = this.height;
           const dkCarouselViewItem1 = new DKCarouselViewItem();
-          dkCarouselViewItem1.view = view1.ios;
+          dkCarouselViewItem1.view = staticView.ios;
           nsArray.addObject(dkCarouselViewItem1);
         }
         return true;
@@ -161,7 +176,6 @@ export class Carousel extends CarouselCommon {
     } 
     else {
       Log.D(`Using template-mode`);
-
       if(isNullOrUndefined(this.items)){
         Log.D(`Items list is null...`);
         return;
