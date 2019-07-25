@@ -1,35 +1,32 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" 
-    xmlns:ns="nativescript-carousel">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:ns="nativescript-carousel" actionBarHidden="false">
     <Page.actionBar>
         <ActionBar title="Static Carousel Demo"></ActionBar>
     </Page.actionBar>
 
-    <GridLayout class="carousel-layout-fix">
-        <ns:Carousel debug="true" height="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff000" 
-            finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="swap" indicatorOffset="0, -30">
+        <ns:Carousel debug="true" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff000"
+            finite="false" showIndicator="true" android:indicatorAnimation="swap" indicatorOffset="0, -30" height="100%">
 
-            <ns:CarouselItem id="slide1" verticalAlignment="middle">
+            <ns:CarouselItem id="slide1">
                 <Label text="Each slide is defined in the XML." textWrap="true" margin="30" />
                 <Label text="Slide 1" backgroundColor="#50000000" horizontalAlignment="center"></Label>
             </ns:CarouselItem>
 
-            <ns:CarouselItem id="slide2" verticalAlignment="middle">
-                <Label text="'finite' is set to True. Carousel will stop at the last slide." textWrap="true" margin="30" android:visibility="collapsed" />
+            <ns:CarouselItem id="slide2">
+                <Label text="'finite' is set to False. Carousel will not stop at the last slide." textWrap="true" margin="30" android:visibility="collapsed" />
                 <Label text="" textWrap="true" margin="50" ios:visibility="collapsed" />
                 <Label text="Slide 2" backgroundColor="#50000000" horizontalAlignment="center"></Label>
             </ns:CarouselItem>
 
-            <ns:CarouselItem id="slide3" verticalAlignment="middle">
+            <ns:CarouselItem id="slide3">
                 <Label text="Indicator animation type: 'swap'" textWrap="true" ios:visibility="collapsed" margin="30"/>
                 <Label text="In order to use the Carousel in full height & widt, wrap in in a Layout and add slight padding (check the css class)." textWrap="true" android:visibility="collapsed" margin="30"/>
                 <Label text="Slide 3" backgroundColor="#50000000" horizontalAlignment="center"></Label>
             </ns:CarouselItem>
 
-            <ns:CarouselItem id="slide4" verticalAlignment="middle">
+            <ns:CarouselItem id="slide4">
                 <Label text="Enjoy using the Carousel plugin :)" textWrap="true" margin="30"/>
                 <Label text="Slide 4" backgroundColor="#50000000" horizontalAlignment="center"></Label>
             </ns:CarouselItem>
 
         </ns:Carousel>
-    </GridLayout>
 </Page>
