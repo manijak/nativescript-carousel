@@ -9,16 +9,18 @@
             <CarouselItem id="slide1" verticalAlignment="middle">
                 <Label text="Each slide is defined in the XML." textWrap="true" margin="30" />
                 <Label text="Slide 1" backgroundColor="#50000000" horizontalAlignment="center"></Label>
+
+                 <Label text="Wrap the Carousel in a GridLayout in order to place the indicator on top (android)" textWrap="true" margin="30" ios:visibility="collapsed"/>
             </CarouselItem>
 
             <CarouselItem id="slide2" verticalAlignment="middle">
                 <Label text="'finite' is set to True. Carousel will stop at the last slide." textWrap="true" margin="30" android:visibility="collapsed" />
+                <Label text="Indicator animation type: 'swap'" textWrap="true" ios:visibility="collapsed" margin="30"/>
                 <Label text="Slide 2" backgroundColor="#50000000" horizontalAlignment="center"></Label>
             </CarouselItem>
 
             <CarouselItem id="slide3" verticalAlignment="middle">
-                <Label text="Indicator animation type: 'swap'" textWrap="true" ios:visibility="collapsed" margin="30"/>
-                <Label text="In order to use the Carousel in full height & widt, wrap in in a Layout and add slight padding (check the css class)." textWrap="true" android:visibility="collapsed" margin="30"/>
+                <Label text="Carousel can be used in fullscreen, just set height to 100%" textWrap="true" margin="30"/>
                 <Label text="Slide 3" backgroundColor="#50000000" horizontalAlignment="center"></Label>
             </CarouselItem>
 
