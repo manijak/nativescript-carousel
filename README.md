@@ -18,6 +18,7 @@ Run `tns plugin add nativescript-carousel` in the ROOT directory of your project
 
 - (iOS) PagerIndicator animations not available for iOS, only Android.
 - (Android) Auto- and Infinite-paging not available.
+- (Android) Carousel still needs to be wrapped in a GridLayout for the indicator to overlap.
 
 ## Usage
 
@@ -129,6 +130,13 @@ Set the indicator count which will change the underlying Android data adapter. S
 | ![anim_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_worm.gif) | ![anim_thin_worm](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_thin_worm.gif) | ![anim_fill](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_fill.gif) | ![anim_drop](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_drop.gif) | ![anim_swap](https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/anim_swap.gif) |
 
 ## Changelog
+
+**6.1.0**
+
+- Fix for iOS safe-area issues. No need to use the custom css-padding-hack any more.
+- DKCarouselView pod updated to version 2.5.0 (fix safe-area layout).
+- Known bugs: Orientation change render-issues on iOS (DKCarouselView) (help wanted).
+- Demos updated.
 
 **6.0.0**
 
