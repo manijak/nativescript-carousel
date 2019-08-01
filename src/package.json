@@ -11,9 +11,11 @@
     },
     "plugin": {
       "nan": "true",
-      "core3": "false",
+      "core3": "true",
       "pan": "true",
-      "wrapper": "false",
+      "vue": "true",
+      "webpack": "true",
+      "wrapper": "",
       "category": "Interface"
     }
   },
