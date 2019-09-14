@@ -1,4 +1,5 @@
 import { Component, OnInit, } from "@angular/core";
+import { Page } from "tns-core-modules/ui/page/page";
 
 @Component({
     selector: "ns-carousel-static",
@@ -8,9 +9,9 @@ import { Component, OnInit, } from "@angular/core";
 })
 export class CarouselStaticComponent implements OnInit {
    
-    constructor() { }
+    constructor(private page: Page) { }
 
     ngOnInit(): void {
-    
+        //this.page.actionBarHidden = true;
     }
 }
