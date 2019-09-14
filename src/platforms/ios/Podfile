@@ -1,1 +1,1 @@
-pod 'DKCarouselView', :git => 'https://github.com/manijak/DKCarouselView'
+pod 'DKCarouselView', :git => 'https://github.com/manijak/DKCarouselView', :tag => '2.4.15'
