@@ -6,6 +6,7 @@ import { ItemsComponent } from "./item/items.component";
 import { CarouselStaticComponent } from "./item/carousel-static.component";
 import { CarouselDynamicComponent } from "./item/carousel-dynamic.component";
 import { CarouselAdvancedComponent } from "./item/carousel-advanced.component";
+import { CarouselImageZoomComponent } from "./item/carousel-image-zoom.component";
 
 const routes: Routes = [
     { path: "", redirectTo: "/items", pathMatch: "full" },
@@ -13,6 +14,8 @@ const routes: Routes = [
     { path: "static", component: CarouselStaticComponent },
     { path: "dynamic", component: CarouselDynamicComponent },
     { path: "advanced", component: CarouselAdvancedComponent },
+    { path: "imageZoom", component: CarouselImageZoomComponent },
+    
 ];
 
 @NgModule({

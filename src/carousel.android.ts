@@ -3,7 +3,7 @@ import { View } from 'tns-core-modules/ui/core/view';
 import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
 import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
 import { layout } from 'tns-core-modules/utils/utils';
-import { CarouselCommon, CarouselUtil, indicatorAnimationDurationProperty, indicatorAnimationProperty, indicatorColorProperty, indicatorColorUnselectedProperty, indicatorPaddingProperty, indicatorRadiusProperty, Log, selectedPageProperty } from './carousel.common';
+import { CarouselCommon, CarouselUtil, indicatorAnimationDurationProperty, indicatorAnimationProperty, indicatorColorProperty, indicatorColorUnselectedProperty, indicatorPaddingProperty, indicatorRadiusProperty, Log, selectedPageProperty, scrollEnabledProperty } from './carousel.common';
 
 const VIEWS_STATES = '_viewStates';
 const PagerNamespace = androidx.viewpager.widget;
@@ -21,7 +21,7 @@ export class Carousel extends CarouselCommon {
   public _childrenCount; // public so it's accessible inside extended classes using WeakRef
   public CarouselPagerAdapterClass: CarouselPagerAdapterClassInner;
   public CarouselPageChangedListenerClass: CarouselPageChangedListener;
-
+  
   constructor() {
     super();
     CarouselUtil.debug = this.debug;
@@ -53,6 +53,11 @@ export class Carousel extends CarouselCommon {
       this.adapter.notifyDataSetChanged();
       this._pageIndicatorView.setCount(value);
     }
+  }
+
+  [scrollEnabledProperty.setNative](value) {
+    Log.D(`scrollEnabledProperty value = ${value}`);
+    this.nativeView.setScrollEnabled(value);
   }
 
   [indicatorColorProperty.setNative](value) {
@@ -166,7 +171,7 @@ export class Carousel extends CarouselCommon {
       this._indicatorViewId = android.view.View.generateViewId();
     }
 
-    this.nativeView = new PagerNamespace.ViewPager(this._context);
+    this.nativeView = new CustomViewPager(this._context);
     this.nativeView.setId(this._androidViewId);
     Log.D(`this.nativeView = ${this.nativeView}`);
 
@@ -284,6 +289,24 @@ export class Carousel extends CarouselCommon {
   public onItemsChanged(data) {
     Log.D(`_onItemsChanged()`, data);
     this.refresh();
+  }
+}
+
+class CustomViewPager extends androidx.viewpager.widget.ViewPager {
+  private _scrollEnabled: boolean = true;
+
+  constructor(context: android.content.Context) {
+      super(context);
+
+      return global.__native(this);
+  }
+
+  public onInterceptTouchEvent(event: android.view.MotionEvent): boolean {
+      return this._scrollEnabled && super.onInterceptTouchEvent(event);
+  }
+
+  public setScrollEnabled(enable: boolean) {
+      this._scrollEnabled = enable;
   }
 }
 

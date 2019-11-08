@@ -7,6 +7,7 @@ import { CarouselDynamicComponent } from './item/carousel-dynamic.component';
 import { CarouselAdvancedComponent } from './item/carousel-advanced.component';
 import { ItemService } from './item/item.service';
 import { ItemsComponent } from './item/items.component';
+import { CarouselImageZoomComponent } from './item/carousel-image-zoom.component';
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -17,7 +18,7 @@ import { ItemsComponent } from './item/items.component';
 @NgModule({
   bootstrap: [AppComponent],
   imports: [NativeScriptModule, AppRoutingModule],
-  declarations: [AppComponent, ItemsComponent, CarouselStaticComponent, CarouselDynamicComponent, CarouselAdvancedComponent],
+  declarations: [AppComponent, ItemsComponent, CarouselImageZoomComponent, CarouselStaticComponent, CarouselDynamicComponent, CarouselAdvancedComponent],
   providers: [ItemService],
   schemas: [NO_ERRORS_SCHEMA]
 })

@@ -1,0 +1,16 @@
+<GridLayout>
+  <Carousel debug="false" color="white"
+    android:indicatorAnimation="slide" indicatorColor="#e90262" indicatorColorUnselected="#CCCCCC" indicatorOffset="0, 4"
+    showIndicator="true" width="100%" height="100%" [scrollEnabled]="scrollEnabled"
+    (pageChanged)="pageChangedEvent($event)" verticalAlignment="center" horizontalAlignment="center">
+    <CarouselItem *ngFor="let image of getImages(); let i = index">
+
+      <GridLayout background="rgba(0,0,0, 0.1)" width="100%" height="100%" (pinch)="onPinch($event)"
+        (pan)="onPan($event)" (doubleTap)="onDoubleTap($event)">
+        <Image [id]="'image'+i" verticalAlignment="center" horizontalAlignment="center" [src]="image" stretch="aspectFit"></Image>
+          <!-- [translateX]="getTranslateX(i)" [translateY]="getTranslateY(i)" [scaleX]="getScale(i)" [scaleY]="getScale(i)"> -->
+        <!-- </Image> -->
+      </GridLayout>
+    </CarouselItem>
+  </Carousel>
+</GridLayout>

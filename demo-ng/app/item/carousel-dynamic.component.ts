@@ -10,6 +10,7 @@ import { ItemService } from "./item.service";
     templateUrl: "./carousel-dynamic.html",
 })
 export class CarouselDynamicComponent implements OnInit, AfterViewInit {
+    scrollEnabled: boolean = true;
     @ViewChild("myCarousel", { static: false }) carouselView: ElementRef<Carousel>;
     myData: SlideItem[];
     constructor(private itemService: ItemService) { }
@@ -48,5 +49,9 @@ export class CarouselDynamicComponent implements OnInit, AfterViewInit {
             }
         },100);
 
+    }
+
+    onCheckedChange(args) {
+        this.scrollEnabled = args.object.checked;
     }
 }

@@ -13,9 +13,9 @@
         </StackLayout>
 
         <GridLayout height="350">
-            <ns:Carousel #advCarousel height="100%" width="100%" color="white" 
+            <ns:Carousel #advCarousel height="100%" width="100%" color="white"
                 (pageChanged)="pageChangedEvent($event)" indicatorColor="#fff" indicatorColorUnselected="#50ffffff" 
-                ios:autoPagingInterval="3" android:indicatorAnimation="swap">
+                ios:autoPagingInterval="3" android:indicatorAnimation="swap" [scrollEnabled]="scrollEnabled">
 
                     <ns:CarouselItem *ngFor="let item of items" verticalAlignment="middle" [backgroundColor]="item.color" (tap)="pageTappedEvent($event)">
                         <GridLayout>
@@ -30,6 +30,10 @@
 
         <Button text="Toggle indicator" (tap)="toggleIndicator()" margin="10,10,0,10" android:visibility="collapsed"></Button>
         <Button text="Toggle indicator color" (tap)="toggleColor()" margin="10,10,0,10"></Button>
+        <StackLayout orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" margin="10"> 
+            <Label text="Enable Carousel Scroll" verticalAlignment="center"></Label>
+            <Switch checked="true" (checkedChange)="onCheckedChange($event)"></Switch>
+        </StackLayout>
         <Label [text]=" 'Selected page: ' + currentPage" textWrap="true" margin="10,0,0,0"></Label>
         <Label [text]=" 'Tapped page: ' + tappedPage" textWrap="true" margin="0,0,0,0"></Label>
     </StackLayout>

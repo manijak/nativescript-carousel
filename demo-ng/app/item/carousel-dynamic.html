@@ -6,7 +6,7 @@
 
         <GridLayout height="350">
             <Carousel #myCarousel debug="true" [items]="myData" height="100%" width="100%" color="white" (pageChanged)="myChangePageEvent($event)" 
-                    android:indicatorAnimation="slide" indicatorColor="#fff" indicatorOffset="0, -10" showIndicator="true">
+                    android:indicatorAnimation="slide" indicatorColor="#fff" indicatorOffset="0, -10" showIndicator="true" [scrollEnabled]="scrollEnabled">
                 <CarouselItem *ngFor="let item of myData" [backgroundColor]="item.color" verticalAlignment="middle" (tap)="myTapPageEvent()">
                     <GridLayout>
                         <Image [src]="item.image" stretch="aspectFill"></Image>
@@ -21,5 +21,9 @@
         <Button text="Select page 3" (tap)="selectPageThree()" margin="10,10,0,10"></Button>
         <Button text="Add page" (tap)="addNewPage()" margin="10,10,0,10"></Button>
         <Label text="Tap the button to add more pages" textWrap="true" margin="10,10,0,10"></Label>
+        <StackLayout orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" margin="10"> 
+            <Label text="Enable Carousel Scroll" verticalAlignment="center"></Label>
+            <Switch checked="true" (checkedChange)="onCheckedChange($event)"></Switch>
+        </StackLayout>
     </StackLayout>
 </ScrollView>

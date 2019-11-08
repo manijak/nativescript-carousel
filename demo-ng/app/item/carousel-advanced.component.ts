@@ -15,6 +15,7 @@ export class CarouselAdvancedComponent implements OnInit, AfterViewInit {
     currentPage: number = 1;
     tappedPage: number = 0;
     indicatorEnabled: boolean = true;
+    scrollEnabled: boolean = true;
 
     carouselView: Carousel;
     constructor(private itemService: ItemService) { }
@@ -43,5 +44,9 @@ export class CarouselAdvancedComponent implements OnInit, AfterViewInit {
 
     pageTappedEvent(args: any): void{
         this.tappedPage = this.carouselView.selectedPage +1;
+    }
+
+    onCheckedChange(args) {
+        this.scrollEnabled = args.object.checked;
     }
 }
