@@ -1,8 +1,8 @@
 {
-  "name": "nativescript-carousel",
+  "name": "humai-nativescript-carousel",
   "description": "Carousel component for NativeScript (iOS & Android).",
   "main": "carousel",
-  "version": "6.1.2",
+  "version": "6.1.1",
   "typings": "carousel.d.ts",
   "nativescript": {
     "platforms": {
