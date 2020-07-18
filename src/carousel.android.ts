@@ -1,8 +1,4 @@
-import { parse } from 'tns-core-modules/ui/builder';
-import { View } from 'tns-core-modules/ui/core/view';
-import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
-import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
-import { layout } from 'tns-core-modules/utils/utils';
+import { Builder, View, GridLayout, Utils } from '@nativescript/core';
 import { CarouselCommon, CarouselUtil, indicatorAnimationDurationProperty, indicatorAnimationProperty, indicatorColorProperty, indicatorColorUnselectedProperty, indicatorPaddingProperty, indicatorRadiusProperty, Log, selectedPageProperty } from './carousel.common';
 
 const VIEWS_STATES = '_viewStates';
@@ -192,8 +188,8 @@ export class Carousel extends CarouselCommon {
       const y = ar[1] ? Number(ar[1]) : 0;
 
       const defaultVerticalMargin = 25;
-      const verticalOffset = layout.toDevicePixels(defaultVerticalMargin + (y < 0 ? Math.abs(y) : -Math.abs(y))); // Reverse +- to be the same as ios
-      const horizontalOffset = layout.toDevicePixels(x);
+      const verticalOffset = Utils.layout.toDevicePixels(defaultVerticalMargin + (y < 0 ? Math.abs(y) : -Math.abs(y))); // Reverse +- to be the same as ios
+      const horizontalOffset = Utils.layout.toDevicePixels(x);
 
       if (this.indicatorAlignment === 'TOP') {
         this._pagerIndicatorLayoutParams.setMargins(horizontalOffset, verticalOffset, 0, 0);
@@ -226,7 +222,7 @@ export class Carousel extends CarouselCommon {
 
   getItemCount(): number {
     let itemCount: number;
-    if (!isNullOrUndefined(this.items) && isNumber(this.items.length)) {
+    if (!Utils.isNullOrUndefined(this.items) && Utils.isNumber(this.items.length)) {
       itemCount = this.items.length;
     } else {
       itemCount = this.getChildrenCount();
@@ -242,16 +238,16 @@ export class Carousel extends CarouselCommon {
 
     let itemsCount = this.getItemCount();
     Log.D(`Items count: `, itemsCount);
-    if(isNullOrUndefined(itemsCount)){
+    if(Utils.isNullOrUndefined(itemsCount)){
       return;
     }
 
     // Using 'items' property and 'itemTemplate' to populate Carousel. Remove all parent children first then add all items.
-    if (!isNullOrUndefined(this.itemTemplate)) {
+    if (!Utils.isNullOrUndefined(this.itemTemplate)) {
       Log.D(`Using template mode`);
       this.removeChildren();
       for (let i = 0; i < itemsCount; i++) {
-        const viewToAdd = !isNullOrUndefined(this.itemTemplate) ? parse(this.itemTemplate, this) : this._getDefaultItemContent(i);
+        const viewToAdd = !Utils.isNullOrUndefined(this.itemTemplate) ? Builder.parse(this.itemTemplate, this) : this._getDefaultItemContent(i);
         const dataItem = this._getDataItem(i);
         viewToAdd.bindingContext = dataItem;
         this.addChild(viewToAdd);
@@ -267,7 +263,7 @@ export class Carousel extends CarouselCommon {
       this._pageIndicatorView.setSelection(this.selectedPage);
     }
 
-    if(isNullOrUndefined(this.itemTemplate)){
+    if(Utils.isNullOrUndefined(this.itemTemplate)){
       Log.D(`setOffscreenPageLimit`);
       this.nativeView.setOffscreenPageLimit(itemsCount);
     }
@@ -314,7 +310,7 @@ class CarouselPagerAdapterClassInner extends PagerNamespace.PagerAdapter {
     Log.D(`-------> PagerAdapter: Items count: `, this.getCount());
 
     const item = this.owner.get().getChildAt(index);
-    if (isNullOrUndefined(item)) {
+    if (Utils.isNullOrUndefined(item)) {
       Log.D(`-------> PagerAdapter: Could not find Carousel(Grid) child item at index: `, index);
       return null;
     }

@@ -9,6 +9,7 @@
 hooks
 node_modules
 !webpack.config.js
+package-lock.json
 
 src/*.d.ts
 src/dist

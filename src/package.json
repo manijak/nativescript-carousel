@@ -2,7 +2,7 @@
   "name": "nativescript-carousel",
   "description": "Carousel component for NativeScript (iOS & Android).",
   "main": "carousel",
-  "version": "6.1.1",
+  "version": "7.0.0",
   "typings": "carousel.d.ts",
   "nativescript": {
     "platforms": {
@@ -80,9 +80,9 @@
     "husky": "^3.0.1",
     "lint-staged": "^9.2.0",
     "prettier": "^1.18.2",
-    "tns-core-modules": "^6.0.1",
-    "tns-platform-declarations": "^6.0.1",
-    "typescript": "~3.5.3",
+    "@nativescript/core": "rc",
+    "@nativescript/types": "rc",
+    "typescript": "~3.9.0",
     "prompt": "^1.0.0",
     "rimraf": "^2.6.3",
     "tslint": "^5.18.0",
