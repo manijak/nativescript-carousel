@@ -5,6 +5,7 @@
 *.js
 *.js.map
 *.log
+*.tgz
 
 hooks
 node_modules
@@ -38,3 +39,4 @@ demo-vue/platforms
 publish/src
 publish/package
 publish/dist
+package-lock.json
