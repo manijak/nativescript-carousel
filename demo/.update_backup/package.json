@@ -4,16 +4,14 @@
   "description": "Vanilla TS demo of the nativescript-carousel",
   "license": "MIT",
   "dependencies": {
-    "@nativescript/core": "7.0.0",
-    "@nativescript/theme": "^2.3.3",
     "nativescript-carousel": "file:../src",
-    "nativescript-theme-core": "^2.0.2"
+    "nativescript-theme-core": "^2.0.2",
+    "@nativescript/core": "7.0.0",
+    "@nativescript/webpack": "3.0.0"
   },
   "devDependencies": {
     "@nativescript/android": "7.0.0",
-    "@nativescript/ios": "7.0.0",
     "@nativescript/types": "7.0.0",
-    "@nativescript/webpack": "~3.0.0",
     "typescript": "3.9.7"
   },
   "main": "app.js"
