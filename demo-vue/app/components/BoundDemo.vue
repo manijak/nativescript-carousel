@@ -32,7 +32,7 @@
 
 <script>
   const carousel = require("nativescript-carousel");
-  import { isAndroid, isIOS } from 'tns-core-modules/platform';
+  import { Platform } from '@nativescript/core';
 
   export default {
     data() {
