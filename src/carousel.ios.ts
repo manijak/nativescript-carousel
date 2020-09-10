@@ -70,7 +70,7 @@ export class Carousel extends CarouselCommon {
     const viewWidth = this.getActualSize().width === 0 ? Screen.mainScreen.widthDIPs : this.getActualSize().width;
     const viewHeight = this.getActualSize().height === 0 ? Screen.mainScreen.heightDIPs : this.getActualSize().height;
     Log.D('createNativeView size', viewWidth, viewHeight);
-    
+
     this.nativeView = DKCarouselView.alloc().initWithFrame(CGRectMake(0, 0, viewWidth, viewHeight));
     Log.D('createNativeView', this.nativeView);
     return this.nativeView;
@@ -136,11 +136,11 @@ export class Carousel extends CarouselCommon {
 
   onOrientationChanged = (evt) => {
     Log.D(`OrientationChanged to `, evt.newValue);
-    if(this.currentOrientation != evt.newValue){
+    if (this.currentOrientation != evt.newValue) {
       this.currentOrientation = evt.newValue;
       this.refresh();
     }
-  };
+  }
 
   refresh() {
     Log.D(`refresh()`);
@@ -169,7 +169,7 @@ export class Carousel extends CarouselCommon {
       });
       this.nativeView.setItems(nsArray);
       Log.D(`items set: `, nsArray.count);
-    } 
+    }
     else {
       Log.D(`Using template-mode`);
       if(Utils.isNullOrUndefined(this.items)){

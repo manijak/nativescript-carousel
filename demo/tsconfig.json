@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
+        "target": "ES2017",
+        "module": "esnext",
+        "moduleResolution": "node",
         "declaration": false,
         "removeComments": true,
         "noLib": false,

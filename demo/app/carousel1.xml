@@ -1,7 +1,5 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:ns="nativescript-carousel" actionBarHidden="false">
-    <Page.actionBar>
-        <ActionBar title="Static Carousel Demo"></ActionBar>
-    </Page.actionBar>
+    <ActionBar title="Static Carousel Demo"></ActionBar>
 
     <GridLayout>
         <ns:Carousel debug="true" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff000"

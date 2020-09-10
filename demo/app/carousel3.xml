@@ -1,9 +1,5 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" 
     xmlns:ns="nativescript-carousel">
-    <Page.actionBar>
-        <ActionBar title="Extras & Events Demo"></ActionBar>
-    </Page.actionBar>
-
     <ScrollView>
         <StackLayout>
             <StackLayout android:visibility="collapsed">

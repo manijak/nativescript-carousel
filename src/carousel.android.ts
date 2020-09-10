@@ -283,6 +283,7 @@ export class Carousel extends CarouselCommon {
   }
 }
 
+@NativeClass()
 class CarouselPagerAdapterClassInner extends PagerNamespace.PagerAdapter {
   private owner: WeakRef<Carousel>;
   constructor(owner: WeakRef<Carousel>) {

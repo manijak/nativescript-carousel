@@ -1,6 +1,5 @@
 import { Carousel } from 'nativescript-carousel';
-import { Observable } from 'tns-core-modules/data/observable';
-import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
+import { Observable, ObservableArray } from '@nativescript/core';
 
 let myCarousel: Carousel = null;
 let pageData = new Observable();
