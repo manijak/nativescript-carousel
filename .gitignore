@@ -5,10 +5,12 @@
 *.js
 *.js.map
 *.log
+*.tgz
 
 hooks
 node_modules
 !webpack.config.js
+package-lock.json
 
 src/*.d.ts
 src/dist
@@ -37,3 +39,4 @@ demo-vue/platforms
 publish/src
 publish/package
 publish/dist
+package-lock.json
