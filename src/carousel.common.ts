@@ -1,11 +1,4 @@
-import { Color } from 'tns-core-modules/color/color';
-import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
-import { booleanConverter, Property, Template, View } from 'tns-core-modules/ui/core/view';
-import { addWeakEventListener, removeWeakEventListener } from 'tns-core-modules/ui/core/weak-event-listener/weak-event-listener';
-import { Label } from 'tns-core-modules/ui/label';
-import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
-import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout';
-import { isNullOrUndefined, isNumber } from 'tns-core-modules/utils/types';
+import { Color, ObservableArray, booleanConverter, Property, Template, View, addWeakEventListener, removeWeakEventListener, Label, GridLayout, StackLayout, Utils } from '@nativescript/core';
 
 export class CarouselUtil {
   public static debug: boolean = false;
@@ -356,7 +349,7 @@ function onItemsChanged(view: any, oldValue, newValue) {
     addWeakEventListener(newValue, ObservableArray.changeEvent, view.refresh, view);
   }
 
-  if (!isNullOrUndefined(view.items) && isNumber(view.items.length)) {
+  if (!Utils.isNullOrUndefined(view.items) && Utils.isNumber(view.items.length)) {
     view.refresh(false);
   }
 }
