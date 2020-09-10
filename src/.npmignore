@@ -14,3 +14,4 @@ platforms/android/*
 !platforms/android/*.aar
 !platforms/android/*.jar
 dist/
+*.tgz

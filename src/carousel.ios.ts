@@ -1,27 +1,7 @@
-import {
-  Application,
-  Screen,
-  Builder,
-  Utils,
-  Enums
-} from '@nativescript/core';
-
-import {
-  autoPagingIntervalProperty,
-  bounceProperty,
-  CarouselCommon,
-  CarouselItem,
-  CarouselUtil,
-  finiteProperty,
-  indicatorColorProperty,
-  indicatorColorUnselectedProperty,
-  indicatorOffsetProperty,
-  Log,
-  scrollEnabledProperty,
-  selectedPageProperty,
-  showIndicatorProperty
-} from './carousel.common';
-
+import { Application, Enums, Screen, Utils, Builder } from '@nativescript/core';
+import { autoPagingIntervalProperty, bounceProperty, CarouselCommon, CarouselItem, 
+         CarouselUtil, finiteProperty, indicatorColorProperty, indicatorColorUnselectedProperty, indicatorOffsetProperty, 
+         Log, scrollEnabledProperty, selectedPageProperty, showIndicatorProperty } from './carousel.common';
 export * from './carousel.common';
 
 export class Carousel extends CarouselCommon {
@@ -192,7 +172,7 @@ export class Carousel extends CarouselCommon {
     }
     else {
       Log.D(`Using template-mode`);
-      if (Utils.isNullOrUndefined(this.items)) {
+      if(Utils.isNullOrUndefined(this.items)){
         Log.D(`Items list is null...`);
         return;
       }
