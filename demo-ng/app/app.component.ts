@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { registerElement } from 'nativescript-angular/element-registry';
+import { registerElement } from '@nativescript/angular';
 // Register Custom Elements for Angular
 import { Carousel, CarouselItem } from 'nativescript-carousel';
 

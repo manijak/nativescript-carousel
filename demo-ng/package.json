@@ -3,41 +3,37 @@
   "version": "1.0.0",
   "description": "Angular demo of the nativescript-carousel",
   "license": "MIT",
-  "nativescript": {
-    "id": "org.nativescript.demongcarousel",
-    "tns-ios": {
-      "version": "6.0.1"
-    },
-    "tns-android": {
-      "version": "6.0.0"
-    }
+  "scripts": {
+    "postinstall": "ngcc --properties es2015 module main --first-only"
   },
   "dependencies": {
-    "@angular/animations": "^8.1.2",
-    "@angular/common": "^8.1.2",
-    "@angular/compiler": "^8.1.2",
-    "@angular/core": "^8.1.2",
-    "@angular/forms": "^8.1.2",
-    "@angular/http": "^7.2.15",
-    "@angular/platform-browser": "^8.1.2",
-    "@angular/platform-browser-dynamic": "^8.1.2",
-    "@angular/router": "^8.1.2",
-    "nativescript-angular": "^8.0.2",
+    "@angular/animations": "^10.1.1",
+    "@angular/common": "^10.1.1",
+    "@angular/compiler": "^10.1.1",
+    "@angular/core": "^10.1.1",
+    "@angular/forms": "^10.1.1",
+    "@angular/platform-browser": "^10.1.1",
+    "@angular/platform-browser-dynamic": "^10.1.1",
+    "@angular/router": "^10.1.1",
+    "@nativescript/angular": "10.0.0",
+    "@nativescript/core": "7.0.0",
+    "@nativescript/theme": "^2.3.3",
+    "@nativescript/webpack": "3.0.0",
     "nativescript-carousel": "file:../src/dist",
-    "nativescript-dev-webpack": "^1.0.1",
-    "nativescript-theme-core": "^2.0.2",
     "reflect-metadata": "~0.1.13",
     "rxjs": "^6.5.2",
-    "tns-core-modules": "^6.0.1",
     "zone.js": "^0.9.1"
   },
   "devDependencies": {
+    "@angular/compiler-cli": "10.1.1",
+    "@nativescript/android": "7.0.0",
+    "@nativescript/ios": "7.0.0",
+    "@ngtools/webpack": "10.1.1",
     "babel-traverse": "6.26.0",
     "babel-types": "6.26.0",
     "babylon": "6.18.0",
     "lazy": "1.0.11",
-    "typescript": "3.4.5",
-    "@angular/compiler-cli": "8.1.2",
-    "@ngtools/webpack": "8.1.2"
-  }
+    "typescript": "3.9.7"
+  },
+  "main": "main.js"
 }

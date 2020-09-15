@@ -35,6 +35,7 @@ export declare class Carousel extends CarouselCommon {
   onItemsChanged(data: any): void;
 }
 
+@NativeClass()
 declare class CarouselPagerAdapterClassInner extends androidx.viewpager.widget.PagerAdapter {
   private owner;
   constructor(owner: WeakRef<Carousel>);
@@ -46,6 +47,7 @@ declare class CarouselPagerAdapterClassInner extends androidx.viewpager.widget.P
   saveState(): android.os.Bundle;
   restoreState(state: any, loader: any): void;
 }
+
 declare class CarouselPageChangedListener extends androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener {
   private owner;
   constructor(owner: WeakRef<Carousel>);

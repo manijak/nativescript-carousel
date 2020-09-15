@@ -1,5 +1,5 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
+import { NativeScriptModule } from '@nativescript/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { CarouselStaticComponent } from './item/carousel-static.component';
@@ -9,10 +9,10 @@ import { ItemService } from './item/item.service';
 import { ItemsComponent } from './item/items.component';
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
-// import { NativeScriptFormsModule } from "nativescript-angular/forms";
+// import { NativeScriptFormsModule } from "@nativescript/angular";
 
 // Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
-// import { NativeScriptHttpModule } from "nativescript-angular/http";
+// import { NativeScriptHttpModule } from "@nativescript/angular";
 
 @NgModule({
   bootstrap: [AppComponent],
