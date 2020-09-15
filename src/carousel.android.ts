@@ -364,6 +364,7 @@ class CarouselPagerAdapterClassInner extends PagerNamespace.PagerAdapter {
   }
 }
 
+@NativeClass()
 class CarouselPageChangedListener extends PagerNamespace.ViewPager.SimpleOnPageChangeListener {
   private owner: WeakRef<Carousel>;
 

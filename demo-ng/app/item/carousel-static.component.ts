@@ -1,5 +1,5 @@
 import { Component, OnInit, } from "@angular/core";
-import { Page } from "tns-core-modules/ui/page/page";
+import { Page } from "@nativescript/core";
 
 @Component({
     selector: "ns-carousel-static",

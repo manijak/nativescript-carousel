@@ -31,6 +31,8 @@ demo/platforms
 !demo/app/tests/*.js
 !demo/references.d.ts
 
+!demo-ng/ngcc.config.js
+
 demo-ng/platforms
 
 demo-vue/platforms

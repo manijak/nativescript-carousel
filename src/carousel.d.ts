@@ -46,6 +46,7 @@ declare class CarouselPagerAdapterClassInner extends androidx.viewpager.widget.P
   saveState(): android.os.Bundle;
   restoreState(state: any, loader: any): void;
 }
+
 declare class CarouselPageChangedListener extends androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener {
   private owner;
   constructor(owner: WeakRef<Carousel>);
