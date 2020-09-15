@@ -1,31 +1,52 @@
 <ActionBar title="Static Carousel Demo"></ActionBar>
 
 <GridLayout class="carousel-layout-fix">
-    <Carousel debug="true" height="100%" width="100%" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorOffset="0, -30"
-        indicatorColor="#fff000" finite="true" bounce="false" showIndicator="true" verticalAlignment="top" android:indicatorAnimation="WORM">
-        
-        <CarouselItem id="slide1" verticalAlignment="middle">
-            <Label text="Each slide is defined in the XML." textWrap="true" margin="30"></Label>
-            <Label text="Slide 1" backgroundColor="#50000000" horizontalAlignment="center"></Label>
+  <Carousel
+    debug="true"
+    height="100%"
+    width="100%"
+    color="white"
+    pageChanged="myChangeEvent"
+    pageTapped="mySelectedEvent"
+    indicatorOffset="0, -30"
+    indicatorColor="#fff000"
+    finite="true"
+    bounce="false"
+    showIndicator="true"
+    verticalAlignment="top"
+    android:indicatorAnimation="WORM"
+  >
+    <CarouselItem id="slide1" verticalAlignment="middle">
+      <label text="Each slide is defined in the XML." textWrap="true" margin="30"></label>
+      <label text="Slide 1" backgroundColor="#50000000" horizontalAlignment="center"></label>
 
-            <Label text="Wrap the Carousel in a GridLayout in order to place the indicator on top (android)" textWrap="true" margin="30" ios:visibility="collapsed"></Label>
-        </CarouselItem>
+      <label
+        text="Wrap the Carousel in a GridLayout in order to place the indicator on top (android)"
+        textWrap="true"
+        margin="30"
+        ios:visibility="collapsed"
+      ></label>
+    </CarouselItem>
 
-        <CarouselItem id="slide2" verticalAlignment="middle">
-            <Label text="'finite' is set to False. Carousel will not stop at the last slide" textWrap="true" margin="30" android:visibility="collapsed"></Label>
-            <Label text="Indicator animation type: 'WORM'" textWrap="true" ios:visibility="collapsed" margin="30"></Label>
-            <Label text="Slide 2" backgroundColor="#50000000" horizontalAlignment="center"></Label>
-        </CarouselItem>
+    <CarouselItem id="slide2" verticalAlignment="middle">
+      <label
+        text="'finite' is set to False. Carousel will not stop at the last slide"
+        textWrap="true"
+        margin="30"
+        android:visibility="collapsed"
+      ></label>
+      <label text="Indicator animation type: 'WORM'" textWrap="true" ios:visibility="collapsed" margin="30"></label>
+      <label text="Slide 2" backgroundColor="#50000000" horizontalAlignment="center"></label>
+    </CarouselItem>
 
-        <CarouselItem id="slide3" verticalAlignment="middle">
-            <Label text="Carousel can be used in fullscreen, just set height to 100%" textWrap="true"  margin="30"></Label>
-            <Label text="Slide 3" backgroundColor="#50000000" horizontalAlignment="center"></Label>
-        </CarouselItem>
+    <CarouselItem id="slide3" verticalAlignment="middle">
+      <label text="Carousel can be used in fullscreen, just set height to 100%" textWrap="true" margin="30"></label>
+      <label text="Slide 3" backgroundColor="#50000000" horizontalAlignment="center"></label>
+    </CarouselItem>
 
-        <CarouselItem id="slide4" verticalAlignment="middle">
-            <Label text="Enjoy using the Carousel plugin :)" textWrap="true" margin="30"></Label>
-            <Label text="Slide 4" backgroundColor="#50000000" horizontalAlignment="center"></Label>
-        </CarouselItem>
-
-    </Carousel>
+    <CarouselItem id="slide4" verticalAlignment="middle">
+      <label text="Enjoy using the Carousel plugin :)" textWrap="true" margin="30"></label>
+      <label text="Slide 4" backgroundColor="#50000000" horizontalAlignment="center"></label>
+    </CarouselItem>
+  </Carousel>
 </GridLayout>

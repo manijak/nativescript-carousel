@@ -1,9 +1,0 @@
-{
-  "android": {
-    "v8Flags": "--expose_gc"
-  },
-  "discardUncaughtJsExceptions": true,
-  "main": "app.js",
-  "name": "carousel-demo-vue",
-  "version": "1.0.0"
-}

@@ -1,4 +1,17 @@
-import { Color, ObservableArray, booleanConverter, Property, Template, View, addWeakEventListener, removeWeakEventListener, Label, GridLayout, StackLayout, Utils } from '@nativescript/core';
+import {
+  addWeakEventListener,
+  booleanConverter,
+  Color,
+  GridLayout,
+  Label,
+  ObservableArray,
+  Property,
+  removeWeakEventListener,
+  StackLayout,
+  Template,
+  Utils,
+  View,
+} from '@nativescript/core';
 
 export class CarouselUtil {
   public static debug: boolean = false;
@@ -143,7 +156,7 @@ export class CarouselCommon extends GridLayout {
     const lbl = new Label();
     lbl.bind({
       targetProperty: 'text',
-      sourceProperty: '$value'
+      sourceProperty: '$value',
     });
     return lbl;
   }
@@ -170,7 +183,7 @@ export const debugProperty = new Property<CarouselCommon, boolean>({
   valueConverter: booleanConverter,
   valueChanged: (view, oldValue, newValue) => {
     CarouselUtil.debug = newValue;
-  }
+  },
 });
 debugProperty.register(CarouselCommon);
 
@@ -179,26 +192,26 @@ export const itemTemplateProperty = new Property<CarouselCommon, any>({
   affectsLayout: true,
   valueChanged: (view: any, oldValue, newValue) => {
     view.refresh(true);
-  }
+  },
 });
 itemTemplateProperty.register(CarouselCommon);
 
 export const itemsProperty = new Property<CarouselCommon, ObservableArray<any>>({
   name: 'items',
   affectsLayout: true,
-  valueChanged: onItemsChanged
+  valueChanged: onItemsChanged,
 });
 itemsProperty.register(CarouselCommon);
 
 export const selectedPageProperty = new Property<CarouselCommon, number>({
   name: 'selectedPage',
   defaultValue: 0,
-  valueConverter: value => {
+  valueConverter: (value) => {
     return +value;
   },
   valueChanged: (view, oldValue, newValue) => {
     view.selectedPage = newValue;
-  }
+  },
 });
 selectedPageProperty.register(CarouselCommon);
 
@@ -208,31 +221,31 @@ export const showIndicatorProperty = new Property<CarouselCommon, boolean>({
   valueConverter: booleanConverter,
   valueChanged: (view, oldValue, newValue) => {
     view.showIndicator = newValue;
-  }
+  },
 });
 showIndicatorProperty.register(CarouselCommon);
 
 export const indicatorColorProperty = new Property<CarouselCommon, Color>({
   name: 'indicatorColor',
   equalityComparer: Color.equals,
-  valueConverter: value => {
+  valueConverter: (value) => {
     return new Color(value);
   },
   valueChanged: (view, oldValue, newValue) => {
     view.indicatorColor = newValue;
-  }
+  },
 });
 indicatorColorProperty.register(CarouselCommon);
 
 export const indicatorColorUnselectedProperty = new Property<CarouselCommon, Color>({
   name: 'indicatorColorUnselected',
   equalityComparer: Color.equals,
-  valueConverter: value => {
+  valueConverter: (value) => {
     return new Color(value);
   },
   valueChanged: (view, oldValue, newValue) => {
     view.indicatorColorUnselected = newValue;
-  }
+  },
 });
 indicatorColorUnselectedProperty.register(CarouselCommon);
 
@@ -241,7 +254,7 @@ export const indicatorOffsetProperty = new Property<CarouselCommon, any>({
   defaultValue: '0,0',
   valueChanged: (view, oldValue, newValue) => {
     view.indicatorOffset = newValue;
-  }
+  },
 });
 indicatorOffsetProperty.register(CarouselCommon);
 
@@ -249,12 +262,12 @@ indicatorOffsetProperty.register(CarouselCommon);
 export const autoPagingIntervalProperty = new Property<CarouselCommon, number>({
   name: 'autoPagingInterval',
   defaultValue: 0,
-  valueConverter: value => {
+  valueConverter: (value) => {
     return +value;
   },
   valueChanged: (view, oldValue, newValue) => {
     view.autoPagingInterval = newValue;
-  }
+  },
 });
 autoPagingIntervalProperty.register(CarouselCommon);
 
@@ -263,7 +276,7 @@ export const finiteProperty = new Property<CarouselCommon, boolean>({
   valueConverter: booleanConverter,
   valueChanged: (view, oldValue, newValue) => {
     view.finite = newValue;
-  }
+  },
 });
 finiteProperty.register(CarouselCommon);
 
@@ -272,7 +285,7 @@ export const bounceProperty = new Property<CarouselCommon, boolean>({
   valueConverter: booleanConverter,
   valueChanged: (view, oldValue, newValue) => {
     view.bounce = newValue;
-  }
+  },
 });
 bounceProperty.register(CarouselCommon);
 
@@ -281,7 +294,7 @@ export const scrollEnabledProperty = new Property<CarouselCommon, boolean>({
   valueConverter: booleanConverter,
   valueChanged: (view, oldValue, newValue) => {
     view.scrollEnabled = newValue;
-  }
+  },
 });
 scrollEnabledProperty.register(CarouselCommon);
 
@@ -291,19 +304,19 @@ export const indicatorAnimationProperty = new Property<CarouselCommon, Indicator
   affectsLayout: true,
   valueChanged: (view, oldValue, newValue) => {
     view.indicatorAnimation = newValue;
-  }
+  },
 });
 indicatorAnimationProperty.register(CarouselCommon);
 
 export const indicatorAnimationDurationProperty = new Property<CarouselCommon, number>({
   name: 'indicatorAnimationDuration',
   affectsLayout: true,
-  valueConverter: value => {
+  valueConverter: (value) => {
     return +value;
   },
   valueChanged: (view, oldValue, newValue) => {
     view.indicatorAnimationDuration = newValue;
-  }
+  },
 });
 indicatorAnimationDurationProperty.register(CarouselCommon);
 
@@ -312,31 +325,31 @@ export const indicatorAlignmentProperty = new Property<CarouselCommon, any>({
   defaultValue: 'BOTTOM',
   valueChanged: (view, oldValue, newValue) => {
     view.indicatorAlignment = newValue.toUpperCase();
-  }
+  },
 });
 indicatorAlignmentProperty.register(CarouselCommon);
 
 export const indicatorRadiusProperty = new Property<CarouselCommon, number>({
   name: 'indicatorRadius',
   affectsLayout: true,
-  valueConverter: value => {
+  valueConverter: (value) => {
     return +value;
   },
   valueChanged: (view, oldValue, newValue) => {
     view.indicatorRadius = newValue;
-  }
+  },
 });
 indicatorRadiusProperty.register(CarouselCommon);
 
 export const indicatorPaddingProperty = new Property<CarouselCommon, number>({
   name: 'indicatorPadding',
   affectsLayout: true,
-  valueConverter: value => {
+  valueConverter: (value) => {
     return +value;
   },
   valueChanged: (view, oldValue, newValue) => {
     view.indicatorPadding = newValue;
-  }
+  },
 });
 indicatorPaddingProperty.register(CarouselCommon);
 
@@ -367,5 +380,5 @@ export enum IndicatorAnimation {
   'SCALE_DOWN' = 'SCALE_DOWN',
   'THIN_WORM' = 'THIN_WORM',
   'DROP' = 'DROP',
-  'SWAP' = 'SWAP'
+  'SWAP' = 'SWAP',
 }

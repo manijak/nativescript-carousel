@@ -20,18 +20,14 @@
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true,
-    "plugins": [{
-      "transform": "@nativescript/webpack/transformers/ns-transform-native-classes",
-      "type": "raw"
-    }]
+    "plugins": [
+      {
+        "transform": "@nativescript/webpack/transformers/ns-transform-native-classes",
+        "type": "raw"
+      }
+    ]
   },
-  "exclude": [
-    "demo",
-    "node_modules"
-  ],
-  "include": [
-    "../src",
-    "**/*"
-  ],
+  "exclude": ["demo", "node_modules"],
+  "include": ["../src", "**/*"],
   "compileOnSave": false
 }

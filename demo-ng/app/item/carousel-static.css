@@ -1,24 +1,24 @@
 #slide1 {
-    background: linear-gradient(45deg, #eb3349, #f45c43);
-    vertical-align: center;
-  }
-  
-  #slide2 {
-    background: linear-gradient(-45deg, #93f9b9, #1d976c);
-    vertical-align: center;
-  }
-  
-  #slide3 {
-    background: linear-gradient(45deg, #1d2b64, #f8cdda);
-    vertical-align: center;
-  }
-  
-  #slide4 {
-    background: linear-gradient(tobottom, #003973, #e5e5be);
-    vertical-align: center;
-  }
+  background: linear-gradient(45deg, #eb3349, #f45c43);
+  vertical-align: center;
+}
 
-  .carousel-layout-fix{
-    padding: 0.1 0;
-    margin: -0.1 0;
-  }
+#slide2 {
+  background: linear-gradient(-45deg, #93f9b9, #1d976c);
+  vertical-align: center;
+}
+
+#slide3 {
+  background: linear-gradient(45deg, #1d2b64, #f8cdda);
+  vertical-align: center;
+}
+
+#slide4 {
+  background: linear-gradient(tobottom, #003973, #e5e5be);
+  vertical-align: center;
+}
+
+.carousel-layout-fix {
+  padding: 0.1 0;
+  margin: -0.1 0;
+}

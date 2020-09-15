@@ -1,4 +1,4 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" 
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded"
     xmlns:ns="nativescript-carousel">
     <Page.actionBar>
         <ActionBar title="Data-bound Carousel"></ActionBar>
@@ -9,8 +9,7 @@
             <Label text="Define a template and assign the 'items' array." textWrap="true" margin="20,0,20,0"/>
 
             <GridLayout height="350" margin="0,0,20,0">
-                <ns:Carousel id="myCarousel" debug="true" color="white" pageChanged="myChangeEvent" 
-                        android:indicatorAnimation="slide" items="{{ myData }}" indicatorColor="#fff" indicatorOffset="0, -10" showIndicator="true">
+                <ns:Carousel id="myCarousel" debug="true" color="white" pageChanged="myChangeEvent" android:indicatorAnimation="slide" items="{{ myData }}" indicatorColor="#fff" indicatorOffset="0, -10" showIndicator="true">
                     <ns:Carousel.itemTemplate>
                         <ns:CarouselItem backgroundColor="{{ color }}" verticalAlignment="middle" tap="myTapEvent">
                             <GridLayout>
