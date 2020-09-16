@@ -1,18 +1,18 @@
 @import '~nativescript-theme-core/css/forest.css';
 
 ActionBar {
-    background-color: #53ba82;
-    color: #ffffff;
+  background-color: #53ba82;
+  color: #ffffff;
 }
 
-Label {
+label {
   text-align: center;
 }
 
-Button {
-      font-size: 16;
-      border-radius: 2;
-      background-color: #298f64;
-      color: #fff;
-      margin: 16;
-  }
+button {
+  font-size: 16;
+  border-radius: 2;
+  background-color: #298f64;
+  color: #fff;
+  margin: 16;
+}

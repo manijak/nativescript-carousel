@@ -16,17 +16,17 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "nativescript-carousel": "file:../src",
-    "nativescript-theme-core": "^2.0.2",
-    "nativescript-vue": "^2.3.0",
-    "@nativescript/core": "7.0.0",
-    "@nativescript/webpack": "3.0.0"
+    "nativescript-carousel": "file:../src/dist",
+    "nativescript-theme-core": "^2.0.24",
+    "nativescript-vue": "^2.8.1",
+    "@nativescript/core": "~7.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@nativescript/android": "7.0.0",
     "@nativescript/ios": "7.0.0",
+    "@nativescript/webpack": "~3.0.0",
     "babel-loader": "^8.0.6",
     "babel-traverse": "6.26.0",
     "babel-types": "6.26.0",

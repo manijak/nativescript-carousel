@@ -1,8 +1,0 @@
-{
-	"name": "migration",
-	"paths": [
-		"package.json",
-		"nsconfig.json",
-		"app/package.json"
-	]
-}

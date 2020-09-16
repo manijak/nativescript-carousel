@@ -1,7 +1,19 @@
-import { Application, Enums, Screen, Utils, Builder } from '@nativescript/core';
-import { autoPagingIntervalProperty, bounceProperty, CarouselCommon, CarouselItem, 
-         CarouselUtil, finiteProperty, indicatorColorProperty, indicatorColorUnselectedProperty, indicatorOffsetProperty, 
-         Log, scrollEnabledProperty, selectedPageProperty, showIndicatorProperty } from './carousel.common';
+import { Application, Builder, Enums, Screen, Utils } from '@nativescript/core';
+import {
+  autoPagingIntervalProperty,
+  bounceProperty,
+  CarouselCommon,
+  CarouselItem,
+  CarouselUtil,
+  finiteProperty,
+  indicatorColorProperty,
+  indicatorColorUnselectedProperty,
+  indicatorOffsetProperty,
+  Log,
+  scrollEnabledProperty,
+  selectedPageProperty,
+  showIndicatorProperty,
+} from './carousel.common';
 export * from './carousel.common';
 
 export class Carousel extends CarouselCommon {
@@ -18,10 +30,6 @@ export class Carousel extends CarouselCommon {
 
     this.currentOrientation = Enums.DeviceOrientation.unknown;
     Application.on('orientationChanged', this.onOrientationChanged);
-  }
-
-  get ios(): any {
-    return this.nativeView;
   }
 
   [autoPagingIntervalProperty.setNative](value) {
@@ -85,7 +93,7 @@ export class Carousel extends CarouselCommon {
         eventName: CarouselCommon.pageTappedEvent,
         object: this,
         view: item,
-        index: index
+        index: index,
       };
       this.notify(data);
     });
@@ -95,7 +103,7 @@ export class Carousel extends CarouselCommon {
         eventName: CarouselCommon.pageChangedEvent,
         object: this,
         view: view,
-        index: index
+        index: index,
       };
       this.selectedPage = index;
       this.notify(data);
@@ -107,8 +115,8 @@ export class Carousel extends CarouselCommon {
         object: this,
         view: view,
         state: {
-          offset: offset
-        }
+          offset: offset,
+        },
       };
       this.notify(data);
     });
@@ -140,7 +148,7 @@ export class Carousel extends CarouselCommon {
       this.currentOrientation = evt.newValue;
       this.refresh();
     }
-  }
+  };
 
   refresh() {
     Log.D(`refresh()`);
@@ -152,12 +160,11 @@ export class Carousel extends CarouselCommon {
     this._isDirty = false;
     this.nativeView.setItems(NSMutableArray.new());
 
-
     if (Utils.isNullOrUndefined(this.itemTemplate)) {
       Log.D(`Using generic-mode`);
       const nsArray = NSMutableArray.new();
       Log.D(`children count: `, this.getChildrenCount());
-      this.eachChildView(staticView => {
+      this.eachChildView((staticView) => {
         if (staticView instanceof CarouselItem) {
           staticView.width = this.width;
           staticView.height = this.height;
@@ -169,10 +176,9 @@ export class Carousel extends CarouselCommon {
       });
       this.nativeView.setItems(nsArray);
       Log.D(`items set: `, nsArray.count);
-    }
-    else {
+    } else {
       Log.D(`Using template-mode`);
-      if(Utils.isNullOrUndefined(this.items)){
+      if (Utils.isNullOrUndefined(this.items)) {
         Log.D(`Items list is null...`);
         return;
       }
@@ -190,7 +196,7 @@ export class Carousel extends CarouselCommon {
         this.addChild(viewToAdd);
       }
 
-      this.eachChildView(view => {
+      this.eachChildView((view) => {
         if (view instanceof CarouselItem) {
           view.width = this.width;
           view.height = this.height;

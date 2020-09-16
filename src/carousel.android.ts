@@ -1,5 +1,16 @@
-import { Builder, View, GridLayout, Utils } from '@nativescript/core';
-import { CarouselCommon, CarouselUtil, indicatorAnimationDurationProperty, indicatorAnimationProperty, indicatorColorProperty, indicatorColorUnselectedProperty, indicatorPaddingProperty, indicatorRadiusProperty, Log, selectedPageProperty } from './carousel.common';
+import { Builder, GridLayout, Utils, View } from '@nativescript/core';
+import {
+  CarouselCommon,
+  CarouselUtil,
+  indicatorAnimationDurationProperty,
+  indicatorAnimationProperty,
+  indicatorColorProperty,
+  indicatorColorUnselectedProperty,
+  indicatorPaddingProperty,
+  indicatorRadiusProperty,
+  Log,
+  selectedPageProperty,
+} from './carousel.common';
 
 const VIEWS_STATES = '_viewStates';
 const PagerNamespace = androidx.viewpager.widget;
@@ -32,16 +43,12 @@ export class Carousel extends CarouselCommon {
     );
   }
 
-  get android(): any {
-    return this.nativeView;
-  }
-
   /**
    * Returns androidx.viewpager.widget.PagerAdapter on AndroidX enabled apps.
    * Returns android.support.v4.view.PagerAdapter on non androidX apps.
    */
   get adapter(): androidx.viewpager.widget.PagerAdapter {
-    return this.android.getAdapter();
+    return this.nativeView.getAdapter();
   }
 
   set pageIndicatorCount(value: number) {
@@ -227,7 +234,7 @@ export class Carousel extends CarouselCommon {
     } else {
       itemCount = this.getChildrenCount();
     }
-    return itemCount; 
+    return itemCount;
   }
 
   refresh() {
@@ -238,7 +245,7 @@ export class Carousel extends CarouselCommon {
 
     let itemsCount = this.getItemCount();
     Log.D(`Items count: `, itemsCount);
-    if(Utils.isNullOrUndefined(itemsCount)){
+    if (Utils.isNullOrUndefined(itemsCount)) {
       return;
     }
 
@@ -247,14 +254,16 @@ export class Carousel extends CarouselCommon {
       Log.D(`Using template mode`);
       this.removeChildren();
       for (let i = 0; i < itemsCount; i++) {
-        const viewToAdd = !Utils.isNullOrUndefined(this.itemTemplate) ? Builder.parse(this.itemTemplate, this) : this._getDefaultItemContent(i);
+        const viewToAdd = !Utils.isNullOrUndefined(this.itemTemplate)
+          ? Builder.parse(this.itemTemplate, this)
+          : this._getDefaultItemContent(i);
         const dataItem = this._getDataItem(i);
         viewToAdd.bindingContext = dataItem;
         this.addChild(viewToAdd);
       }
     }
-    
-    // Notify adapter and indicatorView that items have changed. 
+
+    // Notify adapter and indicatorView that items have changed.
     if (this.adapter) {
       Log.D(`notifyDataSetChanged`);
       this.adapter.notifyDataSetChanged();
@@ -263,7 +272,7 @@ export class Carousel extends CarouselCommon {
       this._pageIndicatorView.setSelection(this.selectedPage);
     }
 
-    if(Utils.isNullOrUndefined(this.itemTemplate)){
+    if (Utils.isNullOrUndefined(this.itemTemplate)) {
       Log.D(`setOffscreenPageLimit`);
       this.nativeView.setOffscreenPageLimit(itemsCount);
     }
@@ -321,7 +330,7 @@ class CarouselPagerAdapterClassInner extends PagerNamespace.PagerAdapter {
     } else {
       item.parent.android.removeView(item.android);
     }
-    
+
     if (this[VIEWS_STATES]) {
       item.nativeView.restoreHierarchyState(this[VIEWS_STATES]);
     }
@@ -379,7 +388,7 @@ class CarouselPageChangedListener extends PagerNamespace.ViewPager.SimpleOnPageC
     this.owner.get().notify({
       eventName: CarouselCommon.pageChangedEvent,
       object: this.owner.get(),
-      index: position
+      index: position,
     });
     this.owner.get().selectedPage = position;
   }
@@ -389,7 +398,7 @@ class CarouselPageChangedListener extends PagerNamespace.ViewPager.SimpleOnPageC
     this.owner.get().notify({
       eventName: CarouselCommon.pageScrollStateChangedEvent,
       object: this.owner.get(),
-      state: state
+      state: state,
     });
   }
 
@@ -403,9 +412,9 @@ class CarouselPageChangedListener extends PagerNamespace.ViewPager.SimpleOnPageC
         android: {
           position: position,
           positionOffset: positionOffset,
-          positionOffsetPixels: positionOffsetPixels
-        }
-      }
+          positionOffsetPixels: positionOffsetPixels,
+        },
+      },
     };
     this.owner.get().notify(data);
   }
