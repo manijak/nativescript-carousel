@@ -140,6 +140,10 @@ Set the indicator count which will change the underlying Android data adapter. S
 
 ## Changelog
 
+**7.0.0**
+
+- Plugin updated to support NativeScript v7.0 release. Thanks to @BradMartin, @NathanWalker & @rickwalking for all the PRs and making sure the code compiles & runs. :clap:
+
 **6.1.0**
 
 - Fix for iOS safe-area issues. No need to use the custom css-padding-hack any more.
@@ -280,6 +284,8 @@ Set the indicator count which will change the underlying Android data adapter. S
 ## Collaborators
 
 - [bradmartin](https://github.com/bradmartin)
+- [NathanWalker](https://github.com/NathanWalker)
+- [rickwalking](https://github.com/rickwalking)
 - [sitefinitysteve](https://github.com/sitefinitysteve)
 - [EddyVerbruggen](https://github.com/EddyVerbruggen)
 - [Pip3r4o](https://github.com/Pip3r4o)

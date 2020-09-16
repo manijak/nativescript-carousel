@@ -2,7 +2,7 @@
   "name": "nativescript-carousel",
   "description": "Carousel component for NativeScript (iOS & Android).",
   "main": "carousel",
-  "version": "7.0.1",
+  "version": "7.0.0",
   "typings": "carousel.d.ts",
   "nativescript": {
     "platforms": {
@@ -70,6 +70,15 @@
       "name": "Brad Martin",
       "email": "bradwaynemartin@gmail.com",
       "url": "https://github.com/bradmartin"
+    },
+    {
+      "name": "Nathan Walker",
+      "url": "https://github.com/NathanWalker"
+    },
+    {
+      "name": "Pedro Marins",
+      "email": "ph.marins@hotmail.com",
+      "url": "https://github.com/rickwalking"
     }
   ],
   "bugs": "https://github.com/manijak/nativescript-carousel/issues",

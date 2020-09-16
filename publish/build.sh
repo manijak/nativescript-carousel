@@ -18,6 +18,7 @@ build() {
     echo 'Creating dist folder...'
     # create dist dir
     mkdir "$DIST_DIR"
+    mkdir "$TO_SOURCE_DIR"
 
     # copy src
     echo 'Copying src...'
@@ -33,7 +34,7 @@ build() {
     # compile package and copy files required by npm
     echo 'Building plugin...'
     cd "$TO_SOURCE_DIR"
-    node_modules/.bin/tsc --outDir ../"$DIST_DIR"
+    ../node_modules/.bin/tsc --outDir ../"$DIST_DIR"
     cd ..
 
     # delete source directory used to create the package
