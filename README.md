@@ -140,6 +140,10 @@ Set the indicator count which will change the underlying Android data adapter. S
 
 ## Changelog
 
+**7.0.1**
+
+- Hotfix release: Fixes issues with the `@NativeClass()` decorator.
+
 **7.0.0**
 
 - Plugin updated to support NativeScript v7.0 release. Thanks to @BradMartin, @NathanWalker & @rickwalking for all the PRs and making sure the code compiles & runs. :clap:
