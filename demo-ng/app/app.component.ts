@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { registerElement } from 'nativescript-angular/element-registry';
+import { registerElement } from '@nativescript/angular';
 // Register Custom Elements for Angular
 import { Carousel, CarouselItem } from 'nativescript-carousel';
 
@@ -8,6 +8,6 @@ registerElement('CarouselItem', () => CarouselItem);
 
 @Component({
   selector: 'ns-app',
-  templateUrl: 'app.component.html'
+  templateUrl: 'app.component.html',
 })
 export class AppComponent {}

@@ -12,7 +12,17 @@ A simple carousel component for NativeScript.
 
 ## Installation
 
-Run `tns plugin add nativescript-carousel` in the ROOT directory of your project. You must clean your project after adding a plugin with native dependencies. This can be done by executing `tns platform remove android` (or ios) and then `tns platform add android` (or ios). The newer versions of the NS CLI, provide a `clean` command that does this in one script if you like that option as well.
+NativeScript 7+:
+
+```bash
+ns plugin add nativescript-carousel
+```
+
+NativeScript less than NS7:
+
+```bash
+tns plugin add nativescript-carousel@6.1.1
+```
 
 ## Limitations
 
@@ -28,8 +38,7 @@ Check out the demos included in this repo for instructions on how to use the Car
 
 [Angular demo](https://github.com/manijak/nativescript-carousel/tree/master/demo-ng)
 
-[Vue demo](https://github.com/manijak/nativescript-carousel/tree/master/demo-vue)   
-
+[Vue demo](https://github.com/manijak/nativescript-carousel/tree/master/demo-vue)
 
 ## Attributes - Common
 
@@ -131,6 +140,14 @@ Set the indicator count which will change the underlying Android data adapter. S
 
 ## Changelog
 
+**7.0.1**
+
+- Hotfix release: Fixes issues with the `@NativeClass()` decorator.
+
+**7.0.0**
+
+- Plugin updated to support NativeScript v7.0 release. Thanks to @BradMartin, @NathanWalker & @rickwalking for all the PRs and making sure the code compiles & runs. :clap:
+
 **6.1.0**
 
 - Fix for iOS safe-area issues. No need to use the custom css-padding-hack any more.
@@ -151,8 +168,8 @@ Set the indicator count which will change the underlying Android data adapter. S
 - Fix for the dreadded `PagerAdapter changed the adapter's contents without calling PagerAdapter#notifyDataSetChanged!` error on Android.
 - Hotfix on the AndroidX migration.
 - Minor refactor in the `refresh()` function. Safer to call on demand.
-- Redesigned all demo apps. Added more advanced examples. 
-- 4.x will be the last Nativescript 5.x version. All future versions will be Nativescript 6.x only and that includes AndroidX. 
+- Redesigned all demo apps. Added more advanced examples.
+- 4.x will be the last Nativescript 5.x version. All future versions will be Nativescript 6.x only and that includes AndroidX.
 
 **4.2.1**
 
@@ -161,7 +178,7 @@ Set the indicator count which will change the underlying Android data adapter. S
 **4.2.0**
 
 - AndroidX update for NS6. Thanks @bradmartin!
-- Code cleanup, typings fix. 
+- Code cleanup, typings fix.
 - Demos updated. Proper Vue-demo added.
 
 **4.1.0**
@@ -271,6 +288,8 @@ Set the indicator count which will change the underlying Android data adapter. S
 ## Collaborators
 
 - [bradmartin](https://github.com/bradmartin)
+- [NathanWalker](https://github.com/NathanWalker)
+- [rickwalking](https://github.com/rickwalking)
 - [sitefinitysteve](https://github.com/sitefinitysteve)
 - [EddyVerbruggen](https://github.com/EddyVerbruggen)
 - [Pip3r4o](https://github.com/Pip3r4o)

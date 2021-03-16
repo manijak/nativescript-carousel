@@ -1,14 +1,13 @@
+import { Observable, ObservableArray } from '@nativescript/core';
 import { Carousel } from 'nativescript-carousel';
-import { Observable } from 'tns-core-modules/data/observable';
-import { ObservableArray } from 'tns-core-modules/data/observable-array/observable-array';
 
 let myCarousel: Carousel = null;
 let pageData = new Observable();
 var myDataArray = new ObservableArray([
-  { title: 'Slide 1', color: '#b3cde0', image: '~/res/01.jpg' },
-  { title: 'Slide 2', color: '#6497b1', image: '~/res/02.jpg' },
-  { title: 'Slide 3', color: '#005b96', image: '~/res/03.jpg' },
-  { title: 'Slide 4', color: '#03396c', image: '~/res/04.jpg' }
+  { title: 'Slide 1', color: '#b3cde0', image: '~/assets/01.jpg' },
+  { title: 'Slide 2', color: '#6497b1', image: '~/assets/02.jpg' },
+  { title: 'Slide 3', color: '#005b96', image: '~/assets/03.jpg' },
+  { title: 'Slide 4', color: '#03396c', image: '~/assets/04.jpg' },
 ]);
 
 export function pageLoaded(args) {

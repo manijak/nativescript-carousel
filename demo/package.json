@@ -3,23 +3,17 @@
   "version": "1.0.0",
   "description": "Vanilla TS demo of the nativescript-carousel",
   "license": "MIT",
-  "nativescript": {
-    "id": "org.carousel.demo",
-    "tns-ios": {
-      "version": "6.0.1"
-    },
-    "tns-android": {
-      "version": "6.0.0"
-    }
-  },
   "dependencies": {
-    "nativescript-carousel": "file:../src/dist",
-    "nativescript-theme-core": "^2.0.2",
-    "tns-core-modules": "^6.0.1"
+    "@nativescript/core": "~7.0.3",
+    "@nativescript/theme": "^2.3.3",
+    "nativescript-carousel": "file:../src/dist"
   },
   "devDependencies": {
-    "nativescript-dev-webpack": "^1.0.1",
-    "tns-platform-declarations": "^6.0.1",
-    "typescript": "~3.4.5"
-  }
+    "@nativescript/android": "7.0.0",
+    "@nativescript/ios": "7.0.0",
+    "@nativescript/types": "~7.0.3",
+    "@nativescript/webpack": "~3.0.4",
+    "typescript": "3.9.7"
+  },
+  "main": "app.js"
 }

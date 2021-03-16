@@ -1,15 +1,13 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatedTo="onNavigatedTo">
-  <Page.actionBar>
-    <ActionBar title="Carousel Demo"></ActionBar>
-  </Page.actionBar>
+  <ActionBar title="Carousel Demo"></ActionBar>
 
   <StackLayout>
     <Label text="Tap buttons to see Carousel in action" textWrap="true" margin="10,0,20,0"/>
 
     <Button text="Static Carousel" tap="carousel1" />
     <Button text="Data-Bound Carousel" tap="carousel2" />
-    <Button text="Extras & Events" tap="carousel3" />
-    
-    <Image src="~/res/js-ts-logo.png" height="66" margin="20,0,0,0"></Image>
+    <Button text="Extras and Events" tap="carousel3" />
+
+    <Image src="~/assets/js-ts-logo.png" height="66" margin="20,0,0,0"></Image>
   </StackLayout>
 </Page>

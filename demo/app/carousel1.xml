@@ -1,16 +1,13 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:ns="nativescript-carousel" actionBarHidden="false">
-    <Page.actionBar>
-        <ActionBar title="Static Carousel Demo"></ActionBar>
-    </Page.actionBar>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:ns="nativescript-carousel" actionBarHidden="false">
+    <ActionBar title="Static Carousel Demo"></ActionBar>
 
     <GridLayout>
-        <ns:Carousel debug="true" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff000"
-            finite="false" showIndicator="true" android:indicatorAnimation="swap" indicatorOffset="0, -30" height="100%">
+        <ns:Carousel debug="true" color="white" pageChanged="myChangeEvent" pageTapped="mySelectedEvent" indicatorColor="#fff000" finite="false" showIndicator="true" android:indicatorAnimation="swap" indicatorOffset="0, -30" height="100%">
 
             <ns:CarouselItem id="slide1" verticalAlignment="middle">
                 <Label text="Each slide is defined in the XML" textWrap="true" margin="30" />
                 <Label text="Slide 1" backgroundColor="#50000000" horizontalAlignment="center"></Label>
-
                 <Label text="Wrap the Carousel in a GridLayout in order to place the indicator on top (android)" textWrap="true" margin="30" ios:visibility="collapsed"/>
             </ns:CarouselItem>
 

@@ -1,29 +1,55 @@
 <ActionBar title="Carousel Data-binding Demo"></ActionBar>
 
 <ScrollView>
-    <StackLayout>
-        <Label text="Define a single CarouselItem element with the '*ngFor' tag pointed at your array." textWrap="true" margin="20,10,50,10"></Label>
+  <StackLayout>
+    <label
+      text="Define a single CarouselItem element with the '*ngFor' tag pointed at your array."
+      textWrap="true"
+      margin="20,10,50,10"
+    ></label>
 
-        <GridLayout height="350">
-            <Carousel #myCarousel debug="true" [items]="myData" height="100%" width="100%" color="white" (pageChanged)="myChangePageEvent($event)" 
-                    android:indicatorAnimation="slide" indicatorColor="#fff" indicatorOffset="0, -10" showIndicator="true" [scrollEnabled]="scrollEnabled">
-                <CarouselItem *ngFor="let item of myData" [backgroundColor]="item.color" verticalAlignment="middle" (tap)="myTapPageEvent()">
-                    <GridLayout>
-                        <Image [src]="item.image" stretch="aspectFill"></Image>
-                        <Label [text]="item.title" horizontalAlignment="center" backgroundColor="#50000000" height="30"></Label>
-                    </GridLayout>
-                </CarouselItem>
-            </Carousel>
-        </GridLayout>
+    <GridLayout height="350">
+      <Carousel
+        #myCarousel
+        debug="true"
+        [items]="myData"
+        height="100%"
+        width="100%"
+        color="white"
+        (pageChanged)="myChangePageEvent($event)"
+        android:indicatorAnimation="slide"
+        indicatorColor="#fff"
+        indicatorOffset="0, -10"
+        showIndicator="true"
+        [scrollEnabled]="scrollEnabled"
+      >
+        <CarouselItem
+          *ngFor="let item of myData"
+          [backgroundColor]="item.color"
+          verticalAlignment="middle"
+          (tap)="myTapPageEvent()"
+        >
+          <GridLayout>
+            <image [src]="item.image" stretch="aspectFill"></image>
+            <label [text]="item.title" horizontalAlignment="center" backgroundColor="#50000000" height="30"></label>
+          </GridLayout>
+        </CarouselItem>
+      </Carousel>
+    </GridLayout>
 
-        <Label text="Indicator animation type: 'slide'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"></Label>
+    <label
+      text="Indicator animation type: 'slide'"
+      textWrap="true"
+      ios:visibility="collapsed"
+      margin="10,0,0,0"
+    ></label>
 
-        <Button text="Select page 3" (tap)="selectPageThree()" margin="10,10,0,10"></Button>
-        <Button text="Add page" (tap)="addNewPage()" margin="10,10,0,10"></Button>
-        <Label text="Tap the button to add more pages" textWrap="true" margin="10,10,0,10"></Label>
-        <StackLayout orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" margin="10"> 
-            <Label text="Enable Carousel Scroll" verticalAlignment="center"></Label>
-            <Switch checked="true" (checkedChange)="onCheckedChange($event)"></Switch>
-        </StackLayout>
+    <button text="Select page 3" (tap)="selectPageThree()" margin="10,10,0,10"></button>
+    <button text="Add page" (tap)="addNewPage()" margin="10,10,0,10"></button>
+    <label text="Tap the button to add more pages" textWrap="true" margin="10,10,0,10"></label>
+    <StackLayout orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" margin="10"> 
+      <Label text="Enable Carousel Scroll" verticalAlignment="center"></Label>
+      <Switch checked="true" (checkedChange)="onCheckedChange($event)"></Switch>
     </StackLayout>
+  </StackLayout>
 </ScrollView>

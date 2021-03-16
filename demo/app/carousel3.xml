@@ -1,9 +1,5 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" 
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded"
     xmlns:ns="nativescript-carousel">
-    <Page.actionBar>
-        <ActionBar title="Extras & Events Demo"></ActionBar>
-    </Page.actionBar>
-
     <ScrollView>
         <StackLayout>
             <StackLayout android:visibility="collapsed">
@@ -17,9 +13,7 @@
             </StackLayout>
 
             <GridLayout height="350">
-                <ns:Carousel id="myCarousel" loaded="carouselLoaded" height="100%" width="100%" color="white" 
-                    pageChanged="myChangeEvent" items="{{ myDataArray }}" 
-                    indicatorColor="#9b5504" indicatorColorUnselected="#609b5504" ios:autoPagingInterval="3" android:indicatorAnimation="THIN_WORM">
+                <ns:Carousel id="myCarousel" loaded="carouselLoaded" height="100%" width="100%" color="white" pageChanged="myChangeEvent" items="{{ myDataArray }}" indicatorColor="#9b5504" indicatorColorUnselected="#609b5504" ios:autoPagingInterval="3" android:indicatorAnimation="THIN_WORM">
                     <ns:Carousel.itemTemplate>
                         <ns:CarouselItem verticalAlignment="middle" backgroundColor="{{ color }}" tap="myPageTapEvent">
                             <GridLayout>

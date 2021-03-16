@@ -1,40 +1,69 @@
 <ActionBar title="Extras & Events Demo"></ActionBar>
 
 <ScrollView>
-    <StackLayout>
-        <StackLayout android:visibility="collapsed">
-            <Label text="Here auto-paging is enabled with an interval of 3 seconds." textWrap="true" margin="10,5,0,5"></Label>
-            <Label text="You can capture the tap and change events." textWrap="true" margin="10,5,0,5"></Label>
-            <Label text="Page-indicator can be turned on/off and its color changed" textWrap="true" margin="10,5,20,5"></Label>
-        </StackLayout>
-        <StackLayout ios:visibility="collapsed">
-            <Label text="You can capture the change events." textWrap="true" margin="10,5,0,5"></Label>
-            <Label text="Page-indicator can have different animations and change color" textWrap="true" margin="10,5,20,5"></Label>
-        </StackLayout>
-
-        <GridLayout height="350">
-            <ns:Carousel #advCarousel height="100%" width="100%" color="white"
-                (pageChanged)="pageChangedEvent($event)" indicatorColor="#fff" indicatorColorUnselected="#50ffffff" 
-                ios:autoPagingInterval="3" android:indicatorAnimation="swap" [scrollEnabled]="scrollEnabled">
-
-                    <ns:CarouselItem *ngFor="let item of items" verticalAlignment="middle" [backgroundColor]="item.color" (tap)="pageTappedEvent($event)">
-                        <GridLayout>
-                            <Image [src]="item.image" stretch="aspectFill"></Image>
-                            <Label [text]="item.title" horizontalAlignment="center" backgroundColor="#50000000" height="30"></Label>
-                        </GridLayout>
-                    </ns:CarouselItem>
-                
-            </ns:Carousel>
-        </GridLayout>
-        <Label text="Indicator animation type: 'swap'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"></Label>
-
-        <Button text="Toggle indicator" (tap)="toggleIndicator()" margin="10,10,0,10" android:visibility="collapsed"></Button>
-        <Button text="Toggle indicator color" (tap)="toggleColor()" margin="10,10,0,10"></Button>
-        <StackLayout orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" margin="10"> 
-            <Label text="Enable Carousel Scroll" verticalAlignment="center"></Label>
-            <Switch checked="true" (checkedChange)="onCheckedChange($event)"></Switch>
-        </StackLayout>
-        <Label [text]=" 'Selected page: ' + currentPage" textWrap="true" margin="10,0,0,0"></Label>
-        <Label [text]=" 'Tapped page: ' + tappedPage" textWrap="true" margin="0,0,0,0"></Label>
+  <StackLayout>
+    <StackLayout android:visibility="collapsed">
+      <label
+        text="Here auto-paging is enabled with an interval of 3 seconds."
+        textWrap="true"
+        margin="10,5,0,5"
+      ></label>
+      <label text="You can capture the tap and change events." textWrap="true" margin="10,5,0,5"></label>
+      <label
+        text="Page-indicator can be turned on/off and its color changed"
+        textWrap="true"
+        margin="10,5,20,5"
+      ></label>
     </StackLayout>
+    <StackLayout ios:visibility="collapsed">
+      <label text="You can capture the change events." textWrap="true" margin="10,5,0,5"></label>
+      <label
+        text="Page-indicator can have different animations and change color"
+        textWrap="true"
+        margin="10,5,20,5"
+      ></label>
+    </StackLayout>
+
+    <GridLayout height="350">
+      <ns:Carousel
+        #advCarousel
+        height="100%"
+        width="100%"
+        color="white"
+        (pageChanged)="pageChangedEvent($event)"
+        indicatorColor="#fff"
+        indicatorColorUnselected="#50ffffff"
+        ios:autoPagingInterval="3"
+        android:indicatorAnimation="swap"
+        [scrollEnabled]="scrollEnabled"
+      >
+        <ns:CarouselItem
+          *ngFor="let item of items"
+          verticalAlignment="middle"
+          [backgroundColor]="item.color"
+          (tap)="pageTappedEvent($event)"
+        >
+          <GridLayout>
+            <image [src]="item.image" stretch="aspectFill"></image>
+            <label [text]="item.title" horizontalAlignment="center" backgroundColor="#50000000" height="30"></label>
+          </GridLayout>
+        </ns:CarouselItem>
+      </ns:Carousel>
+    </GridLayout>
+    <label text="Indicator animation type: 'swap'" textWrap="true" ios:visibility="collapsed" margin="10,0,0,0"></label>
+
+    <button
+      text="Toggle indicator"
+      (tap)="toggleIndicator()"
+      margin="10,10,0,10"
+      android:visibility="collapsed"
+    ></button>
+    <button text="Toggle indicator color" (tap)="toggleColor()" margin="10,10,0,10"></button>
+    <StackLayout orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" margin="10"> 
+      <Label text="Enable Carousel Scroll" verticalAlignment="center"></Label>
+      <Switch checked="true" (checkedChange)="onCheckedChange($event)"></Switch>
+    </StackLayout>
+    <label [text]=" 'Selected page: ' + currentPage" textWrap="true" margin="10,0,0,0"></label>
+    <label [text]=" 'Tapped page: ' + tappedPage" textWrap="true" margin="0,0,0,0"></label>
+  </StackLayout>
 </ScrollView>

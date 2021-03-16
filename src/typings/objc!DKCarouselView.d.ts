@@ -1,4 +1,4 @@
-
+@NativeClass()
 declare class DKCarouselItem extends NSObject {
 
 	static alloc(): DKCarouselItem; // inherited from NSObject
@@ -8,6 +8,7 @@ declare class DKCarouselItem extends NSObject {
 	userInfo: any;
 }
 
+@NativeClass()
 declare class DKCarouselURLItem extends DKCarouselItem {
 
 	static alloc(): DKCarouselURLItem; // inherited from NSObject
@@ -17,6 +18,7 @@ declare class DKCarouselURLItem extends DKCarouselItem {
 	imageUrl: string;
 }
 
+@NativeClass()
 declare class DKCarouselView extends UIView {
 
 	static alloc(): DKCarouselView; // inherited from NSObject

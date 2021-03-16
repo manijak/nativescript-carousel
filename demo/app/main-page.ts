@@ -1,21 +1,21 @@
-import { topmost } from 'tns-core-modules/ui/frame';
+import { Frame } from '@nativescript/core';
 
 export function onNavigatedTo() {}
 
 export function carousel1() {
-  topmost().navigate({
-    moduleName: 'carousel1'
+  Frame.topmost().navigate({
+    moduleName: 'carousel1',
   });
 }
 
 export function carousel2() {
-  topmost().navigate({
-    moduleName: 'carousel2'
+  Frame.topmost().navigate({
+    moduleName: 'carousel2',
   });
 }
 
 export function carousel3() {
-  topmost().navigate({
-    moduleName: 'carousel3'
+  Frame.topmost().navigate({
+    moduleName: 'carousel3',
   });
 }
