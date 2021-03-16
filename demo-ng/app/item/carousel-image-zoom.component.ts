@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { View, Size, Page } from 'tns-core-modules/ui/page/page';
-import { PinchGestureEventData, GestureEventData, PanGestureEventData } from 'tns-core-modules/ui/gestures/gestures';
+import { PanGestureEventData, PinchGestureEventData, Size, View, GestureEventData, Page } from '@nativescript/core';
 import { animationFrameScheduler, interval, defer, Subscription } from 'rxjs';
 import { map, takeWhile } from 'rxjs/operators';
 
@@ -30,7 +29,7 @@ export class CarouselImageZoomComponent implements OnInit {
   protected currentPageIndex: number = 0;
   protected prevDeltaX: number = 0;
   protected prevDeltaY: number = 0;
-  protected scrollEnabled: boolean = false;
+  public scrollEnabled: boolean = false;
 
   constructor(private page: Page) {}
 
@@ -40,7 +39,7 @@ export class CarouselImageZoomComponent implements OnInit {
    * Sample images 
    * Thanks to https://picsum.photos/
    */
-  protected getImages(): string[] {
+  public getImages(): string[] {
     return [
       'https://picsum.photos/id/237/1600/1200',
       'https://picsum.photos/id/511/1200/1600',
@@ -132,7 +131,7 @@ export class CarouselImageZoomComponent implements OnInit {
    * on page change reset the previous image scale/translate
    * @param args 
    */
-  protected pageChangedEvent(args) {  
+  public pageChangedEvent(args) {  
     const imageView = this.page.getViewById<View>('image'+this.currentPageIndex);
     const startScale = imageView.scaleX;
     const startTranslateX = imageView.translateX;
