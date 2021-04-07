@@ -18,14 +18,14 @@
   "dependencies": {
     "nativescript-carousel": "file:../src/dist",
     "nativescript-theme-core": "^2.0.24",
-    "nativescript-vue": "^2.8.1",
-    "@nativescript/core": "~7.0.3"
+    "nativescript-vue": "^2.9.0",
+    "@nativescript/core": "~8.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "@nativescript/android": "7.0.0",
-    "@nativescript/ios": "7.0.0",
+    "@nativescript/android": "8.0.0",
+    "@nativescript/ios": "8.0.0",
     "@nativescript/webpack": "~3.0.0",
     "babel-loader": "^8.0.6",
     "babel-traverse": "6.26.0",
@@ -34,7 +34,7 @@
     "lazy": "1.0.11",
     "nativescript-vue-template-compiler": "^2.3.0",
     "node-sass": "^4.12.0",
-    "typescript": "3.9.7",
+    "typescript": "~4.0.0",
     "vue-loader": "^15.7.1"
   },
   "main": "app.js"
