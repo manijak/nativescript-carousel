@@ -1,4 +1,4 @@
-import { Application, Builder, Enums, Screen, Utils } from '@nativescript/core';
+import { Application, Builder, CoreTypes, Screen, Utils } from '@nativescript/core';
 import {
   autoPagingIntervalProperty,
   bounceProperty,
@@ -27,8 +27,7 @@ export class Carousel extends CarouselCommon {
   constructor() {
     super();
     CarouselUtil.debug = this.debug;
-
-    this.currentOrientation = Enums.DeviceOrientation.unknown;
+    this.currentOrientation = CoreTypes.DeviceOrientation.unknown;
     Application.on('orientationChanged', this.onOrientationChanged);
   }
 
