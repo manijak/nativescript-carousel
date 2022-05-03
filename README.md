@@ -1,3 +1,8 @@
+This plugin is now maintained by the fine devs at NStudio. 
+You can find the new repo here: https://github.com/nstudio/nativescript-plugins/tree/main/packages/nativescript-carousel
+
+----------------------------------------------------------------
+
 [![npm](https://img.shields.io/npm/v/nativescript-carousel.svg)](https://www.npmjs.com/package/nativescript-carousel)
 [![npm](https://img.shields.io/npm/dt/nativescript-carousel.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-carousel)
 
